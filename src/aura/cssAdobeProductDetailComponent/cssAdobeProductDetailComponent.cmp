@@ -1,0 +1,114 @@
+<aura:component controller="SSProductDetailsController" extends="c:ssBaseComponent" 
+                implements="c:ssAppInterface,flexipage:availableForAllPageTypes,forceCommunity:availableForAllPageTypes" 
+                 access="global">
+    
+    <ltng:require styles="{!$Resource.AdobeTheme + '/assets/styles/custom2.css'}"  />
+    
+    <aura:attribute name="cartId" type="String" />
+    <aura:attribute name="productSKU" type="String"/>
+    <aura:attribute name="product" type="Object" />
+    <aura:attribute name="cart" type="SSCartModel" />
+    <aura:attribute name="totalPrice" type="String" default="0.00"/>
+    <aura:attribute name="isSpin" type="Boolean" default="false"/>
+    <aura:attribute name="showModal" type="Boolean"/>
+    <aura:attribute name="showAddons" type="Boolean"/>
+
+    
+    <aura:registerEvent name="ssCartEvent" type="c:ssCartEvent"/>
+    <aura:registerEvent name="ssProductEvent" type="c:ssProductEvent"/>
+    
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+    <aura:handler event="c:ssCartEvent" action="{!c.updateCartPrice}" />
+    
+    <div class="slds-align_absolute-center" style="height: 5rem;">
+    <ul class="slds-list_horizontal">
+        <li class="slds-p-horizontal_large slds-text-align_center"><a href="01-product-selection.html"><div class='r-border2 rounded-w-label-fill' style="background:#8246AF;border:0px solid #8246AF;">1</div><br /> Products </a></li>
+            <li class="slds-p-horizontal_large slds-text-align_center"><a href="02-personal-info.html"><div class='r-border2' style="border:1px solid #8246AF;">2</div><br /> Info &amp; Payment</a></li>
+            <li class="slds-p-horizontal_large slds-text-align_center"><a href="03-confirmation.html"><div class='r-border2' style="border:1px solid #8246AF;">3</div><br /> Confirmation</a></li>
+    </ul>
+        
+    </div>
+
+    	
+    <div class='light-grey-bg'>
+    	<div class='shell-temp' style='margin:0 auto; background:#fff'>
+        	<div class='actions_page_header'>
+            	<div class='rounded-w-label slds-m-around_medium slds-float_left '>1</div> 
+                <span class="actions_page_header_label slds-float_left slds-m-top_medium">Product Selection - {!v.product.productName} (SKU: {!v.product.productSKU})</span>
+            </div>
+			<!-- Data Starts -->
+            <div class='slds-p-around_xx-large'>
+        <aura:if isTrue="{!v.isSpin}">
+            <lightning:spinner variant="brand" size="small" alternativeText="Loading data..."/>
+        </aura:if>
+            	<!--Grid Strats-->
+                <div class="slds-grid slds-gutters">
+                	<div class="slds-col slds-size_3-of-5">                            
+                    	<article class="xslds-card">
+							<div class="slds-card__header slds-grid">
+								<header class="slds-media slds-media_center slds-has-flexi-truncate">
+									<div class="slds-media__figure">
+										<span class="slds-icon_container slds-icon-standard-account" title="account">
+											<img src="{!v.product.productThumbImage}" style="width:40px" />
+										</span>
+									</div>
+									<div class="slds-media__body">
+										<h2 class="slds-card__header-title">
+                                            <span class="slds-text-heading_small ">{!v.product.productName}</span><br />
+    										<span>{!v.product.productLongDescription}</span>
+										</h2>	
+									</div>
+								</header>
+							</div>
+						</article>
+ 					</div>
+                    <div class="slds-col slds-size_2-of-5">
+                    	<span>
+                            <div class="slds-no-flex">Please select term of Payment<br />
+                                
+                                <c:cssAdobeProductTermComponent  aura:id="productInfo" product="{!v.product}" 
+						productSKU="{!v.productSKU}" cart="{!v.cart}" cartId="{!v.cartId}" cartQuantity="{!v.cart.cartItems[0].quantity}"/>
+                        	</div>
+                       	</span>
+                 	</div>
+             	</div>
+                <!--Grid Ends-->
+                    
+            	<c:cssProductsComponent aura:id="productInfo" product="{!v.product}" 
+						productSKU="{!v.productSKU}" cart="{!v.cart}" cartId="{!v.cartId}"/>
+
+                <aura:if isTrue="{!v.showAddons}" >
+                <!--Grid Strats for Add-On Products-->
+                <div class="slds-p-top_medium"><b>CHOOSE OPTIONAL ADD-ON PRODUCTS</b></div>
+                <hr class="hrstyle1" />
+    <c:cssAdobeProductAddonsComponent aura:id="addonProducts" cTitle="{!$Label.c.SS_CHOOSE_OPTIONAL_ADDON_PRODUCTS}" 
+              relationType="Add-On" productSKU="{!v.product.productSKU}" cartId="{!v.cartId}" cart="{!v.cart}"/>
+                    <br />
+                    <div class="slds-p-top_medium"><b>CHOOSE SUPPORT / MAINTENANCE PACKAGE</b></div>
+                    <hr class="hrstyle1" />
+                            <c:cssAdobeProductAddonsComponent aura:id="productMaintenance" cTitle="{!$Label.c.SS_CHOOSE_MAINTENANCE_PERIOD}"
+              relationType="Maintenance" productSKU="{!v.product.productSKU}" cartId="{!v.cartId}" cart="{!v.cart}"/>
+                    
+               	</aura:if>
+                    
+                <hr class="hrstyle2" />
+                <div class="slds-grid slds-gutters">
+                	<div class="slds-col slds-size_3-of-5"></div>
+                    <div class="slds-col slds-size_2-of-5 slds-text-align_left header-lg">
+                    	<b>Total  Payment </b>
+                        <b class="slds-m-horizontal_xx-large"> ${!v.totalPrice} Monthly</b>
+                  	</div>
+              	</div>
+                <div class="slds-grid slds-gutters">
+                	<div class="slds-col slds-size_3-of-5"></div>
+                    <div class="slds-col slds-size_2-of-5 slds-text-align_left header-lg">
+                        <br />
+                    	<lightning:button label="Continue" variant="brand" aura:id="navigateCMP" onclick="{!c.navigateNext}"></lightning:button>                                    
+                  	</div>
+              	</div>
+                
+         	</div>
+                
+          </div>
+      </div>
+</aura:component>

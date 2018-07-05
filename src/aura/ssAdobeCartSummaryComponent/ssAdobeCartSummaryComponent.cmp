@@ -1,0 +1,202 @@
+<aura:component controller="SSCartSummaryController" extends="c:ssBaseComponent" 
+                implements="c:ssAppInterface,flexipage:availableForAllPageTypes,forceCommunity:availableForAllPageTypes" access="global" >
+    
+    <aura:attribute name="cartId" type="String" />
+    <aura:attribute name="cart" type="SSCartModel" />
+    <aura:attribute name="mainProducts" type="List"/>
+    <aura:attribute name="paymentInfoComplete" type="Boolean" default="true"/>
+    <aura:attribute name="paymentInfo" type="SSPaymentDetailsModel" />
+    <aura:attribute name="isSubscriptionDisabled" type="Boolean" default="true"/>
+    <aura:attribute name="fromPaypal" type="Boolean" />
+	<aura:attribute name="showSpinner" type="Boolean" default="false" />
+    <aura:attribute name="payerId" type="String" />
+    <aura:attribute name="paymentId" type="String" />
+    <aura:attribute name="token" type="String" />
+    <aura:attribute type="SSAccountModel" name="account"/>
+    <aura:attribute name="subscriptionItemId" type="String" />
+    
+    <aura:registerEvent name="ssCartEvent" type="c:ssCartEvent"/>
+    
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+    <aura:handler event="c:ssCartEvent" action="{!c.onCartUpdated}" /> 
+    <aura:handler event="c:ssPaymentInfoEvent" action="{!c.onPaymentInfoUpdated}" /> 
+    <aura:handler event="c:ssNewPaymentEvent" action="{!c.onNewPaymentInfoUpdated}" /> 
+    <aura:handler event="c:ssPaypalPaymentEvent" action="{!c.onPayPalPaymentInfoUpdated}" />
+    <aura:handler event="c:ssSubscriptionItemEvent" action="{!c.onSubscriptionItemUpdated}"/>
+    
+    <c:ssSpinnerComponent show="{!v.showSpinner}"/>
+    
+    <div class="slds-p-top_large"> 
+    <lightning:card >
+            <aura:set attribute="title">
+                <h1 class="slds-page-header__title ss-text-heading_medium">Summary </h1> 
+                <p class="header-sm">Review your new subscription details</p>
+            </aura:set>
+            
+        
+        <lightning:layout multipleRows="true" verticalAlign="start" horizontalAlign="stretch">
+               		<lightning:layoutitem class="slds-p-bottom_small "  padding="horizontal-small" size="12" smallDeviceSize="12" mediumDeviceSize="12" largeDeviceSize="12">
+                            <hr class="hrstyle1"/>
+                        </lightning:layoutitem>
+            		<aura:iteration items="{!v.mainProducts}" var="item">
+                        <lightning:layoutitem padding="horizontal-small" size="12" smallDeviceSize="12" mediumDeviceSize="7" largeDeviceSize="7">
+                            <h1 class="header-md slds-has-flexi-truncate">{!item.productName}</h1> 
+                                     <span class="header-xs">(Quantity:{!item.quantity}, Term: {!item.subscriptionTermType})</span>
+                        </lightning:layoutitem>
+                        <lightning:layoutitem  padding="horizontal-small" size="12" smallDeviceSize="12" mediumDeviceSize="5" largeDeviceSize="5">
+                            <div class="slds-float_right ">
+                            <b class="slds-p-right_small">${!item.subAmount}/ {!item.subscriptionTermType}</b>
+                            <a class="slds-p-left--small" href="javascript:void(0)" aura:id="removeItem" data-sku="{!item.Sku}" onclick="{!c.removeItem}">
+                            	<img src="{!$Resource.SSUtil + '/images/trash.svg'}" style="width:20px;"/>
+                             </a>
+                           </div>
+                        </lightning:layoutitem>
+                        
+                        
+                        <aura:if isTrue="{!item.bundleComponents.length > 0}">
+                        	 <lightning:layoutitem class="slds-p-top_small"  padding="horizontal-small" size="12" smallDeviceSize="12" mediumDeviceSize="12" largeDeviceSize="12">
+                            </lightning:layoutitem>
+                        </aura:if>
+                        
+                        <aura:iteration items="{!item.bundleComponents}" var="bundle">
+                            <lightning:layoutitem class="slds-p-bottom_small"  padding="horizontal-small" size="12" smallDeviceSize="12" mediumDeviceSize="12" largeDeviceSize="12">
+                                <hr class="hrstyle1"/>
+                            </lightning:layoutitem>
+                            <lightning:layoutitem class="slds-p-left_small" padding="horizontal-small" size="12" smallDeviceSize="12" mediumDeviceSize="8" largeDeviceSize="8">
+                            	<lightning:layout>
+                                    <lightning:layoutitem class="slds-p-left_medium" padding="horizontal-small" size="12" smallDeviceSize="12" mediumDeviceSize="12" largeDeviceSize="12">
+                                		<h1 class="header-md">{!bundle.productName}</h1> 
+                                     	<span class="header-xs">(Quantity:{!bundle.quantity}, Term: {!item.subscriptionTermType})</span>
+                                </lightning:layoutitem>
+                            </lightning:layout>
+                            </lightning:layoutitem>
+                            <lightning:layoutitem  padding="horizontal-small" size="12" smallDeviceSize="12" mediumDeviceSize="4" largeDeviceSize="4">
+                                <div class="slds-float_right ">
+                                <b>${!bundle.subAmount}/ {!item.subscriptionTermType}</b>
+                               </div>
+                            </lightning:layoutitem>
+                            <!--lightning:layoutitem class="slds-p-left_large slds-p-bottom_small"  padding="horizontal-small" size="12" smallDeviceSize="12" mediumDeviceSize="12" largeDeviceSize="12"-->
+                            	<!--hr class="hrstyle2"/-->
+                        	<!--/lightning:layoutitem-->
+                        </aura:iteration>
+                        
+                        
+                        
+                        
+                         
+                        <aura:if isTrue="{!item.addOnProducts.length > 0}">
+                        	<lightning:layoutitem class="slds-p-bottom_small"  padding="horizontal-small" size="12" smallDeviceSize="12" mediumDeviceSize="12" largeDeviceSize="12">
+                        	</lightning:layoutitem>
+                        </aura:if>
+                        
+                        <aura:iteration items="{!item.addOnProducts}" var="addon">
+                            <lightning:layoutitem class="slds-p-top_small slds-p-bottom_small"  padding="horizontal-small" size="12" smallDeviceSize="12" mediumDeviceSize="12" largeDeviceSize="12">
+                            	<hr class="hrstyle1"/>
+                        	</lightning:layoutitem>
+                            <lightning:layoutitem  padding="horizontal-small" size="12" smallDeviceSize="12" mediumDeviceSize="7" largeDeviceSize="7">
+                            	<lightning:layout>
+                                    <lightning:layoutitem  padding="horizontal-small" size="12" smallDeviceSize="12" mediumDeviceSize="2" largeDeviceSize="2">
+                                		<span class="slds-badge">Add-On</span>
+                                    </lightning:layoutitem>
+                                    <lightning:layoutitem class="slds-p-left_small" padding="horizontal-small" size="12" smallDeviceSize="12" mediumDeviceSize="1" largeDeviceSize="1">
+                                    </lightning:layoutitem>
+                                    <lightning:layoutitem padding="horizontal-small" size="12" smallDeviceSize="12" mediumDeviceSize="9" largeDeviceSize="9">
+                                		<h1 class="header-sm">{!addon.productName}</h1> 
+                                     	<span class="header-xs">(Quantity:{!addon.quantity}, Term: {!addon.subscriptionTermType})</span>
+                                </lightning:layoutitem>
+                            </lightning:layout>
+                            </lightning:layoutitem>
+                            <lightning:layoutitem  padding="horizontal-small" size="12" smallDeviceSize="12" mediumDeviceSize="5" largeDeviceSize="5">
+                                <div class="slds-float_right ">
+                                <b>${!addon.subAmount}/ {!addon.subscriptionTermType}
+                                <a class="slds-p-left--small" href="javascript:void(0)" aura:id="removeItem" data-sku="{!addon.Sku}" onclick="{!c.removeItem}">
+                            	<img src="{!$Resource.SSUtil + '/images/trash.svg'}" style="width:20px;"/>
+                             	</a></b>
+                               </div>
+                            </lightning:layoutitem>
+                            
+                        </aura:iteration>
+                        <lightning:layoutitem class="slds-p-bottom_small" padding="horizontal-small" size="12" smallDeviceSize="12" mediumDeviceSize="12" largeDeviceSize="12">
+                		</lightning:layoutitem>
+                	</aura:iteration>
+                <lightning:layoutitem class="slds-p-bottom_small slds-p-top_small"  padding="horizontal-small" size="12" smallDeviceSize="12" mediumDeviceSize="12" largeDeviceSize="12">
+                            <hr class="hrstyle1"/>
+                        </lightning:layoutitem>
+                
+                <lightning:layoutitem padding="horizontal-small" size="12" smallDeviceSize="12" mediumDeviceSize="6" largeDeviceSize="6">
+                    <lightning:input placeholder="Coupon Code"  variant="label-hidden" 
+                                           name="couponCode" aura:id="couponCode" label="Add Coupon Code"/>
+                </lightning:layoutitem>
+                <lightning:layoutitem padding="horizontal-small" size="12" smallDeviceSize="6" mediumDeviceSize="6" largeDeviceSize="6">
+                    <lightning:button label="Apply Coupon" variant="brand" 
+                                      aura:id="couponButton" onclick="{!c.applyCoupon}"/>
+
+                </lightning:layoutitem>
+                <lightning:layoutitem class="slds-p-bottom_small slds-p-top_small"  padding="horizontal-small" size="12" smallDeviceSize="12" mediumDeviceSize="12" largeDeviceSize="12">
+                            <hr class="hrstyle1"/>
+                        </lightning:layoutitem>
+                <lightning:layoutitem class="slds-p-left_large slds-p-bottom_small" padding="horizontal-small" size="12" smallDeviceSize="12" mediumDeviceSize="8" largeDeviceSize="8">
+                    Subtotal
+                </lightning:layoutitem>
+                <lightning:layoutitem  class="slds-p-bottom_small" padding="horizontal-small" size="12" smallDeviceSize="12" mediumDeviceSize="4" largeDeviceSize="4">
+                    <div class="slds-float_right">
+                        <b>${!v.cart.subTotalAmount}</b>
+                    </div>
+                </lightning:layoutitem>
+                
+                
+                <lightning:layoutitem class="slds-p-left_large" padding="horizontal-small" size="12" smallDeviceSize="12" mediumDeviceSize="8" largeDeviceSize="8">
+                    Sales Tax (To be calculated)
+                </lightning:layoutitem>
+                <lightning:layoutitem class="slds-p-bottom_small" padding="horizontal-small" size="12" smallDeviceSize="12" mediumDeviceSize="4" largeDeviceSize="4">
+                    <div class="slds-float_right">
+                        <b>${!v.cart.taxAmount}</b>
+                    </div>
+                </lightning:layoutitem>
+                
+                 
+                <lightning:layoutitem class="slds-p-left_large " padding="horizontal-small" size="12" smallDeviceSize="12" mediumDeviceSize="8" largeDeviceSize="8">
+                    Discounts Applied 
+                </lightning:layoutitem>
+                <lightning:layoutitem  class="slds-p-bottom_small" padding="horizontal-small" size="12" smallDeviceSize="12" mediumDeviceSize="4" largeDeviceSize="4">
+                    <div class="slds-float_right">
+                        <b>${!v.cart.totalDiscount}</b>
+                    </div>
+                </lightning:layoutitem>
+                
+                <lightning:layoutitem class="slds-p-bottom_small" padding="horizontal-small" size="12" smallDeviceSize="12" mediumDeviceSize="12" largeDeviceSize="12">
+                    <hr class="hrstyle1"/>
+                </lightning:layoutitem>
+                
+                <lightning:layoutitem class="slds-p-left_large " padding="horizontal-small" size="12" smallDeviceSize="12" mediumDeviceSize="8" largeDeviceSize="8">
+                    Total Price 
+                </lightning:layoutitem>
+                <lightning:layoutitem  padding="horizontal-small" size="12" smallDeviceSize="12" mediumDeviceSize="4" largeDeviceSize="4">
+                    <div class="slds-float_right">
+                        <b>${!v.cart.totalAmount}</b>
+                    </div>
+                </lightning:layoutitem>
+                
+                <lightning:layoutitem class="slds-p-bottom_large slds-p-top_small" padding="horizontal-small" size="12" smallDeviceSize="12" mediumDeviceSize="12" largeDeviceSize="12">
+                    <hr class="hrstyle1"/>
+                </lightning:layoutitem>
+                
+                <lightning:layoutitem class="slds-p-bottom_small slds-text-align_center" padding="horizontal-small" size="12" smallDeviceSize="12" mediumDeviceSize="12" largeDeviceSize="12">
+                    <lightning:input type="checkbox" aura:id="subCheck" label="{!$Label.c.CCTermsandConditions}" name="termSubCheck" 
+                                       onchange="{!c.onTermConditionCheck}"/>
+                </lightning:layoutitem>
+                
+                <lightning:layoutitem class="slds-p-bottom_small slds-text-align_center" padding="horizontal-small" size="12" smallDeviceSize="12" mediumDeviceSize="12" largeDeviceSize="12">
+                    <lightning:button aura:id="subscriptionButton" variant="brand" label="START SUBSCRIPTION" 
+                                       onclick="{!c.startSubscription}" disabled="{!v.isSubscriptionDisabled}"/>
+                </lightning:layoutitem>
+                
+                <lightning:layoutitem class="slds-p-around_large slds-text-align_center " padding="horizontal-small" size="12" smallDeviceSize="12" mediumDeviceSize="12" largeDeviceSize="12">
+                    <p>Your first subscription payment will be taken 
+                     within 1 working day following the start of your subscription.</p>
+                </lightning:layoutitem>
+            </lightning:layout>
+          
+        </lightning:card>
+    </div>
+</aura:component>

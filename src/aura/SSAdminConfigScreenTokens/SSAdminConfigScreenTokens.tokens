@@ -1,0 +1,25 @@
+<aura:tokens extends="forcecommunity:base">
+	
+       
+    <!--     Admin config screen Buttons      -->
+    <aura:token name="SSAdminBtnspaddingleft" value="1rem"/>
+    <aura:token name="SSAdminBtnspaddingright" value="1rem"/>
+    <aura:token name="SSAdminBtnstextalign" value="center"/>
+    <aura:token name="SSAdminBtnsverticalalign" value="middle"/>
+    <aura:token name="SSAdminBtnsborder" value="1px solid #dddbda"/>
+    <aura:token name="SSAdminBtnstransition" value="border 0.15s linear"/>
+    <aura:token name="SSAdminBtnsbackgroundcolor" value="#0070d2"/>
+    <aura:token name="SSAdminBtnsbordercolor" value="#0070d2"/>
+    <aura:token name="SSAdminBtnscolor" value="white"/>
+    
+   <!--     Admin config screen Header      -->
+    
+    <aura:token name="SSAdminHeaderLGColor" value="#000"/>
+    <aura:token name="SSAdminHeaderLGFontSize" value="24px"/>
+    
+    <!--     Admin config screen Header      -->
+    
+    <aura:token name="SSAdminHeaderSMColor" value="#666"/>
+    <aura:token name="SSAdminHeaderSMFontSize" value="15px"/>
+    
+</aura:tokens>

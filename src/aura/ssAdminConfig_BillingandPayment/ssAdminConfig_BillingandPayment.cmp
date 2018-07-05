@@ -1,0 +1,281 @@
+<aura:component controller="ssAdminConfig_BillingandPayment"  implements="forceCommunity:availableForAllPageTypes,c:ISSAdminConfig" access="global" >
+    
+    <!-- Handlers -->
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <aura:handler event="c:ssAdminConfig_StorefrontValEvent" action="{!c.onStorefrontSelected}"/>
+    
+
+    <!-- JSON attributes -->
+    <aura:attribute name="CSJson" type="object"/>
+    <aura:attribute name="PPJson" type="object"/>
+    <aura:attribute name="ZuoraJson" type="object"/>
+    <aura:attribute name="CustomJson" type="object"/>
+    <aura:attribute name="BilingPymentJson" type="object"/>
+    
+    <!--  Attributes -->
+    <aura:attribute name="BillingengineValue" type="String" default=""/>
+    <aura:attribute name="PaymentGatewayValue" type="String" default="steelbrick"/>
+    <aura:attribute name="Banner" default="false" type="boolean" access="global"/>
+    <!--aura:attribute name="Strorefronts" default="" type="List" access="global"/--> 
+    
+    <!-- Zuora   -->
+    <aura:attribute name="ZuoraServiceURL" default="" type="String" access="global"/> 
+    <aura:attribute name="ZuoraUsername" default="" type="String" access="global"/> 
+    <aura:attribute name="ZuoraPassword" default="" type="String" access="global"/> 
+    
+    <!-- cybersource -->
+    <aura:attribute name="CSusername" default="" type="String" access="global"/>
+    <aura:attribute name="CSpassword" default="" type="String" access="global"/>
+    <aura:attribute name="CSserviceURL" default="" type="String" access="global"/>
+    <aura:attribute name="CSmerchantId" default="" type="String" access="global"/>
+    <aura:attribute name="CStransactionkey" default="" type="String" access="global"/>
+    
+    <!-- Paypal -->
+    <aura:attribute name="PPClientID" default="" type="String" access="global"/>
+    <aura:attribute name="PPSecret" default="" type="String" access="global"/>
+    <aura:attribute name="PPTokenURL" default="" type="String" access="global"/>
+    <aura:attribute name="PPserviceURL" default="" type="String" access="global"/>
+    <aura:attribute name="ppsignature" default="" type="String" access="global"/>
+    
+    <!-- SteelBrick -->
+    <aura:attribute name="SBusername" default="" type="String" access="global"/>
+    <aura:attribute name="SBpassword" default="" type="String" access="global"/>
+    <aura:attribute name="SBserviceURL" default="" type="String" access="global"/>
+    <aura:attribute name="SBsignature" default="" type="String" access="global"/>
+    
+    
+    <div class="slds-text-color--error">
+        {!v.errorMessage}                
+    </div>
+    <!--   
+    <lightning:layout multipleRows="true" verticalAlign="start" horizontalAlign="stretch"> 
+     
+        <lightning:layoutitem padding="horizontal-small" size="12" smallDeviceSize="12" mediumDeviceSize="12" largeDeviceSize="12"> 
+            <lightning:select aura:id="StoreFronts"  name="StoreFronts" label="StoreFront" value="{!v.storefrontName}">
+                <option value="" text=""></option>
+                <aura:iteration items="{!v.Strorefronts}" var="store">
+                    <option value="{!store.value}" text="{!store.value}" ></option>
+                </aura:iteration>
+            </lightning:select><br/>
+        </lightning:layoutitem>
+    </lightning:layout>
+-->
+    
+    <lightning:layout multipleRows="true" verticalAlign="start" horizontalAlign="stretch"> 
+        
+        <lightning:layoutitem padding="horizontal-small" size="12" smallDeviceSize="12" mediumDeviceSize="12" largeDeviceSize="12"> 
+            <div style="padding-bottom:10px" class="slds-form-element">
+                <h2 class="header-xl slds-p-top_medium slds-p-left_medium">Billing and Payments</h2>
+                <p class="header-sm slds-p-bottom_medium slds-p-left_medium">Please select the service you would like to use for tax calculation</p>
+            </div>                                                                         
+        </lightning:layoutitem>
+    </lightning:layout>
+    
+    <lightning:layout multipleRows="true" verticalAlign="start" horizontalAlign="stretch"> 
+        
+        <aura:if isTrue="{!v.Banner}">
+            <lightning:layoutitem padding="horizontal-small" size="12" smallDeviceSize="12" mediumDeviceSize="12" largeDeviceSize="12"> 
+                <div style="background-color:green;text-align:center;color:white;padding-top:7px;padding-bottom:7px;margin-bottom:10px">Record Updated Successfully!!</div>
+            </lightning:layoutitem>
+        </aura:if>
+        
+        <lightning:layoutitem padding="horizontal-small" size="12" smallDeviceSize="4" mediumDeviceSize="4" largeDeviceSize="4"> 
+            <p style="padding-top:20px" class="slds-form-element__label">Select Billing Engine</p>
+        </lightning:layoutitem>
+        
+        <lightning:layoutitem padding="horizontal-small" size="12" smallDeviceSize="8" mediumDeviceSize="8" largeDeviceSize="8"> 
+            <lightning:select name="PaymentService"  label="" required="true" aura:id="BillingengineValue" value="{!v.BillingengineValue}">
+                <option value="">Payment Types</option>
+                <option value="CloudCraze">CloudCraze</option>
+                <option value="Zuora">Zuora</option>
+                <option value="SteelBrick">SteelBrick</option>
+            </lightning:select>
+        </lightning:layoutitem>
+    </lightning:layout>
+    <br/>
+    <lightning:layout multipleRows="true" verticalAlign="start" horizontalAlign="stretch">
+        
+        <lightning:layoutitem padding="horizontal-small" size="12" smallDeviceSize="4" mediumDeviceSize="4" largeDeviceSize="4"> 
+            <p style="padding-top:20px" class="slds-form-element__label">Select Payment Gateway</p>
+        </lightning:layoutitem>
+        
+        <lightning:layoutitem padding="horizontal-small" size="12" smallDeviceSize="8" mediumDeviceSize="8" largeDeviceSize="8"> 
+            <lightning:select name="PaymentGateway" label="" required="true" aura:id="PaymentGatewayValue" value="{!v.PaymentGatewayValue}">
+                <option value="">Payment Types</option>
+                <option value="Cyber Source">Cyber Source</option>
+                <option value="Paypal">Paypal</option>
+                <option value="Zuora payment pages">Zuora payment pages</option>
+                <option value="Custom Payment Type2">Custom Payment Type</option>
+            </lightning:select>
+        </lightning:layoutitem>
+    </lightning:layout>
+    
+    
+    <!--     Gateway Details Starts  -->
+    
+    <br/>
+    <lightning:layout multipleRows="true" verticalAlign="start" horizontalAlign="stretch">
+        
+        <lightning:layoutitem padding="horizontal-small" size="12" smallDeviceSize="4" mediumDeviceSize="4" largeDeviceSize="4"> 
+            <p style="padding-top:20px" class="slds-form-element__label">Payment Gateway Details</p>
+        </lightning:layoutitem>
+        
+        <lightning:layoutitem padding="horizontal-small" size="12" smallDeviceSize="8" mediumDeviceSize="8" largeDeviceSize="8"> 
+            <!---    Zuora Options  -->
+            
+            <aura:if isTrue="{!v.PaymentGatewayValue == 'Zuora payment pages'}">
+                <lightning:layout multipleRows="true" verticalAlign="start" horizontalAlign="stretch">
+                    
+                    <lightning:layoutitem padding="horizontal-small" size="12" smallDeviceSize="6" mediumDeviceSize="6" largeDeviceSize="6"> 
+                        <div class="slds-form-element">
+                            <lightning:input label="Username" aura:id="ZuoraUsername" required="true" name="Username"  placeholder ="Username" value="{!v.ZuoraUsername}"/>
+                        </div>
+                    </lightning:layoutitem>
+                    
+                    <lightning:layoutitem padding="horizontal-small" size="12" smallDeviceSize="6" mediumDeviceSize="6" largeDeviceSize="6"> 
+                        <div class="slds-form-element">
+                            <lightning:input label="Password"  required="true" name="Password"  placeholder ="Password" aura:id="ZuoraPassword" value="{!v.ZuoraPassword}"/>
+                        </div>
+                    </lightning:layoutitem>
+
+                    <lightning:layoutitem padding="horizontal-small" size="12" smallDeviceSize="12" mediumDeviceSize="12" largeDeviceSize="12"> 
+                        <div class="slds-form-element"> 
+                            <lightning:input label="Service URL" required="true"  name="Service URL" aura:id="ZuoraServiceURL"  placeholder ="Service URL" value="{!v.ZuoraServiceURL}"/>
+                        </div>
+                    </lightning:layoutitem>
+                </lightning:layout>
+            </aura:if> 
+            
+            <!---    CyberSource  Options   -->
+            <aura:if isTrue="{!v.PaymentGatewayValue == 'Cyber Source'}">
+                <lightning:layout multipleRows="true" verticalAlign="start" horizontalAlign="stretch">
+                    
+                    <lightning:layoutitem padding="horizontal-small" size="12" smallDeviceSize="6" mediumDeviceSize="6" largeDeviceSize="6"> 
+                        <div class="slds-form-element">
+                            <lightning:input label="Username"  name="Username"  placeholder ="Username" required="true" aura:id="CSusername" value="{!v.CSusername}"/>
+                        </div>
+                    </lightning:layoutitem>
+                    
+                    <lightning:layoutitem padding="horizontal-small" size="12" smallDeviceSize="6" mediumDeviceSize="6" largeDeviceSize="6"> 
+                        <div class="slds-form-element">
+                            <lightning:input label="Password"  name="Password"  placeholder ="Password" required="true" aura:id="CSpassword" value="{!v.CSpassword}"/>
+                        </div>
+                    </lightning:layoutitem>
+                    
+                    <lightning:layoutitem padding="horizontal-small" size="12" smallDeviceSize="12" mediumDeviceSize="12" largeDeviceSize="12"> 
+                        <div class="slds-form-element">
+                            <lightning:input label="Service URL"  name="Service URL"  placeholder ="Service URL" required="true" aura:id="CSserviceURL" value="{!v.CSserviceURL}"/>
+                        </div>
+                    </lightning:layoutitem>
+                    
+                    <lightning:layoutitem padding="horizontal-small" size="12" smallDeviceSize="6" mediumDeviceSize="6" largeDeviceSize="6"> 
+                        <div class="slds-form-element">
+                            <lightning:input label="Merchant Id"  name="Merchant Id"  placeholder ="Merchant Id" required="true" aura:id="CSmerchantId" value="{!v.CSmerchantId}"/>
+                        </div>
+                    </lightning:layoutitem>
+                    
+                    <lightning:layoutitem padding="horizontal-small" size="12" smallDeviceSize="6" mediumDeviceSize="6" largeDeviceSize="6"> 
+                        <div class="slds-form-element">
+                            <lightning:input label="Transaction Key"  name="Transaction Key"  placeholder ="Transaction Key" required="true" aura:id="CStransactionkey" value="{!v.CStransactionkey}"/>
+                        </div>
+                    </lightning:layoutitem>
+                    
+                </lightning:layout>
+            </aura:if>
+            
+            <!---    Paypal   Options   -->
+            <aura:if isTrue="{!v.PaymentGatewayValue == 'Paypal'}">
+                <lightning:layout multipleRows="true" verticalAlign="start" horizontalAlign="stretch">
+                    
+                    <lightning:layoutitem padding="horizontal-small" size="12" smallDeviceSize="6" mediumDeviceSize="6" largeDeviceSize="6"> 
+                        <div class="slds-form-element">
+                            <lightning:input label="Client ID"  name="Client ID"  placeholder ="Client ID" required="true" aura:id="PPClientID" value="{!v.PPClientID}"/>
+                        </div>
+                    </lightning:layoutitem>
+                    
+                    <lightning:layoutitem padding="horizontal-small" size="12" smallDeviceSize="6" mediumDeviceSize="6" largeDeviceSize="6"> 
+                        <div class="slds-form-element">
+                            <lightning:input label="Secret"  name="Secret"  placeholder ="Secret" required="true" aura:id="PPSecret" value="{!v.PPSecret}"/>
+                        </div>
+                    </lightning:layoutitem>
+                    
+                    <lightning:layoutitem padding="horizontal-small" size="12" smallDeviceSize="12" mediumDeviceSize="12" largeDeviceSize="12"> 
+                        <div class="slds-form-element">
+                            <lightning:input label="Token URL"  name="Token URL"  placeholder ="Token URL" required="true" aura:id="PPTokenURL" value="{!v.PPTokenURL}"/>
+                        </div>
+                    </lightning:layoutitem>
+                    
+                    <lightning:layoutitem padding="horizontal-small" size="12" smallDeviceSize="6" mediumDeviceSize="6" largeDeviceSize="6"> 
+                        <div class="slds-form-element">
+                            <lightning:input label="service URL"  name="service URL"  placeholder ="service URL" required="true" aura:id="PPserviceURL" value="{!v.PPserviceURL}"/>
+                        </div>
+                    </lightning:layoutitem>
+                    
+                    <lightning:layoutitem padding="horizontal-small" size="12" smallDeviceSize="6" mediumDeviceSize="6" largeDeviceSize="6"> 
+                        <div class="slds-form-element">
+                            <lightning:input label="Signature"  name="Signature"  placeholder ="Signature" required="true" aura:id="ppsignature" value="{!v.ppsignature}"/>
+                        </div>
+                    </lightning:layoutitem>
+                    
+                </lightning:layout>
+            </aura:if>
+            
+            
+            <!---    SteelBrick   Options  
+            <aura:if isTrue="{!v.PaymentGatewayValue == 'steelbrick'}">
+                <lightning:layout multipleRows="true" verticalAlign="start" horizontalAlign="stretch">
+                    
+                    
+                    <lightning:layoutitem padding="horizontal-small" size="12" smallDeviceSize="6" mediumDeviceSize="6" largeDeviceSize="6"> 
+                        <div class="slds-form-element">
+                            <lightning:input label="Username"  name="Username"  placeholder ="Username" value="{!v.SBusername}"/>
+                        </div>
+                    </lightning:layoutitem>
+                    
+                    <lightning:layoutitem padding="horizontal-small" size="12" smallDeviceSize="6" mediumDeviceSize="6" largeDeviceSize="6"> 
+                        <div class="slds-form-element">
+                            <lightning:input label="Password"  name="Password"  placeholder ="Password" value="{!v.SBpassword}"/>
+                        </div>
+                    </lightning:layoutitem>
+                    
+                    <lightning:layoutitem padding="horizontal-small" size="12" smallDeviceSize="6" mediumDeviceSize="6" largeDeviceSize="6"> 
+                        <div class="slds-form-element">
+                            <lightning:input label="Service URL"  name="Service URL"  placeholder ="Service URL" value="{!v.SBserviceURL}"/>
+                        </div>
+                    </lightning:layoutitem>
+                    
+                    <lightning:layoutitem padding="horizontal-small" size="12" smallDeviceSize="6" mediumDeviceSize="6" largeDeviceSize="6"> 
+                        <div class="slds-form-element">
+                            <lightning:input label="Signature"  name="Signature"  placeholder ="Signature" value="{!v.SBsignature}"/>
+                        </div>
+                    </lightning:layoutitem>
+                    
+                </lightning:layout>
+            </aura:if>-->            
+            <!---    Custom    Options   -->
+            
+            <aura:if isTrue="{!v.PaymentGatewayValue == 'Custom'}">
+                <lightning:layout multipleRows="true" verticalAlign="start" horizontalAlign="stretch">
+                    <lightning:layoutitem padding="horizontal-small" size="12" smallDeviceSize="12" mediumDeviceSize="12" largeDeviceSize="12"> 
+                        
+                        
+                    </lightning:layoutitem>
+                </lightning:layout>
+            </aura:if>
+            
+            <!---    None    Options   -->
+            <aura:if isTrue="{!v.PaymentGatewayValue == 'None'}">
+                <lightning:layout multipleRows="true" verticalAlign="start" horizontalAlign="stretch">
+                    <lightning:layoutitem padding="horizontal-small" size="12" smallDeviceSize="12" mediumDeviceSize="12" largeDeviceSize="12"> 
+                        
+                        
+                    </lightning:layoutitem>
+                </lightning:layout>
+            </aura:if>
+        </lightning:layoutitem>
+    </lightning:layout>
+    
+    <div class="slds-float_right" style="padding-top:10px">
+        <lightning:button class="ssBillingConfigBtn"  label="Save"  onclick="{!c.onclickSavebutton}"/>
+    </div>
+</aura:component>

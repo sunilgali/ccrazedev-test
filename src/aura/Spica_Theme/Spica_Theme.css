@@ -1,0 +1,108 @@
+/*header content*/
+.THIS div.header_content{
+    margin: 0 auto;
+    /*text-align: center;*/
+}
+/*navigation*/
+.THIS .right_head_col{
+    
+    padding-right:40px;
+    position:absolute;
+    right:0;
+    top:50%;
+    -webkit-transform: translateY(-50%);
+    -moz-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+    width:85%;
+    
+}
+.THIS .profMenu{
+    
+    float:right;
+    margin-top:4px;
+    width:15%;
+    
+}
+.THIS .custNav{
+    float:left;
+    width:85%;
+}
+/*.THIS .navDropSec{
+width:15%;
+float:left;
+margin-top:4px;
+position:relative;
+}*/
+.THIS .nav_container{
+    position:relative;
+    max-width:1920px;
+    margin:0 auto;
+}
+.THIS .nav_container:after, .THIS .dynLogCont:after{
+    content:"";
+    clear:both;
+    display:block;
+}
+.THIS .dynLogCont {
+    float:left;
+    width:15%;
+    padding-left:40px;
+}
+.THIS .logoContainer {
+    background-image: t('url(' + brandLogoImage  + ')');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    position: relative;
+    max-width: 100%;
+    max-height: 50%;
+    display: block;
+    outline: 0;
+    height: 50px;
+}
+@media only screen and (max-width: 767px) {
+    .THIS .login-wrapper.selfServiceUserProfileMenu {
+        margin-top:6px;
+    }
+    .THIS .comm-navigation__list {
+        float:left;
+    }
+    .THIS .dynLogCont {
+        width:auto;
+        padding-left:20px;
+        text-align: left;
+        width: 100px;
+        float: left;
+    }
+    .THIS .right_head_col{
+        width:auto;
+        position:static;
+        right:auto;
+        top:auto;
+        -webkit-transform: none;
+        -moz-transform: none;
+        -ms-transform: none;
+        transform: none;
+        margin-top:6px;
+        margin-right:10px;
+        padding-right: 0px;
+        float: right;
+    }
+    .THIS .custNav {
+        margin-top:2px;
+    }
+    .THIS .custNav, .THIS .profMenu {
+        width:50%;
+    }
+}
+
+.THIS .doc_home_top {
+    position:relative;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+.THIS .footCon{
+    background-color:#f2f2f2;
+    margin-top:15px;
+}

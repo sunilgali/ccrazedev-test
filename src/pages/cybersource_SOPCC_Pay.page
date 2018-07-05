@@ -1,0 +1,455 @@
+<apex:page id="c__cybersource_SOPCC_Pay" controller="ccpgcs.cc_pgcs_ctrl_pmt_SOPCC_Pay" applyHtmlTag="false" docType="html-5.0"
+           sidebar="false" showHeader="false" standardStylesheets="false" cache="false" contentType="text/html">
+<!-- <script>alert('Raja');</script> -->
+  <style type="text/css">
+  #sopccFrame { visibility: hidden; border: 0; width: 0; height: 0; }
+  #sopccAddress { height: 0;}
+Label, legend {
+  display: block;
+  margin-left: 3px;
+  padding-top: 2px;
+  text-shadow: 2px 2px 3px rgba(150, 150, 150, 0.75);
+  font-family:Verdana, Geneva, sans-serif;
+  font-size:.9em;
+}
+.inline {
+  display:inline-block;
+}
+  </style>
+  <script id="PaymentSOPCC-Both" type="text/template">
+   
+    <div class="ccPaymentOuterContainer">
+      <div class="main_content_large_right_container">
+        <div class="ccpgcs-messagingSection-Error">
+        </div>
+        <form id="sopccPay" action="#" class="sopccPay">
+          <fieldset>
+            <legend>{{pageLabelMap 'MyWallet_NewCreditCard_sopcc'}}</legend>
+            <input type="hidden" name="accountType" value="sopcc"/>
+            <div>
+              <!-- billing name-->
+              <label for="first_name"><span class="firstNameLabel fieldLabel">{{pageLabelMap 'MyWallet_FirstName_sopcc'}}</span></label>
+              <input type="text" name="first_name" class="firstName"/>
+              <label for="last_name"><span class="lastNameLabel fieldLabel">{{pageLabelMap 'MyWallet_LastName_sopcc'}}</span></label>
+              <input type="text" name="last_name" class="lastName"/>
+            </div>
+            <div class="clear"></div>
+            <div>
+              <!-- card type -->
+              <label for="card_type"><span class="cardTypeLabel fieldLabel">{{pageLabelMap 'MyWallet_CardType_sopcc'}}</span></label>
+              <select name="card_type" class="cardType">
+                <option value="">{{pageLabelMap 'MyWallet_CardType_Select_sopcc'}}</option>
+              </select>
+            </div>
+            <div>
+              <!-- card number -->
+              <label for="card_number"><span class="cardNumberLabel fieldLabel">{{pageLabelMap 'MyWallet_CardNumber_sopcc'}}</span></label>
+              <input type="tel" name="card_number" class="cardNumber"/>
+            </div>
+            <div>
+              <!-- expiration -->
+              <label for="card_expirationM"><span class="cardExpirationLabel fieldLabel">{{pageLabelMap 'MyWallet_CardExpiration_sopcc'}}</span></label>
+              <input type="tel" name="card_expirationMM" maxlength="2" class="cardExpirationMM" placeholder="{{pageLabelMap 'MyWallet_CardExpirationMM_sopcc'}}"/>
+              <input type="tel" name="card_expirationYYYY" maxlength="4" class="cardExpirationYYYY" placeholder="{{pageLabelMap 'MyWallet_CardExpirationYYYY_sopcc'}}"/>
+            </div>
+            <div>
+              <!-- cvn -->
+              <label for="card_cvn"><span class="cardCvnLabel fieldLabel">{{pageLabelMap 'MyWallet_CardCVN_sopcc'}}</span></label>
+              <input type="tel" name="card_cvn" maxlength="4" class="cardCvn" disabled="disabled"/>
+            </div>
+            <!-- address -->
+            <div class="addressBlock"/>
+            <hr/>
+            {{#if {!NOT(ISPICKVAL($User.UserType, 'Guest'))} }}
+            {{#ifDisplay 'wlt.enabled'}}
+            <div class="actionButtons">
+              <label>
+                <span class="saveLabel SavePayment fieldLabel">{{pageLabelMap 'MyWallet_SavePayment'}}</span>
+                <input type="checkbox" name="saveAsStoredPayment" id="saveAsStoredPayment" class="saveAsStoredPayment" value="true"/>
+              </label>
+            </div>
+            <div class="displayName">
+              <label>
+                <span class="saveDisplay Name fieldLabel">{{pageLabelMap 'MyWallet_NameOpt'}}</span>
+                <input type="text" name="displayName" id="displayName" class="displayName" maxlength="50"/>
+              </label>
+            </div>
+            <hr/>
+            {{/ifDisplay}}
+            {{/if}}
+          </fieldset>
+          <p class="two_buttons">
+          <div class="right">
+            <input type="button" class="sopccMakePayment button" name="sopccMakePayment" id="sopccPayment"
+                   data-id="sopccPay" value="{{pageLabelMap 'Payment_MakePayment'}}"/>
+          </div>
+          </p>
+        </form>
+        <iframe id="sopccFrame" src="{!URLFOR(iframe)}?{!iframeParameters}" border="0"></iframe>
+      </div>
+    </div>
+    <div id="sopccAddress"></div>
+  </script>
+  <ccpgcs:cc_pgcs_pmt_SOPCC_Address />
+  <script>
+jQuery(function($) {
+  CCRZ.models.PaymentsSOPCCModel = CCRZ.CloudCrazeModel.extend({
+    className : "cc_pgcs_ctrl_pmt_SOPCC_Pay",
+    frameSet : function(_frame, _sel, _val) {
+      if (_frame && _frame.contentWindow && _frame.contentWindow.document) {
+        var el = _frame.contentWindow.document.getElementById(_sel);
+        if (el) {
+           el.value = _val;
+           return _val;
+        }
+      }
+      return null;
+    },
+    frameGet : function(_frame, _sel) {
+      if (_frame && _frame.contentWindow && _frame.contentWindow.document) {
+        var el = _frame.contentWindow.document.getElementById(_sel);
+        if (el) return el.value;
+      }
+      return null;
+    }
+  });
+  CCRZ.views.PaymentsSOPCCView = CCRZ.CloudCrazeView.extend({
+    viewName : "PaymentsSOPCCView",
+    el : "sopccPay",
+    className : "sopccPay",
+    managedSubView : true,
+    templateDesktop : CCRZ.util.template("PaymentSOPCC-Both"),
+    templatePhone : CCRZ.util.template("PaymentSOPCC-Both"),
+    init : function(options) {
+      var _this = this;
+      _this.selector = options.selector;
+      _this.render();
+      CCRZ.pubSub.trigger('action:paymentViewInit',this);
+    },
+    iframe: function() {
+      return document.getElementById('sopccFrame');
+    },
+    payContext: function() {
+      if (CCRZ.pagevars.remoteContext.currentPageName.match('.+InvoicePayment.*')) return 'inv';
+      if (CCRZ.pagevars.remoteContext.currentPageName.match('.+Checkout.*')) return 'co';
+      return '';
+    },
+    addressFormatter: function(addr) {
+      var formatted = '';
+      if (addr['type']) formatted += addr['type'] + ':';
+      formatted += ' ' + [addr['firstName'],addr['lastName']].join(' ');
+      formatted += ', ' + [addr['addressFirstLine'],addr['addressSecondLine'],addr['addressThirdLine']].join(' ');
+      formatted += ', ' + [addr['city'],addr['state'],addr['postal']].join(' ');
+      formatted += ', ' + addr['country'];
+      return formatted.replace(/\s+/g, ' ').replace(/\s,\s/g, ', ');
+    },
+    validateInfo: function(formSel) {
+      $(formSel).validate({
+ 
+        invalidHandler: function(event, validator) {
+          CCRZ.handleValidationErrors(event, validator, 'ccpgcs-messagingSection-Error', false);
+        },
+        rules: {
+          first_name : { required: true },
+          last_name : { required: true },
+          address : { required: true, minlength: 1 },
+          card_type : { required: true, minlength: 1 },
+          card_number : { required: true, digits: true },
+          card_expirationMM : { required: true, digits: true },
+          card_expirationYYYY : { required: true, digits: true },
+          card_cvn : { required: ('true' == $('form#sopccPay select[name=card_type] option:selected').attr('data-required')), digits: true }
+        },
+        messages: {
+          first_name : { required: CCRZ.pagevars.pageLabels['MyWallet_FirstName_Required_sopcc'] },
+          last_name : { required: CCRZ.pagevars.pageLabels['MyWallet_LastName_Required_sopcc'] },
+          address : { required: CCRZ.pagevars.pageLabels['MyWallet_Address_Required_sopcc'] },
+          card_type : { required: CCRZ.pagevars.pageLabels['MyWallet_CardType_Required_sopcc'], minlength: CCRZ.pagevars.pageLabels['MyWallet_CardType_Required_sopcc'] },
+          card_number : { required: CCRZ.pagevars.pageLabels['MyWallet_CardNumber_Required_sopcc'] },
+          card_expirationMM : { required: CCRZ.pagevars.pageLabels['MyWallet_CardExpirationMM_Required_sopcc'] },
+          card_expirationYYYY : { required: CCRZ.pagevars.pageLabels['MyWallet_CardExpirationYYYY_Required_sopcc'] },
+          card_cvn : { required: CCRZ.pagevars.pageLabels['MyWallet_CardCvn_Required_sopcc'] }
+        },
+        errorPlacement: function(error, element) { }
+      });
+      return $(formSel).valid();
+    },
+    renderDesktop: function(){
+      this.setElement(this.selector);
+      this.data={};
+      this.$el.html(this.templateDesktop(this.data));
+    },
+    renderPhone: function(){
+      this.setElement(this.selector);
+      this.data={};
+      this.$el.html(this.templatePhone(this.data));
+    },
+    postRender: function() {
+      var _this = this;
+      _this.addressView = new CCRZ.views.AddressSOPCCView();
+      _this.addressView.render(function() {
+        _this.addressView.renderStates('', _this.addressView.model.get('defaultCountry'));
+        $('form fieldset .addressBlock').append($('#sopccAddress div.addressBlock').detach());
+      });
+      _this.updateCardTypes();
+      _this.updateFields();
+      if (CCRZ.invoicePaymentView && CCRZ.invoicePaymentView.paymentView) {
+        $(CCRZ.invoicePaymentView.paymentView.$el).off('click', '.useStoredPayment');
+        $(CCRZ.invoicePaymentView.paymentView.$el).on('click', '.useStoredPayment', $.proxy(_this.useStoredPayment, _this));
+      }
+      if (CCRZ.cartCheckoutView && CCRZ.cartCheckoutView.subView && CCRZ.cartCheckoutView.subView.paymentView) {
+        $(CCRZ.cartCheckoutView.subView.paymentView.$el).off('click', '.useStoredPayment');
+        $(CCRZ.cartCheckoutView.subView.paymentView.$el).on('click', '.useStoredPayment', $.proxy(_this.useStoredPayment, _this));
+      }
+       
+    },
+    updateFields: function(callback) {
+      var _this = this;
+      var spid = $('.sopcc input.storedPaymentSelection:checked').val();
+      if (spid) {
+        _this.model.frameSet(this.iframe(), 'merchant_defined_data2', spid);
+      } else {
+        _this.updateFirstName();
+        _this.updateLastName();
+        _this.updateCardType();
+        _this.updateCardExpiration();
+        _this.updateAddress();
+        _this.updateSaveAsStoredPayment();
+        _this.updateDisplayName();
+      }
+      _this.model.frameSet(this.iframe(), 'merchant_defined_data4', this.payContext());
+      if (_this.payContext() === 'inv') {
+        var $$inv = $('input.invoicePayAmount');
+        _this.model.frameSet(_this.iframe(), 'merchant_defined_data20', $$inv.data('id'));
+        _this.model.frameSet(_this.iframe(), 'amount', $$inv.val());
+      }
+      _this.model.frameSet(_this.iframe(), 'merchant_defined_data10', CCRZ.pagevars.remoteContext.storefront);
+      _this.model.frameSet(_this.iframe(), 'merchant_defined_data11', CCRZ.pagevars.remoteContext.portalUserId);
+      _this.model.frameSet(_this.iframe(), 'merchant_defined_data12', CCRZ.pagevars.remoteContext.effAccountId);
+      _this.model.frameSet(_this.iframe(), 'merchant_defined_data13', CCRZ.pagevars.remoteContext.currentCartId);
+      _this.model.frameSet(_this.iframe(), 'merchant_defined_data14', CCRZ.pagevars.remoteContext.priceGroupId);
+      _this.model.frameSet(_this.iframe(), 'merchant_defined_data15', CCRZ.pagevars.remoteContext.userIsoCode);
+      _this.model.frameSet(_this.iframe(), 'merchant_defined_data16', CCRZ.pagevars.remoteContext.userLocale);
+      _this.model.frameSet(_this.iframe(), 'merchant_defined_data17', CCRZ.pagevars.remoteContext.currentPageName);
+      _this.model.frameSet(_this.iframe(), 'merchant_defined_data18', window.location.pathname);
+      _this.model.frameSet(_this.iframe(), 'merchant_defined_data24', (CCRZ.currentUser && CCRZ.currentUser.Email && {!NOT(ISPICKVAL($User.UserType, 'Guest'))})?CCRZ.currentUser.Email:'');
+      var qs = window.location.search.substring(1).split('&');
+      for(var i=0;i < qs.length;i++) _this.model.frameSet(_this.iframe(), 'merchant_defined_data3'+i, decodeURIComponent(qs[i]));
+      Visualforce.remoting.Manager.invokeAction('{!$RemoteAction.cc_pgcs_ctrl_pmt_SOPCC_Pay.getFormData}',
+        CCRZ.pagevars.remoteContext,
+        JSON.stringify($(_this.iframe()).contents().find('input').serializeObject()),
+        function(r) {
+          if (r && r.success && r.data) {
+            $.each(r.data, function(k,v) { _this.model.frameSet(_this.iframe(), k, v); });
+          }
+          if (callback) callback(_this);
+        },{buffer:false,escape:false});
+      return _this;
+    },
+    updateAddress: function(event) {
+      var _this = this;
+      $$selected = $('form#sopccPay select[name=address] option:selected');
+      if ($$selected.val()) {
+        _this.model.set('address', $$selected.val());
+        _this.addressView.model.set('address', $$selected.val());
+        _this.model.frameSet(_this.iframe(), 'merchant_defined_data3', $$selected.val());
+      }
+      return _this;
+    },
+    updateCardTypes: function(event) {
+      var _this = this;
+      Visualforce.remoting.Manager.invokeAction('{!$RemoteAction.cc_pgcs_ctrl_pmt_SOPCC_Pay.getPaymentTypes}',
+        CCRZ.pagevars.remoteContext,'',
+        function(r) {
+          if (r && r.success && r.data) {
+            $$select = $('form#sopccPay select[name=card_type]');
+            $$select.find('option[data-default]').remove();
+            $.each(r.data, function(i,v) {
+              $$select.append('<option '+
+                'data-sfid=\"'+v['sfid']+'\" '+'data-verification=\"'+v['verification']+'\" '+ 'value=\"'+v['type']+'\">' +
+                CCRZ.pagevars.pageLabels['PaymentType_'+ v['type']+'_sopcc']
+                + '</option>');
+            });
+          }
+        },{buffer:false,escape:false});
+        return _this;
+    },
+    updateCardType: function(event) {
+      var _this = this;
+      $$selected = $('form#sopccPay select[name=card_type] option:selected');
+      _this.model.frameSet(_this.iframe(), 'card_type', '');
+      $('form#sopccPay input[name=card_type] option:selected').attr('data-required' ,$$selected.attr('data-verification'));
+      if ('true' == $$selected.attr('data-verification')) {
+        $('form#sopccPay input[name=card_cvn]').prop('disabled',false);
+        _this.model.frameSet(_this.iframe(), 'card_type', $$selected.val());
+      } else {
+        $('form#sopccPay input[name=card_cvn]').prop('disabled',true);
+      }
+      return _this;
+    },
+    updateCardExpiration: function(event) {
+      var _this = this;
+      var mm = $('form#sopccPay input[name=card_expirationMM]').val();
+      var yyyy = $('form#sopccPay input[name=card_expirationYYYY]').val();
+      if (mm && yyyy) {
+        if (mm.length < 2) mm = "0" + mm;
+        _this.model.frameSet(_this.iframe(), 'card_expiry_date', mm + "-" + yyyy);
+      }
+      return _this;
+    },
+    updateFirstName: function(event) {
+      var _this = this;
+      _this.model.frameSet(_this.iframe(), 'bill_to_forename', $('form#sopccPay input[name=first_name]').val());
+      return _this;
+    },
+    updateLastName: function(event) {
+      var _this = this;
+      _this.model.frameSet(_this.iframe(), 'bill_to_surname', $('form#sopccPay input[name=last_name]').val());
+      return _this;
+    },
+    updateSaveAsStoredPayment: function(event) {
+      var _this = this;
+      if ($('form#sopccPay input[name=saveAsStoredPayment]').is(':checked')) {
+        _this.model.frameSet(_this.iframe(), 'merchant_defined_data22', 'true');
+        _this.updateDisplayName();
+      } else {
+        _this.model.frameSet(_this.iframe(), 'merchant_defined_data22', 'false');
+        _this.model.frameSet(_this.iframe(), 'merchant_defined_data23', '');
+      }
+      return _this;
+    },
+    updateDisplayName: function(event) {
+      var _this = this;
+      if ($('form#sopccPay input[name=displayName]').val()) {
+       _this.model.frameSet(_this.iframe(), 'merchant_defined_data23', $('form#sopccPay input[name=displayName]').val());
+      }
+      return _this;
+    },
+    useStoredPayment: function(event) {
+      var _this = this;
+      var spid = $('.sopcc input.storedPaymentSelection:checked').val();
+      var ipv = (CCRZ.invoicePaymentView)? CCRZ.invoicePaymentView.paymentView : null;
+      var cov = (CCRZ.cartCheckoutView && CCRZ.cartCheckoutView.subView && CCRZ.cartCheckoutView.subView.paymentView)?
+        CCRZ.cartCheckoutView.subView.paymentView : null;
+      if (spid) {
+        _this.updateFields(function(_this) {
+          $('input.sopccMakePayment').prop('disabled', true).addClass('disabled');
+          Visualforce.remoting.Manager.invokeAction('{!$RemoteAction.cc_pgcs_ctrl_pmt_SOPCC_Pay.getSignature}',
+              CCRZ.pagevars.remoteContext,
+              JSON.stringify($(_this.iframe()).contents().find('input[data-signed=true]').serializeObject()),
+              function(r) {
+                if (r && r.success && r.data) {
+                  $.each(r.data, function(k,v) { _this.model.frameSet(_this.iframe(), k, v); });
+                  var eventMethod = window.addEventListener ? "addEventListener" : "attachEvent";
+                  var eventerAdd = window[eventMethod];
+                  var messageEvent = eventMethod == "attachEvent" ? "onmessage" : "message";
+                  eventerAdd(messageEvent, _this.handlePaymentResponse, false);
+                  $$form = $(_this.iframe()).contents().find('form');
+                  $$form.submit();
+                } else if (r && r.messages
+                  && _.isArray(r.messages)
+                  && (r.messages.length > 0)) {
+                  CCRZ.pubSub.trigger('pageMessage', r);
+                  $('input.sopccMakePayment').prop('disabled', false).removeClass('disabled');
+                  _this.iframe().src = _this.iframe().src;
+                }
+              }, {buffer:false,escape:false});
+        });
+      } else if (ipv) {
+        ipv.useStoredPayment();
+      } else if (cov) {
+        cov.useStoredPayment();
+      }
+    },
+    makePayment: function(event) {
+      var _this = this;
+      _this.updateFields(function(_this) {
+        if (_this.validateInfo('#sopccPay')) {
+          $('input.sopccMakePayment').prop('disabled', true).addClass('disabled');;
+          Visualforce.remoting.Manager.invokeAction('{!$RemoteAction.cc_pgcs_ctrl_pmt_SOPCC_Pay.getSignature}',
+              CCRZ.pagevars.remoteContext,
+              JSON.stringify($(_this.iframe()).contents().find('input[data-signed=true]').serializeObject()),
+              function(r) {
+                if (r && r.success && r.data) {
+                  $.each(r.data, function(k,v) { _this.model.frameSet(_this.iframe(), k, v); });
+                  _this.model.frameSet(_this.iframe(), 'card_number', $('form#sopccPay input[name=card_number]').val());
+                  _this.model.frameSet(_this.iframe(), 'card_cvn', $('form#sopccPay input[name=card_cvn]').val());
+                  var eventMethod = window.addEventListener ? "addEventListener" : "attachEvent";
+                  var eventerAdd = window[eventMethod];
+                  var messageEvent = eventMethod == "attachEvent" ? "onmessage" : "message";
+                  eventerAdd(messageEvent, _this.handlePaymentResponse, false);
+                  $$form = $(_this.iframe()).contents().find('form');
+                  $$form.submit();
+                } else if (r && r.messages && _.isArray(r.messages) && (r.messages.length > 0)) {
+                  CCRZ.pubSub.trigger('pageMessage', r);
+                  $('input.sopccMakePayment').prop('disabled', false).removeClass('disabled');
+                  _this.iframe().src = _this.iframe().src;
+                }
+              }, {buffer:false,escape:false});
+        } // /validateInfo
+      });
+    },
+    handlePaymentResponse: function(event) {
+      var _this = this;
+      var iframe = document.getElementById('sopccFrame');
+      var eventMethod = window.addEventListener ? "removeEventListener" : "detachEvent";
+      var eventerRemove = window[eventMethod];
+      var messageEvent = eventMethod == "attachEvent" ? "onmessage" : "message";
+      eventerRemove(messageEvent, this, false);
+      $('input.sopccMakePayment').prop('disabled', false).removeClass('disabled');
+      if (event.origin !== window.location.origin) return;
+      var response = JSON.parse(event.data);
+      if (response && response.success) {
+        if (response.data.req_merchant_defined_data4 === 'co') {
+          if (response.data.placeURL) {
+            window.location = response.data.placeURL + getCSRQueryString();
+          } else {
+            orderDetails(response.data);
+          }
+        }
+        if (response.data.req_merchant_defined_data4 === 'inv') {
+          $('.invoicePaymentContainer').hide();
+          if (CCRZ.invoicePaymentView
+            && CCRZ.invoicePaymentView.displayType == 'generic') {
+            if (myInvoices) myInvoices();
+          } else {
+            if (invoiceDetail) invoiceDetail(response.data.req_merchant_defined_data20);
+          }
+        }
+      } else if (response && response.messages && _.isArray(response.messages) && (response.messages.length > 0)) {
+        CCRZ.pubSub.trigger('pageMessage', response);
+        iframe.src = iframe.src;
+      } else {
+        CCRZ.pubSub.trigger('pageMessage',{messages:[{
+          type : 'CUSTOM',
+          labelId : 'Checkout_OrderPlaceError',
+          severity : 'ERROR',
+          classToAppend : ($('storedpayment-messagingSection-Error'))?'storedpayment-messagingSection-Error':'messagingSection-Error'
+        }]});
+        iframe.src = iframe.src;
+      }
+    },
+    events: {
+      'click .sopccMakePayment':'makePayment',
+      'blur .firstName':'updateFirstName',
+      'blur .lastName':'updateLastName',
+      'change .address':'updateAddress',
+      'change .cardType':'updateCardType',
+      'blur .cardExpirationMM':'updateCardExpiration',
+      'blur .cardExpirationYYYY':'updateCardExpiration',
+      'blur .saveAsStoredPayment':'updateSaveAsStoredPayment',
+      'blur .displayName':'updateDisplayName'
+    }
+  });
+  CCRZ.pubSub.trigger('action:paymentViewReady','sopcc',function(options){
+    CCRZ.payment = CCRZ.payment||{views:{}};
+    CCRZ.payment.views.sopcc = new CCRZ.views.PaymentsSOPCCView({
+      model : new CCRZ.models.PaymentsSOPCCModel(),
+      selector : options.selector
+    });
+  });
+});
+ 
+ 
+ 
+  </script>
+</apex:page>

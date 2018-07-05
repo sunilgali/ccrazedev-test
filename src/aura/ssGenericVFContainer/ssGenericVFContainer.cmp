@@ -1,0 +1,28 @@
+<aura:component access="global">
+	<!-- ssGenericVFContainer -->
+    <!--BEGIN ATTRIBUTES-->
+    <aura:attribute name="disableBtn" type="Boolean" />
+    <aura:attribute name="spinnerStatus" type="String"/>
+    <aura:attribute name="message" type="String"/>
+    <aura:attribute name="vfHost" type="String"/>
+    <aura:attribute name="lcHost" type="String" />
+    <aura:attribute name="iframeWidth" type="String"/>
+    <aura:attribute name="objPayload" type="object"/>
+    <aura:attribute name="iframeHeight" type="String" default="500"/>
+    <aura:attribute name="iframePageType" type="String" default="Credit%20Card"/>
+    <aura:attribute name="iframeBorderStyle" type="String" default="none"/>
+    <aura:attribute name="vfPageName" type="String" default="ssZuoraPaymentPage"/>
+    <aura:attribute name="iFrameHostName" type="String" default="https://ccrazedev-dev-ed--c.na78.visual.force.com" />
+    <aura:attribute name="iFrameSrc" type="String" default="{! v.iFrameHostName + '/apex/' + v.vfPageName + '?lcHost=' + v.lcHost + '&amp;type=' + v.iframePageType}"/>
+    <!--END ATTRIBUTES-->
+    <!-- BEGIN EVENT -->
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <!-- END EVENT -->
+    <!-- BEGIN BODY -->
+    <iframe aura:id="vfFrameContainer" src="{! v.iFrameSrc}" width="{!v.iframeWidth}" height="{!v.iframeHeight}" 
+            onload="{!c.updateIframeReolution}" style="{! 'border-style: ' + v.iframeBorderStyle + ';height: ' + v.iframeHeight + ';'}"/>
+    <div aura:id="buttonContainer" class="slds-hide slds-align--absolute-center slds-p-top_small">
+        <lightning:button variant="brand" label="Submit" onclick="{! c.handleSubmitClick }" disabled="{!v.disableBtn}"/>
+    </div>
+    <!-- END BODY -->
+</aura:component>

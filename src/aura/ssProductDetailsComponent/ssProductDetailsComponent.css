@@ -1,0 +1,9 @@
+.THIS {
+    
+}
+ 
+.THIS .header-lg2{
+    color : t(SSLDTHeaderLG2Color);
+    font-size: t(SSLDTHeaderLG2FontSize);
+    font-weight:t(SSLDTHeaderLG2FontWeight);
+}

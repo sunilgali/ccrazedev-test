@@ -1,0 +1,12 @@
+.THIS {
+}
+
+.THIS .select-fixed-width > .slds-form-element__control > .slds-select_container{
+    width: 215px;
+}
+
+.THIS .ss_header-lg2{
+    color : t(SSHeaderLG2Color);
+    font-size: t(SSHeaderLG2FontSize);
+    font-weight:t(SSHeaderLG2FontWeight);
+}

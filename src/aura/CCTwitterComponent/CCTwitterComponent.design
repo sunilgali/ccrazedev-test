@@ -1,0 +1,4 @@
+<design:component label="Twitter">
+	<design:attribute name="name" label="Component Name"  description="Unique name of the Component. Used to save and retrieve configuration." />	
+	<design:attribute name="permissionName" label="Permission Set Name"  description="Name of the Permission Set that needs to be applied to determine the Administrator." default="" />	
+</design:component>

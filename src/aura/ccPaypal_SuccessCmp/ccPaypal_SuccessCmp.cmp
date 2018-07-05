@@ -1,0 +1,23 @@
+<aura:component implements="forceCommunity:availableForAllPageTypes,lightning:isUrlAddressable" access="global">
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <aura:attribute type="String" name="PayerID"/>
+    <aura:attribute type="String" name="paymentId"/>
+     <aura:attribute type="String" name="cartId"/>
+    <aura:attribute type="String" name="token"/>
+    
+    <div class="slds-box" style="padding-top:100px;padding-bottom:100px;background-color: #f2f2f2;">
+        <div class="slds-align_absolute-center">
+            
+            <lightning:layout multipleRows="true" verticalAlign="start" horizontalAlign="stretch" >
+                <div>  
+                    <b>PayerID</b>       : {!v.PayerID}<br/><br/>
+                    <b>paymentId</b>     : {!v.paymentId}<br/><br/>
+                    <b>token </b>        : {!v.token}<br/><br/>
+                    <b>cartId </b>        : {!v.cartId}
+                </div>
+            </lightning:layout>
+        </div>
+    </div>
+    
+    
+</aura:component>

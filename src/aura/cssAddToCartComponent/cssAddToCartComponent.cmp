@@ -1,0 +1,17 @@
+<aura:component  controller="CSSCartController" extends="c:cssBaseComponent" implements="flexipage:availableForAllPageTypes,forceCommunity:availableForAllPageTypes" access="global">
+	
+    <c:cssSpinnerComponent show="true" alternateText="Please wait ....." spinnerSize="large" />
+    
+    <aura:handler name="init" value="{!this}" action="{!c.onInit}" />
+
+	<aura:attribute name="productSKU" type="String" access="global"/>
+	<aura:attribute name="storefront" type="String" access="global"/>
+	<aura:attribute name="userLocale" type="String" access="global"/>
+	<aura:attribute name="userCurrency" type="String" access="global"/>
+	<aura:attribute name="subscriptionTerm" type="String" access="global"/>
+	<aura:attribute name="quantity" type="String" access="global" default="1"/>
+	<aura:attribute name="transactionType" type="String" access="global"/>
+	
+	<aura:attribute name="cartItems" type="Object[]" access="global"/>
+    
+</aura:component>

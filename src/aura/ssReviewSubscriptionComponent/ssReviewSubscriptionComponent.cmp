@@ -1,0 +1,99 @@
+<aura:component >
+    <div class="slds-p-left_large slds-p-top_large ">
+    <h1 class="slds-page-header__title slds-text-heading_medium">Summary </h1>
+    <p>Review your new subscription details</p>
+    <hr class="hrstyle1"/>
+    
+    <table>
+        <tr><td>
+            <h1 class='header-md slds-has-flexi-truncate'>Data Quality Management...</h1> 
+            <span class="header-xs">(Users:100, Storage: 50gb, Term: Annual)</span>
+            </td>
+            <td style="vertical-align:top; width:100px;"><b>$19.99/ Month</b></td>
+        </tr>
+        <tr><td colspan="2"><hr class="hrstyle1"/></td></tr>
+        <tr><td><span class='slds-badge'>Add-On</span>
+            <span class="header-md">Development Tools</span>
+            <h3 class="header-xs" style='margin-left:65px;'>(Term: Annual)</h3>
+            </td>
+            <td style="vertical-align:top"><b>$10.00/ Month</b></td>
+        </tr>
+        <tr><td colspan="2"><hr class="hrstyle1" style="margin-left:40px;"/></td></tr>
+        <tr><td><span class='slds-badge'>Add-On</span>
+            <span class="header-md">Maintenance Plan</span>
+            <h3 class="header-xs" style='margin-left:65px;'>(Term: Annual)</h3>
+            </td>
+            <td style="vertical-align:top"><b>$12.00/ Month</b></td>
+        </tr>
+        <tr><td colspan="2"><hr class="hrstyle1"/></td></tr>
+        <tr><td>
+            <h1 class='header-md slds-has-flexi-truncate'>
+                Cloud Platform Big Data...</h1>
+            <span class="header-xs" >(Users:100, Storage: 50gb, Term: Annual)</span>
+            </td>
+            <td style="vertical-align:top; width:100px;"><b>$19.99/ Month</b></td>
+        </tr>
+        <tr><td colspan="2"><hr class="hrstyle1" /></td></tr>
+        <tr><td><span class='slds-badge'>Add-On</span>
+            <span class="header-md">Development Tools</span>
+            <h3 class="header-xs" style='margin-left:65px;'>(Term: Annual)</h3>
+            </td>
+            <td style="vertical-align:top"><b>$10.00/ Month</b></td>
+        </tr>
+        <tr><td colspan="2"><hr class="hrstyle1" style="margin-left:40px;"/></td></tr>
+        <tr><td><span class='slds-badge'>Add-On</span>
+            <span class="header-md">Maintenance Plan</span>
+            <h3 class="header-xs" style="margin-left:65px;">(Term: Annual)</h3>
+            </td>
+            <td style="vertical-align:top"><b>$12.00/ Month</b></td>
+        </tr>
+        <tr><td colspan="2"><hr class="hrstyle2"/></td></tr>
+        <tr><td colspan="2">
+            <div class="slds-form-element">
+                <label class="slds-form-element__label" for="text-input-id-1">
+                    <h1 class="header-md">Add Coupon Code</h1>
+                </label><br/>
+                <div class="slds-form-element__control slds-float_left">
+                    <input type="text" id="text-input-id-1" style="width:250px;" class="slds-input" placeholder="Placeholder Text" />
+                </div>
+                
+                <div class="slds-form-element slds-float_left" style='padding-left:8px;'>
+                    <div class="slds-form-element__control">
+                        <button class="slds-button slds-button_brand">Apply</button>
+                    </div>
+                </div>
+            </div>
+            
+            </td>
+        </tr>
+        <tr><td colspan="2"><hr class="hrstyle1"/></td></tr>
+        <tr><td class="slds-p-vertical_small">Subtotal</td>
+            <td class="slds-p-vertical_small slds-text-align_right" style="vertical-align:top; width:100px;"><b>$82.99</b></td>
+        </tr>
+        <tr><td>Sales Tax (To be calculated)</td>
+            <td class="slds-p-vertical_small slds-text-align_right"  style="vertical-align:top; width:100px;"><b> </b></td>
+        </tr>
+        <tr><td>Discounts Applied (0%)</td>
+            <td class="slds-p-vertical_small slds-text-align_right" style="vertical-align:top; width:100px;"><b>$0.00 </b></td>
+        </tr>
+        <tr><td colspan="2"><hr class="hrstyle2"/></td></tr>
+        <tr><td>Total Price</td>
+            <td class="slds-p-vertical_small slds-text-align_right" style="vertical-align:top; width:100px;"><b>$82.99</b></td>
+        </tr>
+        <tr><td colspan="2" class="slds-p-horizontal_medium slds-p-vertical_medium">
+            <span class="slds-checkbox">
+                <input type="checkbox" name="options" id="checkbox-2" value="on" />
+                <label class="slds-checkbox__label" for="checkbox-2">
+                    <span class="slds-checkbox_faux"></span>&nbsp;&nbsp;
+                    <span class="header-sm" style="font-size:12px;"> I have read and accepted the <a href="#">Terms and Conditions</a></span>
+                </label>
+            </span></td></tr>
+        
+        <tr><td colspan="2" class='slds-text-align_center'> <a href="04-BuyNow-Success.html" class="slds-button slds-button_brand" style="width:300px">START SUBSCRIPTION</a></td></tr>
+        <tr><td colspan='2' class="slds-p-around_large"><p>Your first subscription payment will be taken 
+            within 1 working day following the start of your subscription.</p>
+            </td></tr>
+    </table>
+    </div>
+    
+</aura:component>

@@ -1,0 +1,197 @@
+<aura:component implements="forceCommunity:availableForAllPageTypes" access="global" >
+    
+    <div style="margin-left:5%;margin-right:5%">
+        
+        <table style="max-width:100%" class="slds-table slds-table_bordered slds-table_cell-buffer slds-table_col-bordered">
+            <tbody>
+                <tr>   
+                    <td >
+                        <div class="slds-truncate" >     
+                        </div>
+                    </td>
+                    <td >
+                        <div class="slds-truncate">
+                            <center>
+                                <p><b>Acrobat Reader</b></p>
+                                <p>The free global standard for reliably viewing, printing, <br/>
+                                    and commenting on PDF documents.</p><br/><br/><br/>
+                                <lightning:button class="button" label="Download now" onclick="{!c.handleClick }"/> 
+                            </center>
+                        </div>
+                    </td>
+                    <td style="background-color:#f9f9f9">
+                        <div class="slds-truncate" >
+                            <center>
+                                <p><b>Adobe Acrobat Professional Bundle</b></p>
+                                <p>The world’s best PDF solution lets you create, sign, <br/>
+                                    and send documents on any device. <br/>
+                                    Try it free for 7 days.</p><br/>
+                                <lightning:button class="button" onclick="{!c.handleTryClick }" label="Start free trial"/><br/><br/>
+                                <lightning:button class="button" label="  Buy now  " onclick="{!c.handleBuyClick }"/> 
+                            </center>
+                            
+                            
+                        </div>
+                    </td> 
+                </tr>             
+                
+                
+                <tr> 
+                    <td >
+                        <div class="slds-truncate"> 
+                            <p>View PDF</p>
+                        </div>
+                    </td>
+                    <td >
+                        <div class="slds-truncate" >
+                            <center>
+                                <lightning:icon class="yes" iconName="utility:check" alternativeText="Doc image" /></center>
+                        </div>
+                    </td>
+                    <td style="background-color:#f9f9f9">
+                        <div class="slds-truncate">
+                            <center>
+                                <lightning:icon class="yes" iconName="utility:check" alternativeText="Doc image" /></center>
+                        </div>
+                    </td> 
+                </tr> 
+                
+                
+                
+                <tr> 
+                    <td >
+                        <div class="slds-truncate"> 
+                            <p>Print PDF </p>
+                        </div>
+                    </td>
+                    <td >
+                        <div class="slds-truncate" >
+                            <center>
+                                <lightning:icon class="yes" iconName="utility:check" alternativeText="Doc image" /></center>
+                        </div>
+                    </td>
+                    <td style="background-color:#f9f9f9">
+                        <div class="slds-truncate">
+                            <center>
+                                <lightning:icon class="yes" iconName="utility:check" alternativeText="Doc image" />
+                            </center>
+                        </div>
+                    </td> 
+                </tr>
+                
+                
+                <tr> 
+                    <td >
+                        <div class="slds-truncate"> 
+                            <p>Comment on PDF </p>
+                        </div>
+                    </td>
+                    <td >
+                        <div class="slds-truncate" >
+                            <center>
+                                <lightning:icon class="yes" iconName="utility:check" alternativeText="Doc image" /></center>
+                        </div>
+                    </td>
+                    <td style="background-color:#f9f9f9">
+                        <div class="slds-truncate">
+                            <center>
+                                <lightning:icon class="yes" iconName="utility:check" alternativeText="Doc image" />
+                            </center>
+                        </div>
+                    </td> 
+                </tr>
+                
+                
+                <tr> 
+                    <td >
+                        <div class="slds-truncate"> 
+                            <p>Create PDF </p>
+                        </div>
+                    </td>
+                    <td >
+                        <div class="slds-truncate" >
+                            <center>
+                                <lightning:icon class="no"  iconName="utility:close" alternativeText="Doc image" /></center>
+                        </div>
+                    </td>
+                    <td style="background-color:#f9f9f9">
+                        <div class="slds-truncate">
+                            <center>
+                                <lightning:icon class="yes" iconName="utility:check" alternativeText="Doc image" />
+                            </center>
+                        </div>
+                    </td> 
+                </tr>
+                
+                
+                
+                <tr> 
+                    <td >
+                        <div class="slds-truncate"> 
+                            <p>Export PDF to Office format or image</p>
+                        </div>
+                    </td>
+                    <td >
+                        <div class="slds-truncate" >
+                            <center>
+                                <lightning:icon class="no"  iconName="utility:close" alternativeText="Doc image" /></center>
+                        </div>
+                    </td>
+                    
+                    <td style="background-color:#f9f9f9">
+                        <div class="slds-truncate">
+                            <center>
+                                <lightning:icon class="yes" iconName="utility:check" alternativeText="Doc image" /></center>
+                        </div>
+                    </td> 
+                </tr>
+                
+                
+                <tr> 
+                    <td >
+                        <div class="slds-truncate"> 
+                            <p>Restrict editing and printing of others</p>
+                        </div>
+                    </td>
+                    <td >
+                        <div class="slds-truncate" >
+                            <center>
+                                <lightning:icon class="no"  iconName="utility:close" alternativeText="Doc image" /></center>
+                        </div>
+                    </td>
+                    <td style="background-color:#f9f9f9">
+                        <div class="slds-truncate">
+                            <center>
+                                <lightning:icon class="yes" iconName="utility:check" alternativeText="Doc image" /></center>
+                        </div>
+                    </td> 
+                </tr>
+                
+                
+                
+                <tr> 
+                    <td >
+                        <div class="slds-truncate"> 
+                            <p>ISO and accessibility standards compliant</p>
+                        </div>
+                    </td>
+                    <td >
+                        <div class="slds-truncate" >
+                            <center>
+                                <lightning:icon class="no"  iconName="utility:close" alternativeText="Doc image" /></center>
+                        </div>
+                    </td>
+                    <td style="background-color:#f9f9f9">
+                        <div class="slds-truncate">
+                            <center>
+                                <lightning:icon class="yes" iconName="utility:check" alternativeText="Doc image" /></center>
+                        </div>
+                    </td> 
+                </tr>
+                
+                
+            </tbody>
+        </table>
+        
+    </div>
+</aura:component>

@@ -1,0 +1,11 @@
+<aura:component extends="c:ssBaseComponent" implements="forceCommunity:profileMenuInterface" access="global">
+<aura:attribute name="options" type="String[]" default="My Subscriptions"/>
+<ui:menu >
+    <ui:menuTriggerLink aura:id="trigger" label="Profile Menu"/>
+    <ui:menuList class="actionMenu" aura:id="actionMenu">
+        <aura:iteration items="{!v.options}" var="itemLabel">
+            <ui:actionMenuItem label="{!itemLabel}" click="{!c.handleClick}"/>
+        </aura:iteration>
+    </ui:menuList>
+</ui:menu>
+</aura:component>

@@ -1,0 +1,8 @@
+<aura:interface description="Interface for Cart Listing Component" extends="c:ICSSBaseComponent" access="global">
+
+	<!-- Cart related attributes -->    
+	<aura:attribute name="cartId" type="String" default="" description="Salesforce ID of the Cart" access="global"/>
+	<aura:attribute name="encryptedCartId" type="String" default="" description="Encrypted ID for the Cart" access="global"/>
+
+    
+</aura:interface>

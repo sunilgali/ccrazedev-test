@@ -1,0 +1,24 @@
+<aura:component implements="c:ISSAdminConfig">
+	<ltng:require styles="{!$Resource.ssAdminConfig_Styles  + '/styles/custom2.css'}" 
+                  afterScriptsLoaded="{!c.onScriptsLoaded}" />     
+	<aura:handler event="c:ssAdminConfig_StorefrontValEvent" action="{!c.onStorefrontSelected}"/>
+      
+<!-- Body content Starts.. -->      
+ <div class='light-grey-bg' style='height:500px'>
+     <!-- Block container starts..-->
+     <div class="admin-ctr" >
+         
+<!-- Right block starts -->
+         <div class="admin-rt">
+             
+             <div class="slds-p-vertical_large">
+                 <h2 style="margin-top:-45px;" id="entity-header" class="header-xl slds-p-around_medium">
+                    Cart Listing Component Customization
+                 </h2>
+             </div>
+        </div>
+    </div>
+</div>     
+
+
+</aura:component>

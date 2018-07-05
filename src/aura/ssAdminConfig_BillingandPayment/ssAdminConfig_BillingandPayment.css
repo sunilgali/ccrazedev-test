@@ -1,0 +1,23 @@
+.THIS .header-xl{
+    color : t(SSAdminHeaderLGColor);
+    font-size: t(SSAdminHeaderLGFontSize);
+}
+.THIS .header-sm{
+    color : t(SSAdminHeaderSMColor);
+    font-size: t(SSAdminHeaderSMFontSize);
+}
+.THIS .slds-input{
+    margin-bottom:10px;
+}
+.THIS .ssBillingConfigBtn{
+    padding-left: t(SSAdminBtnspaddingleft);
+    padding-right: t(SSAdminBtnspaddingright);
+    text-align: t(SSAdminBtnstextalign);
+    vertical-align: t(SSAdminBtnsverticalalign);
+    border: t(SSAdminBtnsborder);
+    transition: t(SSAdminBtnstransition);
+    background-color: t(SSAdminBtnsbackgroundcolor);
+    border-color: t(SSAdminBtnsbordercolor);
+    color: t(SSAdminBtnscolor);
+        margin-right:20px;
+}

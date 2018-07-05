@@ -1,0 +1,133 @@
+<aura:component implements="c:ISSAdminConfig">
+    
+    <ltng:require styles="{!$Resource.ssAdminConfig_Styles  + '/styles/custom2.css'}" 
+                  afterScriptsLoaded="{!c.onScriptsLoaded}" />
+    
+    
+    <aura:handler event="c:ssAdminConfig_StorefrontValEvent" action="{!c.onStorefrontSelected}"/>
+    <!-- Body content Starts.. -->      
+    <div class='light-grey-bg' style='height:500px'>
+        <!-- Block container starts..-->
+        <div class="admin-ctr" >
+            
+            
+            <!-- Right block starts -->
+            <div class="admin-rt">
+                
+                <div class="slds-p-vertical_large">
+                    <h2 style="margin-top:-45px;" id="entity-header" class="header-xl slds-p-around_medium">
+                        Buy/Try/Convert Journey
+                    </h2>
+                    <div class="slds-form slds-form_horizontal slds-p-around_medium">
+                        <div class="slds-form-element">
+                            <label class="slds-form-element__label" for="select-01">
+                                Select Journey
+                            </label>
+                            <div class="slds-form-element__control slds-p-horizontal_large slds-m-bottom_medium">
+                                <fieldset class="slds-form-element">
+                                    <div class="slds-form-element__control">
+                                        <span class="slds-radio" style="width:100px;float:left">
+                                            <input type="radio" id="radio-13" name="options" value="on" />
+                                            <label class="slds-radio__label" for="radio-13">
+                                                <span class="slds-radio_faux"></span>
+                                                <span class="slds-form-element__label"><b>Standard</b></span>
+                                            </label>
+                                        </span>
+                                        <span class="slds-radio" style="width:100px; float:right">
+                                            <input type="radio" id="radio-14" name="options" value="on" />
+                                            <label class="slds-radio__label" for="radio-14">
+                                                <span class="slds-radio_faux"></span>
+                                                <span class="slds-form-element__label"><b>Custom</b></span>
+                                            </label>
+                                        </span>
+                                    </div>
+                                </fieldset>
+                            </div>
+                        </div>
+                        
+                        <div class="slds-form-element">
+                            <label class="slds-form-element__label" for="text-input-id-1">
+                                Please select the service 
+                                class for <b>Custom Buy Journey</b>
+                            </label>
+                            <div class="slds-form-element__control slds-p-horizontal_large slds-m-bottom_medium">
+                                <div class="slds-combobox_container">
+                                    <div class="slds-combobox slds-dropdown-trigger slds-dropdown-trigger_click " aria-expanded="false" aria-haspopup="listbox" role="combobox">
+                                        <div class="slds-combobox__form-element slds-input-has-icon slds-input-has-icon_right" role="none">
+                                            <input type="text" class="slds-input slds-combobox__input" id="combobox-unique-id-20" aria-autocomplete="list" aria-controls="listbox-unique-id" autocomplete="off" role="textbox" placeholder="Custom buy journey  implmentation class" />
+                                            <span class="slds-icon_container slds-icon-utility-search slds-input__icon slds-input__icon_right">
+                                                <img src="{!$Resource.ssAdminConfig_Assets + '/assets/images/filter.svg'}" style="width:18px"/>
+                                            </span>
+                                        </div>
+                                        <div id="listbox-unique-id" role="listbox" >
+                                            <ul class="slds-listbox slds-listbox_vertical slds-dropdown slds-dropdown_fluid" role="presentation">
+                                                <li role="presentation" class="slds-listbox__item">
+                                                    <div id="listbox-option-unique-id-01" class="slds-media slds-listbox__option slds-listbox__option_entity slds-listbox__option_has-meta " role="option">
+                                                        <span class="slds-media__figure">
+                                                            <span class="slds-icon_container slds-icon-standard-account" title="Description of icon when needed">
+                                                                <!--<svg class="slds-icon slds-icon_small" aria-hidden="true">
+<use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/assets/icons/standard-sprite/svg/symbols.svg#account" />
+</svg>-->
+                                                                <span class="slds-assistive-text">Description of icon when needed</span>
+                                                            </span>
+                                                        </span>
+                                                        <span class="slds-media__body">
+                                                            <span class="slds-listbox__option-text slds-listbox__option-text_entity">Acme</span>
+                                                            <span class="slds-listbox__option-meta slds-listbox__option-meta_entity">Account • San Francisco</span>
+                                                        </span>
+                                                    </div>
+                                                </li>
+                                                <li role="presentation" class="slds-listbox__item">
+                                                    <div id="listbox-option-unique-id-02" class="slds-media slds-listbox__option slds-listbox__option_entity slds-listbox__option_has-meta" role="option">
+                                                        <span class="slds-media__figure">
+                                                            <span class="slds-icon_container slds-icon-standard-account" title="Description of icon when needed">
+                                                                <!--<svg class="slds-icon slds-icon_small" aria-hidden="true">
+<use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/assets/icons/standard-sprite/svg/symbols.svg#account" />
+</svg>-->
+                                                                <span class="slds-assistive-text">Description of icon when needed</span>
+                                                            </span>
+                                                        </span>
+                                                        <span class="slds-media__body">
+                                                            <span class="slds-listbox__option-text slds-listbox__option-text_entity">Salesforce.com, Inc.</span>
+                                                            <span class="slds-listbox__option-meta slds-listbox__option-meta_entity">Account • San Francisco</span>
+                                                        </span>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="slds-form-element">
+                            <label class="slds-form-element__label" for="text-input-id-1">
+                                Provide page URL for product detail
+                            </label>
+                            <div class="slds-form-element__control slds-p-horizontal_large slds-m-bottom_medium">
+                                <input type="text" id="text-input-id-1" class="slds-input" placeholder=" " />
+                            </div>
+                        </div>
+                        
+                        
+                        
+                        
+                        
+                        <div class="slds-form-elementx">
+                            <a href="#"  >
+                                How to  modify extend / customize standard component to meet you  needs?
+                            </a>
+                            
+                        </div>
+                    </div>
+                    
+                    <div class="slds-float_right" style="padding-top:10px">
+        <lightning:button class="ssBillingConfigBtn"  label="Save"  onclick="{!c.onclickSavebutton}"/>
+    </div> 
+                    
+                </div>
+            </div>
+        </div>
+    </div>     
+    
+</aura:component>

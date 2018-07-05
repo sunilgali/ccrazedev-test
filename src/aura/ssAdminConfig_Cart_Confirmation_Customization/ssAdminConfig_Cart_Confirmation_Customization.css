@@ -1,0 +1,19 @@
+.THIS .ssBillingConfigBtn{
+    padding-left: t(SSAdminBtnspaddingleft);
+    padding-right: t(SSAdminBtnspaddingright);
+    text-align: t(SSAdminBtnstextalign);
+    vertical-align: t(SSAdminBtnsverticalalign);
+    border: t(SSAdminBtnsborder);
+    transition: t(SSAdminBtnstransition);
+    background-color: t(SSAdminBtnsbackgroundcolor);
+    border-color: t(SSAdminBtnsbordercolor);
+    color: t(SSAdminBtnscolor);
+}
+.THIS .admin-rt{
+    float:none !important;
+}
+
+.THIS .admin-ctr{
+    width: auto;
+    height: 500px;
+}

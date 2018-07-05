@@ -1,0 +1,30 @@
+<aura:component >
+    
+    <img style="width:100%;margin: 0 auto;padding: 0" src="ps-stock-add-800x414.jpg"/>
+    <br/>
+    <div style="Margin-right:15%;margin-left:15%">
+        <p style="font-size: 1.5625rem;
+                  line-height: 29px;
+                  line-height: 1.8125rem;
+                  margin-top: .14010425em;
+                  margin-bottom: .14010425em;
+                  text-align: center;
+                  font-weight: 500;
+                  font-style: normal;
+                  color:#2b9af3">Add Adobe Stock to Photoshop and get 10 free images.</p>
+        <br/>
+        <p style="font-weight: 300;text-align: center;">Adobe Stock gives you access to millions of images, graphics, and videos available right inside Photoshop CC. 
+            Try a free month and download up to 10 high-res images.</p>
+        <br/>
+        <p style="font-style: normal;font-weight: 700;text-align: center;">Cancel risk-free within the first month.</p>
+        <br/>
+        <p style="font-weight: 300;font-style: normal;text-align: center;">
+            <strike>US$29.99/mo</strike>  With discount : US$25.99/mo</p>
+        <br/></div>
+    <center>
+        
+        <lightning:button class="button" label="Try now" onclick="{!c.handleAdobeTryPhotoshop }"/>
+        <lightning:button class="button" label="Buy now" onclick="{!c.handleAdobeBuyPhotoshop }"/>  
+    </center>
+    
+</aura:component>

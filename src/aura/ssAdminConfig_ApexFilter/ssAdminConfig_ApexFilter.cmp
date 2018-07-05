@@ -1,0 +1,6 @@
+<aura:component access="global" controller="ssAdminConfig_ApexFiltercClass">
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <aura:attribute name="ClassName" default="" type="String" access="global"/> 
+    <aura:attribute name="options" type="List" default=""/>
+   <lightning:combobox aura:id="ApexClass" name="Apex" placeholder="Apex Tax Implementation" value="{!v.ClassName}" options="{! v.options }" onchange="{! c.handleChange }"/>
+</aura:component>

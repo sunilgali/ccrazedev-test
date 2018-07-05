@@ -1,0 +1,47 @@
+<aura:component access="global">
+    
+    
+    <div style="Background-color:white;padding-top:30px">
+        
+        <div class="ProductValue">$5.00</div> 
+        <div>user/month</div>
+        <div class="h3">(annual commitment)</div><br/>
+        <div class="h3">Office 365 Business Essentials</div>
+         <lightning:button label="Buy Now" class="BuyproductButton" onclick="{!c.handleBuy365BusinessEssentials}"/><br/>
+        
+        <div style="padding-left:10%;padding-right:10%;">
+            <hr/>
+        </div>
+        
+        <div class="p">
+            Best for businesses that need business email and other business services. Office applications not included.
+        </div>
+        
+        <div class="h2" style="color:#d83b01"> Office applications included</div>
+        <br/>
+        (Not included)
+        <br/> 
+        <br/> 
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        
+        <div class="p">
+            Services Excluded
+        </div><br/>
+        
+        <img src="OneDrive.png" alt="OneDrive"/>
+        <img src="Skype.png" alt="Skype"/><br/>
+        <img src="Exchange.png" alt="Exchange"/>
+        <img src="SharePoint.png" alt="SharePoint"/><br/>
+        <img src="Teams.png" alt="Teams"/>
+        
+    </div>      
+    
+</aura:component>

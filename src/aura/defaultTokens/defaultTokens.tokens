@@ -1,0 +1,64 @@
+<aura:tokens extends="c:SSAdminConfigScreenTokens">
+
+    
+    <!--       Font sizes         -->
+    <aura:token name="h3" value="20px"/>
+    <aura:token name="h2" value="15px"/>
+    <aura:token name="p" value="12px"/>
+    
+    
+    <aura:token name="ProductValue" value="30.6px"/>
+    <aura:token name="LineHeight" value="2.0"/>
+    
+    <!-- Buy Button-->
+    <aura:token name="ProductBuyButtonpadding" value="10px 10px  10px 10px"/>
+    <aura:token name="ProductBuyButtonColor" value="#008a00"/>
+    
+    <!-- Try Button-->
+    <aura:token name="ProductTryButtonpadding" value="9px 18px 9px 18px"/>
+    <aura:token name="ProductTryButtonColor" value="#737373"/>
+    
+    <aura:token name="HeaderLGColor" value="#000"/>
+    <aura:token name="HeaderLGFontSize" value="16px"/>
+    <aura:token name="HeaderLG2FontWeight" value="700"/>
+    
+    <aura:token name="SSHeaderLG2Color" value="#000"/>
+    <aura:token name="SSHeaderLG2FontSize" value="16px"/>
+    <aura:token name="SSHeaderLG2FontWeight" value="700"/>
+    
+    <aura:token name="SSLDTHeaderLGColor" value="#000"/>
+    <aura:token name="SSLDTHeaderLGFontSize" value="16px"/>
+    <aura:token name="SSLDTHeaderLGFontWeight" value="700"/>
+    
+    <aura:token name="SSLDTHeaderLG2Color" value="#000"/>
+    <aura:token name="SSLDTHeaderLG2FontSize" value="16px"/>
+    <aura:token name="SSLDTHeaderLG2FontWeight" value="700"/>
+    
+    <aura:token name="SSLDTHeaderMDColor" value="#000"/>
+    <aura:token name="SSLDTHeaderMDFontSize" value="14px"/>
+    <aura:token name="SSLDTHeaderMDFontWeight" value="700"/>
+    
+    <aura:token name="SSLDTHeaderSMColor" value="#666"/>
+    <aura:token name="SSLDTHeaderSMFontSize" value="12px"/>
+    <aura:token name="SSLDTHeaderSMFontWeight" value="700"/>
+    
+    <aura:token name="SSLDTHeaderXSColor" value="#666"/>
+    <aura:token name="SSLDTHeaderXSFontSize" value="11px"/>
+    <aura:token name="SSLDTHeaderXSFontWeight" value="700"/>
+    
+    <aura:token name="SSLDTHeaderSUCCESSColor" value="#1AB00A"/>
+    <aura:token name="SSLDTHeaderSUCCESSFontSize" value="16px"/>
+    <aura:token name="SSLDTHeaderSUCCESSFontWeight" value="700"/>
+    
+    <aura:token name="SSLDTHR1Margin" value="0px"/>
+    <aura:token name="SSLDTHR2Margin" value="2px"/>
+    <aura:token name="SSLDTHR2BorderTop" value="2px solid rgba(0, 0, 0, 0.1)"/>
+    <aura:token name="SSLDTHR1Margin1" value=".8rem 0"/>
+    <aura:token name="SSLDTHR2Margin1" value=".8rem 0"/>
+    
+    <aura:token name="SSLDTFormElementLabelColor" value="#333333"/>
+    
+    <aura:token name="SSLDTTextHeadingMediumFontWeight" value="700"/>
+    
+    
+</aura:tokens>

@@ -1,0 +1,28 @@
+.THIS#twit-master-cont {
+    background:white;
+}
+.THIS .profileImg img {
+    border-radius:50%;
+}
+.THIS .fa.fa-twitter {
+    padding:0;
+    margin:0;
+}
+.THIS #twitterParContainer {
+    height:500px;
+    overflow:none;
+    overflow-y:scroll;
+}
+
+/*twitter screenname hover*/
+.THIS .userNameLink a {
+    color:#14171a;
+}
+.THIS .userNameLink a:hover,
+.THIS .userNameLink a:focus {
+    text-decoration:none;
+}
+.THIS .userNameLink:hover span.userName {
+    color:#1DA1F2;
+    text-decoration:underline;
+}

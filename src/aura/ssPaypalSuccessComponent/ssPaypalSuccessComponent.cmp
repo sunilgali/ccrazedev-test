@@ -1,0 +1,123 @@
+<aura:component controller="SSPaypalSuccessController" extends="c:ssBaseComponent" 
+                implements="forceCommunity:availableForAllPageTypes,lightning:isUrlAddressable" access="global" >
+    
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    
+    <aura:registerEvent name="ssPaypalPaymentEvent" type="c:ssPaypalPaymentEvent"/>
+   	<aura:registerEvent name="ssSubscriptionItemEvent" type="c:ssSubscriptionItemEvent"/>
+    
+    <aura:attribute name="showSpinner" type="Boolean" default="false" />
+    <aura:attribute name="cartId" type="String" />
+    <aura:attribute name="cart" type="Object"/>
+    <aura:attribute name="payerId" type="String"/>
+    <aura:attribute name="paymentId" type="String"/>
+    <aura:attribute name="token" type="String" />
+    <aura:attribute name="subscriptionItemId" type="String" />
+	<aura:attribute name="account" type="SSAccountModel" />    
+    <aura:attribute name="isSpin" default="false" type="Boolean" />
+     
+    <aura:if isTrue="{!v.isSpin}">
+            <lightning:spinner variant="brand" size="small" alternativeText="Loading data..."/>
+        </aura:if>
+    
+    <div class=" slds-p-top_large"> 
+        <lightning:card >
+            <aura:set attribute="title">
+                <h1 class="slds-page-header__title ss-text-heading_medium">Customer Information </h1> 
+            </aura:set>
+
+        <lightning:layout multipleRows="true" verticalAlign="start" horizontalAlign="stretch">
+            <lightning:layoutitem class="slds-p-left_large slds-p-bottom_x-small" size="12" smallDeviceSize="12" mediumDeviceSize="8" largeDeviceSize="8">
+                <lightning:input type="text" label="Company Name" aura:id="ssCompName"  
+                                 value="{!v.account.accountName}" disabled="true" />
+            </lightning:layoutitem>
+            <lightning:layoutitem size="12" smallDeviceSize="12" mediumDeviceSize="4" largeDeviceSize="4">
+            </lightning:layoutitem>
+            
+            <lightning:layoutitem class="slds-p-left_large slds-p-bottom_x-small" size="12" smallDeviceSize="12" mediumDeviceSize="4" largeDeviceSize="4">
+                <lightning:input type="text" label="Last Name" aura:id="ssLName"   
+                                 value="{!v.account.billingContact.lastName}" disabled="true" />
+            </lightning:layoutitem>
+            <lightning:layoutitem class="slds-p-left_small slds-p-bottom_x-small" size="12" smallDeviceSize="12" mediumDeviceSize="4" largeDeviceSize="4">
+                <lightning:input type="text" label="First Name" aura:id="ssFName"  
+                                 value="{!v.account.billingContact.firstName}" disabled="true" />
+            </lightning:layoutitem>
+            <lightning:layoutitem size="12" smallDeviceSize="12" mediumDeviceSize="4" largeDeviceSize="4">
+            </lightning:layoutitem>
+            
+            
+            <lightning:layoutitem class="slds-p-left_large slds-p-bottom_x-small" size="12" smallDeviceSize="12" mediumDeviceSize="8" largeDeviceSize="8">
+                <lightning:input type="email" label="Email" aura:id="ssEmail"  
+                                 value="{!v.account.billingContact.email}" disabled="true" />
+            </lightning:layoutitem>
+            <lightning:layoutitem size="12" smallDeviceSize="12" mediumDeviceSize="4" largeDeviceSize="4">
+            </lightning:layoutitem>
+            
+            <lightning:layoutitem class="slds-p-left_large slds-p-bottom_x-small" size="12" smallDeviceSize="12" mediumDeviceSize="8" largeDeviceSize="8">
+                <lightning:input type="tel" label="Phone" name="tel" aura:id="ssPhone" disabled="true"  
+                                 value="{!v.account.billingContact.phone}" />
+            </lightning:layoutitem>
+            <lightning:layoutitem size="12" smallDeviceSize="12" mediumDeviceSize="4" largeDeviceSize="4">
+            </lightning:layoutitem>
+            
+            
+                <lightning:layoutitem class="slds-p-left_large slds-p-bottom_x-small" size="12" smallDeviceSize="12" mediumDeviceSize="8" largeDeviceSize="8">
+                    <lightning:input type="text" label="Address" aura:id="ssAddress"  
+                                    value="{!v.account.billingContact.address.streetAddress}" disabled="true" />
+                </lightning:layoutitem>
+                <lightning:layoutitem size="12" smallDeviceSize="12" mediumDeviceSize="4" largeDeviceSize="4">
+                </lightning:layoutitem>
+                
+                <lightning:layoutitem class="slds-p-left_large slds-p-bottom_x-small" size="12" smallDeviceSize="12" mediumDeviceSize="8" largeDeviceSize="8">
+					<lightning:input type="text" label="Country" aura:id="ssCountry"  
+                                     value="{!v.account.billingContact.address.country}" disabled="true" />
+                    
+                </lightning:layoutitem>
+                <lightning:layoutitem size="12" smallDeviceSize="12" mediumDeviceSize="4" largeDeviceSize="4">
+                </lightning:layoutitem>
+                
+                <lightning:layoutitem class="slds-p-left_large slds-p-bottom_x-small" size="12" smallDeviceSize="12" mediumDeviceSize="8" largeDeviceSize="8">
+					<lightning:input type="text" label="State" aura:id="ccState"  
+                                     value="{!v.account.billingContact.address.state}" disabled="true" />
+                    
+                </lightning:layoutitem>
+                <lightning:layoutitem size="12" smallDeviceSize="12" mediumDeviceSize="4" largeDeviceSize="4">
+                </lightning:layoutitem>
+                
+                <lightning:layoutitem class="slds-p-left_large slds-p-bottom_x-small" size="12" smallDeviceSize="12" mediumDeviceSize="8" largeDeviceSize="8">
+                    <lightning:input type="text" label="City" aura:id="ssCity"  
+                                     value="{!v.account.billingContact.address.city}" disabled="true" />
+                </lightning:layoutitem>
+                <lightning:layoutitem size="12" smallDeviceSize="12" mediumDeviceSize="4" largeDeviceSize="4">
+                </lightning:layoutitem>
+                 
+                <lightning:layoutitem class="slds-p-left_large slds-p-bottom_x-small" size="12" smallDeviceSize="12" mediumDeviceSize="8" largeDeviceSize="8">
+                    <lightning:input type="text" label="Postal Code" aura:id="ssPostalCode"  
+                                     value="{!v.account.billingContact.address.postalCode}"  disabled="true"/>
+                </lightning:layoutitem>
+            
+        </lightning:layout>
+            
+        </lightning:card>
+        <div class="slds-p-top_medium slds-p-bottom_medium " >
+        <lightning:card>
+        	<aura:set attribute="title">
+                <h1 class="slds-page-header__title ss-text-heading_medium">Paypal Details: </h1> 
+            </aura:set>
+            <div class="slds-align_absolute-center">
+                
+                <lightning:layout multipleRows="true" verticalAlign="start" horizontalAlign="stretch" >
+                    <div>  
+                        <b>Payer ID</b>       : {!v.payerId}<br/><br/>
+                        <b>Paymnet ID</b>     : {!v.paymentId}<br/><br/>
+                        <b>Payment Token </b>        : {!v.token}<br/><br/>
+                    </div>
+                </lightning:layout>
+            </div>
+        
+        </lightning:card>
+        </div>
+        
+    </div>
+	
+</aura:component>

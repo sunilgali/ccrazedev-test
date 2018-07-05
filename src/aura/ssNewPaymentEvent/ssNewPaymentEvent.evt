@@ -1,0 +1,4 @@
+<aura:event type="APPLICATION" description="Event template" >
+    <aura:attribute name="paymentcomplete" type="Boolean"/>
+    <aura:attribute name="newPayment" type="SSPaymentDetailsModel"/>
+</aura:event>

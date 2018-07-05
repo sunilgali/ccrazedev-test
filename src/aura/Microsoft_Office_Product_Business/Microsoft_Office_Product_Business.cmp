@@ -1,0 +1,48 @@
+<aura:component access="global" implements="forcecommunity:availableforallpagetypes">
+    
+    
+    <div style="padding-top:20px;background-color:#f5f5f5;">
+        <lightning:layout multipleRows="true" verticalAlign="start" horizontalAlign="stretch">
+            
+            <lightning:layoutItem padding="horizontal-small" flexibility="auto" size="12" smallDeviceSize="12" mediumDeviceSize="12" largeDeviceSize="3">
+                
+                <div class="MircrosoftOpt" style="padding-top:100px">
+                    <p>Choose a plan<br/>
+                        Select all the features you need and we'll recommend the right plan.</p><br/> 
+                    <a>office maps</a><br/>
+                    <a> Hosted email</a><br/>
+                    <a> File storage and sharing</a><br/>
+                    <a> Online meetings</a><br/><br/><br/><br/>
+                    <p>
+                        <a>Looking for more?</a><br/><br/>
+                        <a>See options for enterpriseWhat is Office 365 for business?</a><br/><br/>
+                        Telephone : 855-270-0615<br/><br/>
+                        Available M-F 6:00AM to 6:00PM PT<br/><br/>
+                        <a>Contact us</a></p>
+                    
+                </div>
+                <br/>
+            </lightning:layoutItem>
+            
+            <lightning:layoutItem padding="horizontal-small" flexibility="auto" size="12" smallDeviceSize="12" mediumDeviceSize="4" largeDeviceSize="3">
+                <c:Mircrosoft_Office_Product_Business_Option1 />
+            </lightning:layoutItem>
+            
+            <lightning:layoutItem padding="horizontal-small" flexibility="auto" size="12" smallDeviceSize="12" mediumDeviceSize="4" largeDeviceSize="3">
+                <c:Mircrosoft_Office_Product_Business_Option2 />
+            </lightning:layoutItem>
+            
+            <lightning:layoutItem padding="horizontal-small" flexibility="auto" size="12" smallDeviceSize="12" mediumDeviceSize="4" largeDeviceSize="3">
+                <c:Mircrosoft_Office_Product_Business_Option3 />
+            </lightning:layoutItem>
+            
+        </lightning:layout>
+        
+        <lightning:layout >
+            <lightning:layoutItem padding="horizontal-small" flexibility="auto" size="12" smallDeviceSize="12" mediumDeviceSize="12" largeDeviceSize="12">
+                <img src="plan.png"/>
+            </lightning:layoutItem> 
+        </lightning:layout>
+    </div> 
+    
+</aura:component>

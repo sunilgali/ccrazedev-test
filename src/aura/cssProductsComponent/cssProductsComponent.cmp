@@ -1,0 +1,110 @@
+<aura:component controller="SSProductsController" extends="c:ssBaseComponent" implements="c:ssAppInterface" >
+    
+    <aura:attribute name="product" type="SSProductModel"/>
+    <aura:attribute name="cartId" type="String" />
+    <aura:attribute name="cart" type="SSCartModel" />
+    <aura:attribute name="productSKU" type="String" />
+    <aura:attribute name="selectedTerm" type="String" default="Monthly"/>
+    <aura:attribute name="isDynamicKit" type="Boolean"/>
+    <aura:attribute name="dynamicAmount" type="Decimal"/>
+    <aura:attribute name="isSpin" type="Boolean"/>
+    
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    
+    <aura:registerEvent name="ssCartEvent" type="c:ssCartEvent"/>
+    <aura:handler event="c:ssCartEvent" action="{!c.updateCart}" />
+    
+
+	<aura:if isTrue="{!v.product.isBundledProduct}" >
+
+        
+            <aura:iteration items="{!v.product.bundleComponents}" var="bProduct">
+        <!--Grid Strats-->
+    <div class="slds-grid slds-gutters">
+    	<div class="slds-col slds-size_5-of-5">
+        	<article class="xslds-card" >
+            	<div class="slds-card__header slds-grid">
+					<header class="slds-media slds-media_center slds-has-flexi-truncate slds-p-left_large">
+    					<div class="slds-form-element">
+							<div class="slds-form-element__control">
+								<span class="slds-checkbox">
+                                    
+                        <aura:if isTrue="{! v.product.productType == 'Dynamic Kit'}" >
+                            <lightning:input name="{!bProduct.productSKU}" type="checkbox" label="" 
+                                aura:id="dynamicCheckbox" value="{!bProduct.productSKU}" onchange="{!c.kitSelectionChanged}"
+                                checked="{!not(bProduct.bundleComponentIsOptional)}" disabled="{!not(bProduct.bundleComponentIsOptional)}" />
+                            <aura:set attribute="else">
+                            <lightning:input name="{!bProduct.productSKU}" type="checkbox" label="" 
+                                aura:id="dynamicCheckbox" value="{!bProduct.productSKU}" 
+                                checked="true" disabled="true" />
+                            </aura:set>
+                        </aura:if>
+                                    
+								</span>
+							</div>
+						</div>
+						<div class="slds-media__figure">
+                        	<span class="slds-icon_container slds-icon-standard-account" title="account">
+	                        	<img src="{!bProduct.productThumbImage}" style="width:30px;height:30px;" />
+                            </span>
+						</div>
+						<div class="slds-media__body">
+                        	<h2 class="slds-card__header-title">
+                            	<span class="slds-text-heading_small">{!bProduct.productName}</span><br />
+                                <span class='header-sm' style="font-weight:100">{!bProduct.productShortDescription}</span>
+                          	</h2>
+
+						<aura:if isTrue="{! not(bProduct.isTierPriced)}" >        
+                        <div class="slds-no-flex">
+                        	<div class="slds-form-element">
+                                <div class="slds-form-element__control"  style="width:200px;">
+                                    <lightning:input class="" type="number" placeholder="Quantity"  name="simpQuantity" value="1" 
+                                     aura:id="simpQuantity" label="Quantity" onblur="{!c.simpleQuantityChanged}"/>
+                              	</div>
+	                      	</div> 
+                      	</div>
+                        </aura:if>
+                        
+                                            <aura:if isTrue="{! v.product.productType == 'Dynamic Kit'}" >
+                    	<aura:if isTrue="{!bProduct.isTierPriced}" >
+
+                        <div class="slds-no-flex">
+                        	<div class="slds-form-element">
+                                <div class="slds-form-element__control" style="width:200px;">
+                            
+                            
+                            
+                                <lightning:select  class="select-fixed-width"  name="{!bProduct.productSKU}"  
+                                          label="Tier" aura:id="dynamicTierSelect" >
+                                    <option text="Select Tier" value="" />
+                                    <aura:iteration items="{!bProduct.price[0].tierPriceList}" var="item">
+                                        <option text="{!item.tierDescription}" value="{!item.tierDescription}" selected="{!item.selected}"/>
+                                    </aura:iteration> 
+                                </lightning:select>
+                                <lightning:input type="number"     
+                                           name="{!bProduct.productSKU}" aura:id="dynamicTierQuantity" label="Quantity" onblur="{!c.kitSelectionChanged}"/>
+                    </div>
+                </div>
+                            </div>
+                    </aura:if>
+                    </aura:if>                        
+                        
+                        
+                        </div>
+
+
+                        
+					</header>
+				</div>
+			</article>
+       	</div>
+                </div>
+            
+            </aura:iteration>
+        
+    </aura:if>
+    
+    
+    
+
+</aura:component>

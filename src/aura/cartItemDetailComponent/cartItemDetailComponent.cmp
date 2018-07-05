@@ -1,0 +1,179 @@
+<aura:component access="global">
+    
+    <ltng:require styles="{!$Resource.SSDefaultTheme + '/assets/styles/custom.css'}" 
+        afterScriptsLoaded="{!c.onScriptsLoaded}" />
+
+
+    <div class="slds-p-around_large">                    
+		<article class="slds-card">
+			<div class="slds-card__header slds-grid">
+                <header class="slds-media slds-media_center slds-has-flexi-truncate">
+					<div class="slds-media__figure">
+                        <img src="{!$Resource.SSDefaultTheme + '/assets/images/diamond.svg'}" style="width:40px" />
+					</div>
+					<div class="slds-media__body">
+						<h2>
+                            <span class="header-lg2">Data Quality Management, Micro services</span> 
+    						<p class="slds-text-body_small">Embed data quality services to validate addresses and enrich with geocodes…</p>
+						</h2>
+					</div>
+				</header>
+				<div class="slds-no-flex">
+                    <button class="slds-button"><img src="{!$Resource.SSDefaultTheme + '/assets/images/trash.svg'}" style="width:20px" /></button>
+				</div>
+			</div>
+			<div class="slds-card__body slds-card__body_inner">     
+     			<div class="demo-only demo-only--sizing slds-grid slds-wrap">
+					<div class="slds-size_2-of-3">
+    					<div class="header-sm slds-text-align_left">
+        					SELECT PRODUCT OPTIONS
+                            <hr class="hrstyle1" />
+        					<div class="slds-col">
+	 							<div class="slds-form-element">
+									<div class="slds-form-element__control slds-float_left">
+                                        <div class="slds-select_container" style="width:150px;">
+                                            <select class="slds-select" id="select-01">
+                                            <option>Users</option>
+                                            <option>50</option>
+                                            <option>100</option>
+                                            <option>300</option>
+                                            </select>
+                                        </div>
+									</div>		  
+								</div> 
+								<div class="slds-form-element slds-float_left" style="padding-left:8px;">
+									<div class="slds-select_container" style="width:150px;">
+                                        <select class="slds-select" id="select-01">
+                                        <option>Storage</option>
+                                        <option>50GB</option>
+                                        <option>100GB</option>
+                                        <option>300GB</option>
+                                        </select>
+									</div>
+								</div>
+                                <div class="slds-form-element slds-float_left" style="padding-left:8px;">
+                                    <div class="slds-select_container" style="width:188px;">
+                                        <select class="slds-select" id="select-01">
+                                        <option>Attribute 3</option>
+                                        <option>Option</option>
+                                        <option>Option</option>
+                                        <option>Option</option>
+                                        </select>
+                                    </div>
+                                </div>   
+					        </div>
+    					</div>
+					</div>
+					<div class="slds-size_1-of-3">
+						<div class=" header-sm slds-text-align_left">
+    						SELECT TERM
+                            <hr class="hrstyle1" />
+	    					<div class="slds-form-element slds-float_left" style="padding-left:8px;">
+                                <div class="slds-select_container" style="width:235px;">
+                                    <select class="slds-select" id="select-01">
+                                    <option>Term           Plan</option>
+                                    <option>Option</option>
+                                    <option>Option</option>
+                                    <option>Option</option>
+                                    </select>
+                                </div>
+							</div>
+    					</div>
+					</div>
+				</div>
+          	</div>
+            
+	     	<!-- 2nd -->
+     		<div class="slds-card__body slds-card__body_inner">     
+     			<div class="demo-only demo-only--sizing slds-grid slds-wrap">
+					<div class="slds-size_2-of-3">
+    					<div class=" slds-box_x-small slds-text-align_left ">
+        					CHOOSE OPTIONAL ADDON PRODUCTS
+                            <hr class="hrstyle1" />
+					        <div class="slds-col">
+  								<div class="slds-form-element slds-float_left">
+  									<div class="slds-form-element__control">
+                                        <span class="slds-checkbox">
+                                            <input type="checkbox" name="options" id="checkbox-2" value="on" />
+	                                          <label class="slds-checkbox__label" for="checkbox-2">
+                                            <span class="slds-checkbox_faux"></span>
+                                            <span class="header-md">Development Tools</span>
+                                          </label>
+                                        </span>
+  									</div>
+								</div>
+	 
+                                <div class="slds-form-element slds-float_right" style="padding-right:8px;">
+                                    <div class="slds-select_container" style="width:150px;">
+                                        <select class="slds-select" id="select-01">
+                                        <option>Users</option>
+                                        <option>50</option>
+                                        <option>100</option>
+                                        <option>300</option>
+                                        </select>
+                                    </div>
+                                </div> 
+					            <div class="clr"></div>
+        					</div>
+    					</div>
+					</div>
+					<div class="slds-size_1-of-3 ">
+						<div class="  slds-box_x-small slds-text-align_left xslds-m-around_x-small">
+						    SELECT TERM
+                            <hr class="hrstyle1" />
+    						<div class="slds-form-element slds-float_left" style="padding-left:8px;">
+								<div class="slds-select_container" style="width:235px;">
+                                    <select class="slds-select" id="select-01">
+                                    <option>Term           Plan</option>
+                                    <option>Option</option>
+                                    <option>Option</option>
+                                    <option>Option</option>
+                                    </select>
+								</div>
+							</div>    
+    					</div>
+    					
+					</div>
+				</div>
+     		</div>
+     
+	     	<!-- thrid -->
+     		<div class="slds-card__body slds-card__body_inner">     
+     			<div class="demo-only demo-only--sizing slds-grid slds-wrap">
+					<div class="slds-size_3-of-3">
+    					<div class=" slds-box_x-small slds-text-align_left">
+					        CHOOSE MAINTENANCE PERIOD
+                            <hr class="hrstyle1" />
+        					<div class="slds-col">
+                                <div class="slds-form-element  slds-float_left">
+                              <div class="slds-form-element__control">
+                                <span class="slds-checkbox">
+                                    <input type="checkbox" name="options" id="checkbox-2" value="on" />
+                                      <label class="slds-checkbox__label" for="checkbox-2">
+                                        <span class="slds-checkbox_faux"></span>
+                                        <span class="header-md">Maintenance</span>
+                                      </label>
+                                </span>
+                              </div>
+							</div>
+                            <div class="slds-form-element slds-float_right" style="padding-left:8px;">
+                                <div class="slds-select_container" style="width:235px;">
+                                    <select class="slds-select" id="select-01">
+                                    <option>12Months     Included</option>
+                                    <option>Option</option>
+                                    <option>Option</option>
+                                    <option>Option</option>
+                                    </select>
+                                </div>
+                            </div>   
+        					</div>
+    					</div>
+					</div>
+				</div>
+                <hr class="hrstyle1" />
+		         <div class="slds-text-align_right">Variable monthly fee:    <b>$41.99/Month</b></div>
+     			</div>
+			</article>
+    <!-- end game -->
+		</div>
+</aura:component>

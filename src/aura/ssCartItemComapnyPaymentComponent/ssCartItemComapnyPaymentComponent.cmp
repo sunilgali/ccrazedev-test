@@ -1,0 +1,24 @@
+<aura:component >
+    <ltng:require styles="{!$Resource.SSDefaultTheme + '/assets/styles/custom.css'}" 
+                  afterScriptsLoaded="{!c.onScriptsLoaded}" />
+    <aura:attribute name="selectedTabId" type="String" />
+    
+    <lightning:layout >
+        <lightning:layoutitem size="8">
+                <lightning:tabset aura:id="pTabs" selectedTabId="{!v.selectedTabId}">
+                    <lightning:tab label="01 SELECT PRODUCTS" id="prodDetails">
+                        <c:cartItemDetailComponent />
+                    </lightning:tab>
+                    <lightning:tab label="02 COMPANY INFO" id="comapnyInfo">
+                        <c:ssCompanyInfoComponent />
+                    </lightning:tab>
+                    <lightning:tab label="03 PAYMENT SELECTION" id="paymentSel">
+                        <c:ssPaymentInfoComponent />
+                    </lightning:tab>
+                </lightning:tabset>
+        </lightning:layoutitem>
+        <lightning:layoutitem size="4" >
+            <c:ssReviewSubscriptionComponent />
+        </lightning:layoutitem>
+    </lightning:layout>
+</aura:component>

@@ -1,0 +1,7 @@
+<aura:interface description="Interface template">
+    
+    <aura:attribute name="storefrontName" type="String" />
+    <aura:attribute name="configId" type="String" />
+    <aura:attribute name="configType" type="String" default="Tax" />
+
+</aura:interface>

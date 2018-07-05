@@ -1,0 +1,52 @@
+<aura:component implements="c:ISSAdminConfig" >
+    
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    
+    
+    <aura:attribute name="MenuValue" type="String" default="Tax"/>
+    <aura:handler event="c:ssAdmin_MenuCmpRenderEvent" action="{!c.handleMenuChangeEvent}"/>
+    <aura:handler event="c:ssAdminConfig_StorefrontValEvent" action="{!c.onStorefrontSelected}"/>
+    
+    <aura:if isTrue="{!v.MenuValue == 'Tax'}">
+        <c:ssAdminConfig_Tax storefrontName="{!v.storefrontName}"/>
+    </aura:if>
+    
+    <aura:if isTrue="{!v.MenuValue == 'Billing'}">   
+        <c:ssAdminConfig_BillingandPayment storefrontName="{!v.storefrontName}"/>
+    </aura:if>
+    
+    <aura:if isTrue="{!v.MenuValue == 'Provisioning'}">
+        <c:ssAdminConfig_Admin_Provisioning storefrontName="{!v.storefrontName}"/>
+    </aura:if>
+    
+    <aura:if isTrue="{!v.MenuValue == 'BuyTry'}">
+        <c:ssAdminConfig_Buy_Try  storefrontName="{!v.storefrontName}"/>
+    </aura:if>
+    
+    <aura:if isTrue="{!v.MenuValue == 'Subscription'}">
+        <c:ssAdminConfig_subscription storefrontName="{!v.storefrontName}"/>
+    </aura:if>
+    
+    <aura:if isTrue="{!v.MenuValue == 'ProductDetail'}">
+        <c:ssAdminConfig_Product_Detail storefrontName="{!v.storefrontName}"/>
+    </aura:if>
+    
+    
+    <aura:if isTrue="{!v.MenuValue == 'CartListing'}">
+        <c:ssAdminConfig_Cart_Listing storefrontName="{!v.storefrontName}"/>
+    </aura:if>
+    
+    <aura:if isTrue="{!v.MenuValue == 'CartSummary'}">
+        <c:ssAdminConfig_Cart_Summary storefrontName="{!v.storefrontName}"/>
+    </aura:if>
+    
+    <aura:if isTrue="{!v.MenuValue == 'Confirmation'}">
+        <c:ssAdminConfig_Cart_Confirmation_Customization   storefrontName="{!v.storefrontName}"/>
+    </aura:if>
+    
+    <aura:if isTrue="{!v.MenuValue == 'Notifications'}">
+        <c:ssAdminConfig_Notification   storefrontName="{!v.storefrontName}"/>
+    </aura:if>
+    
+    
+</aura:component>

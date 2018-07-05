@@ -1,0 +1,109 @@
+<aura:component implements="c:ISSAdminConfig">
+    <aura:registerEvent name="ssAdmin_MenuCmpRenderEvent" type="c:ssAdmin_MenuCmpRenderEvent"/>
+    <aura:handler event="c:ssAdminConfig_StorefrontValEvent" action="{!c.onStorefrontSelected}"/>
+
+     <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+   
+    <ltng:require styles="{!$Resource.ssAdminConfig_Styles  + '/styles/custom2.css'}" 
+                  afterScriptsLoaded="{!c.onScriptsLoaded}" />
+    
+    <aura:attribute name="selectedValue" type="String" default="Tax"/>
+    
+    <div class="admin-lt">
+        <div class="demo-only" style="width: 260px;border-radius:0.25rem">
+            <nav class="slds-nav-vertical" aria-label="Sub page">
+                <div class="slds-nav-vertical__section">
+                    <h2 id="entity-header" class="header-lg slds-nav-vertical__title slds-text-title_caps slds-p-vertical_large">CONFIGURATIONS</h2>
+                    <div class="admin-ctr-lt-scroll">
+                        <ul>
+                            <li class="slds-nav-vertical__item">
+                                <div class="slds-p-top_small" style="height:30px">
+                                    <div class="slds-float_left slds-p-left_large">
+                                        <img src="{!$Resource.ssAdminConfig_Assets + '/assets/images/shopping-cart.svg'}" style="width:18px"/> 
+                                    </div>
+                                    <div class="slds-float_left">&nbsp;&nbsp;
+                                        <b>Storefront Configuration</b>  
+                                    </div>
+                                    <div class="slds-float_right slds-p-right_small">
+                                        <img  src="{!$Resource.ssAdminConfig_Assets + '/assets/images/down-arrow2.svg'}"  style="width:12px"/>
+                                    </div>
+                                </div>
+                            </li>
+                            
+                            <li class="slds-nav-vertical__item slds-p-left_xx-large">
+                                <a href="#" onclick="{!c.OnClickTax}"  class="slds-nav-vertical__action " aria-describedby="folder-header">Tax </a>
+                            </li>
+                            <li class="slds-nav-vertical__item slds-p-left_xx-large ">
+                                <a href="#" onclick="{!c.OnClickBilling}" class="slds-nav-vertical__action" aria-describedby="folder-header">Billing and Payments</a>
+                            </li>
+                            <li class="slds-nav-vertical__item slds-p-left_xx-large ">
+                                
+                                <a href="#" onclick="{!c.OnClickProvisioning}" aura:id="Provisioning" class="slds-nav-vertical__action" aria-describedby="folder-header">
+                                    Provisioning</a>
+                            </li>
+                            <li class="slds-nav-vertical__item">
+                                <div class="slds-p-top_small" style="height:30px">
+                                    <div class="slds-float_left slds-p-left_large">
+                                        
+                                        <img src="{!$Resource.ssAdminConfig_Assets + '/assets/images/picture.svg'}"  style="width:18px"/>
+                                    </div>
+                                    <div class="slds-float_left">&nbsp;&nbsp;
+                                        <b>UI Customizations</b>  
+                                    </div>
+                                    <div class="slds-float_right slds-p-right_small">
+                                        <img src="{!$Resource.ssAdminConfig_Assets + '/assets/images/down-arrow2.svg'}"  style="width:12px"/>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="slds-nav-vertical__item slds-p-left_xx-large ">
+                                <a href="#" onclick="{!c.OnClickBuyTry}"  class="slds-nav-vertical__action" aria-describedby="folder-header">Buy/Try</a>
+                            </li>
+                            <li class="slds-nav-vertical__item slds-p-left_xx-large ">
+                                <a href="#" onclick="{!c.OnClickSubscription}" class="slds-nav-vertical__action" aria-describedby="folder-header">Subscription Management</a>
+                            </li> 
+                            <li class="slds-nav-vertical__item">
+                                <div class="slds-p-top_small" style="height:30px">
+                                    <div class="slds-float_left slds-p-left_large">
+                                        <img src="{!$Resource.ssAdminConfig_Assets + '/assets/images/component.svg'}" style="width:18px"/>
+                                    </div>
+                                    <div class="slds-float_left">&nbsp;&nbsp;
+                                        <b>Component Configuration</b>  
+                                    </div>
+                                    <div class="slds-float_right slds-p-right_small">
+                                        <img src="{!$Resource.ssAdminConfig_Assets + '/assets/images/down-arrow2.svg'}"  style="width:12px"/>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="slds-nav-vertical__item slds-p-left_xx-large ">
+                                <a href="#" onclick="{!c.OnClickProductDetail}" class="slds-nav-vertical__action" aria-describedby="folder-header">Product Detail</a>
+                            </li>
+                            <li class="slds-nav-vertical__item slds-p-left_xx-large ">
+                                <a href="#" onclick="{!c.OnClickCartListing}" class="slds-nav-vertical__action" aria-describedby="folder-header">Cart Listing</a>
+                            </li>
+                            <li class="slds-nav-vertical__item slds-p-left_xx-large ">
+                                <a href="#" onclick="{!c.OnClickCartSummary}" class="slds-nav-vertical__action" aria-describedby="folder-header">Cart Summary</a>
+                            </li>
+                            <li class="slds-nav-vertical__item slds-p-left_xx-large ">
+                                <a href="#" onclick="{!c.OnClickConfirmation}" class="slds-nav-vertical__action" aria-describedby="folder-header">Confirmation</a>
+                            </li>
+                            <li class="slds-nav-vertical__item">
+                                <div class="slds-p-top_small" style="height:30px">
+                                    <div class="slds-float_left slds-p-left_large">
+                                        <img src="{!$Resource.ssAdminConfig_Assets + '/assets/images/notification.svg'}" style="width:24px"/>
+                                    </div>
+                                    
+                                    <div class="slds-float_left">&nbsp;&nbsp;
+                                        <a href="#" onclick="{!c.OnClickNotifications}" style="color:#3e3e3c"><b>Notifications</b></a>   
+                                    </div>
+                                    <div class="slds-float_right slds-p-right_small">
+                                        <img src="{!$Resource.ssAdminConfig_Assets + '/assets/images/down-arrow2.svg'}"  style="width:16px"/>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </div> 
+    </div>
+</aura:component>

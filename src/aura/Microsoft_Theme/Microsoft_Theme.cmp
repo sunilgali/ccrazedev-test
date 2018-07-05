@@ -1,0 +1,29 @@
+<aura:component implements="forceCommunity:themeLayout" access="global">
+    
+    <aura:attribute name="search" type="Aura.Component[]"/>
+    <aura:attribute name="navBar" type="Aura.Component[]"/>
+    <aura:attribute name="profileMenu" type="Aura.Component[]"/>
+    <aura:attribute name="newFooter" type="Aura.Component[]"/>
+    
+    <div class="master_container">
+        <div class="doc_home_top">
+            <div class='nav_container'>
+                <div class='dynLogCont'>
+                    <div class="logoContainer"></div>
+                </div>
+                <div class='right_head_col'>
+                    <div class="custNav">
+                        {!v.navBar}
+                    </div>
+                    <div class="profMenu">
+                        {!v.profileMenu}
+                    </div>
+                </div>
+            </div> <!-- nav container-->
+        </div>
+        {!v.body}
+        <div class='footCon'>
+            {!v.newFooter}
+        </div>
+    </div>
+</aura:component>

@@ -1,0 +1,39 @@
+.THIS{
+    line-height: token(LineHeight);
+    text-align:center
+}
+.THIS img{
+    max-width: 90px;
+    padding-right: 5%;
+    padding-bottom: 25px;
+    padding-top: 5px;
+}
+.THIS .ProductValue{
+    font-size:token(ProductValue);
+}
+.THIS .h3{
+    font-size:token(h3);
+}
+.THIS .h2{
+    font-size:token(h2);
+    line-height: 5.0;
+}
+.THIS .p{
+    padding-left:10%;
+        padding-right:10%;
+    font-size:token(p);
+}
+.THIS .BuyproductButton{
+    color:white;
+    margin-top:20px;
+    background:t(ProductBuyButtonColor);
+    border-color:t(ProductBuyButtonColor);
+    padding:token(ProductBuyButtonpadding);  
+}
+.THIS .TryproductButton{
+    color:white;
+    margin-top:20px;
+    background:token(ProductTryButtonColor);
+    border-color:token(ProductTryButtonColor);
+    padding:token(ProductTryButtonpadding);  
+}

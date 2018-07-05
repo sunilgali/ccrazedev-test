@@ -1,0 +1,141 @@
+<apex:page controller="SSCSRecipientController" showHeader="false" sidebar="false">
+    <apex:includeScript value="{!URLFOR($Resource.SSUtil, '/hmac-sha256.js')}"/>
+    <apex:includeScript value="{!URLFOR($Resource.SSUtil, '/enc-base64-min.js')}"/>
+    <apex:includeScript value="{!$Resource.JQuery331}"/>
+    <apex:includeScript value="{!URLFOR($Resource.SSUtil, '/ssUtil.js')}"/>
+    
+    <body>
+        
+        <form id="payment_form" action="" method="post">
+            <input type="hidden" id="cybersourceResponse" value="{!cybersourceResponse}"/>
+            <input type="hidden" id="lgHost" value="{!lghost}"/>
+            <input type="hidden" id="access_key" value=""/>
+            <input type="hidden" id="profile_id" value=""/>
+            <input type="hidden" id="transaction_uuid" name="transaction_uuid" value=""/>
+            <input type="hidden" id="signed_field_names" value="access_key,profile_id,transaction_uuid,signed_field_names,unsigned_field_names,signed_date_time,locale,transaction_type,reference_number,amount,currency,payment_method,card_type,card_number,card_expiry_date,bill_to_forename,bill_to_surname,bill_to_email,bill_to_phone,bill_to_address_line1,bill_to_address_city,bill_to_address_state,bill_to_address_country,bill_to_address_postal_code,card_cvn,override_custom_receipt_page"/>
+            <input type="hidden" id="unsigned_field_names" name="unsigned_field_names" value="card_type,card_number,card_expiry_date,card_cvn"/>
+        	<input type="hidden" id="signed_date_time" value=""/>
+        	<input type="hidden" id="locale" value="en"/>
+			<input type="hidden" id="transaction_type" value="en" />
+            <input type="hidden" id="reference_number" size="25"/>
+            <input type="hidden" id="amount" size="25"/>
+            <input type="hidden" id="currency" size="25"/>
+            <input type="hidden" id="payment_method"/>
+            <input type="hidden" id="card_type"/>
+            <input type="hidden" id="card_number"/>
+            <input type="hidden" id="card_expiry_date"/>
+            <input type="hidden" id="card_cvn"/>
+            <input type="hidden" id="bill_to_forename"/>
+            <input type="hidden" id="bill_to_surname"/>
+            <input type="hidden" id="bill_to_email"/>
+            <input type="hidden" id="bill_to_phone"/>
+            <input type="hidden" id="bill_to_address_line1"/>
+            <input type="hidden" id="bill_to_address_city"/>
+            <input type="hidden" id="bill_to_address_state"/>
+            <input type="hidden" id="bill_to_address_country"/>
+            <input type="hidden" id="bill_to_address_postal_code"/>
+            <input type ="hidden" id="secret_key" />
+            <input type="hidden" id="override_custom_receipt_page" name="override_custom_receipt_page" />
+		</form>
+	</body>
+<script>
+
+$(document).ready(function(){
+    //var lexOrigin = "https://ccrazedev-dev-ed.lightning.force.com";
+    var lexOrigin = document.getElementById("lgHost").value;
+    var payload = document.getElementById("cybersourceResponse").value;
+    if(lexOrigin !== null && lexOrigin.length > 0 && payload !== null && payload.length > 0){
+    	parent.postMessage(payload, lexOrigin);
+    }
+});
+
+window.addEventListener("message", function(event) {
+    /*if (event.origin !== lexOrigin) {
+        // Not the expected origin: reject message
+        return;
+    }*/
+    // Only handle messages we are interested in            
+    /*if (event.data.name === "com.mycompany.chatmessage") {
+				var messages = lcMessagesEl.value;
+				messages = messages + event.data.payload + "\n";
+				lcMessages.value = messages;
+            }*/
+    //alert(event.data["transactionType"]);
+    document.getElementById("transaction_type").value = event.data["transactionType"]; 
+    document.getElementById("reference_number").value = event.data["referenceNumber"];
+    document.getElementById("access_key").value = event.data["accessKey"]; 
+    document.getElementById("profile_id").value = event.data["profileId"]; 
+    document.getElementById("secret_key").value = event.data["secretKey"]; 
+    document.getElementById("transaction_uuid").value = event.data["transactionUUID"]; 
+    document.getElementById("currency").value = event.data["currency"]; 
+    document.getElementById("amount").value = event.data["amount"]; 
+    document.getElementById("payment_method").value = event.data["paymethod"];
+    document.getElementById("card_number").value = event.data["cardNumber"];
+    document.getElementById("card_type").value = event.data["cardType"];
+    document.getElementById("card_expiry_date").value = event.data["expirationDate"];
+    document.getElementById("card_cvn").value = event.data["securityCode"];
+    document.getElementById("bill_to_forename").value = event.data["cardHolderName"];
+    document.getElementById("bill_to_surname").value = event.data["cardHolderName"];
+    document.getElementById("bill_to_email").value = event.data["email"];
+    document.getElementById("bill_to_phone").value = event.data["phone"];
+    document.getElementById("bill_to_address_line1").value = event.data["street"];
+    document.getElementById("bill_to_address_city").value = event.data["city"];
+    document.getElementById("bill_to_address_state").value = event.data["state"];
+    document.getElementById("bill_to_address_country").value = event.data["country"];
+    document.getElementById("bill_to_address_postal_code").value = event.data["postalCode"];
+    document.getElementById("override_custom_receipt_page").value = event.data["recipientPage"];
+    updateOnSubmit();
+    document.getElementById("payment_form").action = event.data["formAction"];
+    document.getElementById("payment_form").submit();
+}, false);
+
+function updateOnSubmit(){
+    //add 'name' attr to all input items
+    $('input').each(function (item) {
+        $(this).attr('name', $(this).attr('id'));
+    });
+    
+    
+    //insert current time
+    $("#signed_date_time").val(dateString());
+    
+    //generate unique transaction id
+    $("#transaction_uuid").val(Math.floor(Math.random() * 100000000));
+    //console.log($("#signed_date_time").val());
+    
+    //create data to sign
+    var signedFieldNames = $('#signed_field_names').val().split(",");
+    var dataToSign = [];
+    signedFieldNames.forEach(function (item) {
+        dataToSign.push(item + "=" + $('#' + item).val());
+    });
+    dataToSign = dataToSign.join(",");
+    //console.log(dataToSign);
+    
+    //var secretKey ="c60e8963dcc04e83a0a23f548e58e344aedefdd583bd472b8b1b48505254bbd18c9636e1b946497ba35b85c76cca6aaa7fc7ec001ef94c6596296e5a39af5813e807e44ce9a84f1f9a11f6355c50b801f063ad2aec1742e796e00dcaaa12edcd535d3341aefc4450a4a89ebe356cec7efa5748ac4a1c4600ac3ab75d09ae2df8"
+    var secretKey = $("#secret_key").val();
+    var signature = $('<input/>').attr('id', 'signature').attr('type', 'hidden').attr('name', 'signature');
+    //console.log('secretKey'+secretKey);
+    //console.log('CryptoJS.enc.Base64'+CryptoJS.enc.Base64);
+    
+    signature.val(CryptoJS.HmacSHA256(dataToSign, secretKey).toString(CryptoJS.enc.Base64));
+    //console.log('signature'+signature);
+    //console.log('form'+$('#payment_form'));
+    
+    //prepend the signature field to the form 
+    $('#payment_form').prepend(signature);    
+};
+//Return UTC date (current time) as string formatted for Cybs.
+var dateString = function () {
+    var d = new Date();
+    d = d.toISOString();
+    return d.substring(0, 19) + 'Z';
+};
+
+
+</script>
+
+
+
+
+</apex:page>

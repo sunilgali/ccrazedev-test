@@ -1,0 +1,35 @@
+<aura:component access="global" implements="forcecommunity:availableforallpagetypes" >
+    <aura:attribute type="boolean" default="false" name="flag"/>
+    
+    <div id="Adobe_TopNavigation" class="slds-grid Adobe_TopNavigation">
+        <div class="slds-align_absolute-center">
+            <div class="slds-grid slds-wrap slds-grid--pull-padded">
+                <ul class="slds-list_horizontal">
+                    <p> ADOBE PHOTOSHOP CC</p>
+                    <p> What's New</p>
+                    <p> Learn and Support </p>
+                    <p> Free Trial</p>
+                    <p> More Products</p>   
+                </ul>
+                <lightning:button class="button" label="Buy now" onclick="{!c.handleClick }"/>  
+            </div>
+        </div>
+    </div>
+    
+    
+    <aura:if isTrue="{!v.flag}">
+        <div aura:id="modalDialog"  role="dialog"  class="slds-modal slds-modal_medium">
+            <div class="slds-modal__container">
+                <div class="slds-modal__header">
+                    <button class="slds-button slds-modal__close slds-button--icon-inverse" title="Close" onclick="{!c.onClickClose}">
+                        <lightning:icon style="fill:white" iconName="utility:close" size="small" alternativeText="Configure" />
+                    </button>  
+                </div>
+                <div class="slds-modal__content slds-p-around--medium">
+                    <c:Adobe_Photoshop_PopUp/>
+                </div>
+            </div>
+        </div>
+        <div aura:id="modalBackdrop" class="slds-backdrop"></div>      
+    </aura:if>
+</aura:component>

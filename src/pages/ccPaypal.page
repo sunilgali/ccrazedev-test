@@ -1,0 +1,15 @@
+<apex:page controller="ccPaypal" showHeader="false" sidebar="false">
+    <html>
+        <head>
+            <script type="text/javascript">
+            function redirect(link){
+                window.location = link;
+            }
+            </script>
+        </head>
+        <apex:form >
+            <apex:actionFunction name="paypalRedirect" action="{!paypalRedirect}" oncomplete="redirect('{!approval_link}')"/>
+            <apex:commandButton action="{!paypalRedirect}" value="Donate Now" oncomplete="paypalRedirect()" style="background:red;height:40px;width:120px;" />
+        </apex:form>        
+    </html>
+</apex:page>

@@ -1,0 +1,68 @@
+<aura:component controller="SSCartItemDetailController" implements="c:ssAppInterface" access="global">
+    
+    <ltng:require styles="{!$Resource.SSDefaultTheme + '/assets/styles/custom.css'}" 
+                  afterScriptsLoaded="{!c.onScriptsLoaded}" />
+    
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+    <aura:handler event="c:ssCartEvent" action="{!c.updateCartPrice}" />
+    
+    <!--
+		simple with addons and maintenance - MUSDKTP
+		simple with NO addons and NO maintenance - MEXCL
+		simple with NO addons and maintenance - MUSVZO
+		tiered - MUST
+		Dynamic Kit - MUSKIT
+		Bundled - MUSBUN05 
+	-->
+    <aura:attribute name="cartId" type="String" default="279a482b-8f84-424f-a7ef-b218775de17a"/>
+    <aura:attribute name="productSKU" type="String" default="MUSDKTP"/>
+    <aura:attribute name="product" type="Object" />
+    <aura:attribute name="cart" type="SSCartModel" />
+    <aura:attribute name="totalPrice" type="String" default="0.00"/>
+    
+    <div class="slds-p-around_large">                    
+        <lightning:card >
+            <aura:set attribute="title">
+                <header class="slds-media slds-media_center slds-has-flexi-truncate">
+                    <div class="slds-media__figure">
+                        <img src="{!v.product.productThumbImage}" style="width:40px" />
+                    </div>
+                    <div class="slds-media__body">
+                        <h2>
+                            <span class="header-lg2">{!v.product.productName}</span> 
+                            <p class="slds-text-body_small"> 
+                                <aura:unescapedHtml value="{!v.product.productLongDescription}"/>
+                            </p>
+                        </h2>
+                    </div>
+                </header>
+            </aura:set> 
+            <aura:set attribute="actions">
+                <div class="slds-no-flex">
+                    <button class="slds-button"><img src="{!$Resource.SSDefaultTheme + '/assets/images/trash.svg'}" style="width:20px" /></button>
+                </div>
+            </aura:set>
+            <!--aura:set attribute="footer">
+                <hr class="hrstyle1" />
+                <div class="slds-text-align_right">Variable monthly fee:    <b>${!v.totalPrice}/Month</b></div>
+            </aura:set-->
+            
+            <c:ssProductInfoComponent aura:id="productInfo" product="{!v.product}" productSKU="{!v.productSKU}" cartId="{!v.cartId}"/>
+            
+            <c:ssRelatedProductsComponent aura:id="addonProducts" cTitle="{!$Label.c.SS_CHOOSE_OPTIONAL_ADDON_PRODUCTS}" 
+              relationType="Add-On" showSelect="true" productSKU="{!v.productSKU}" cartId="{!v.cartId}"/>
+            
+            <c:ssRelatedProductsComponent aura:id="productMaintenance" cTitle="{!$Label.c.SS_CHOOSE_MAINTENANCE_PERIOD}"
+              relationType="Maintenance" showSelect="false" productSKU="{!v.productSKU}" cartId="{!v.cartId}"/>
+            
+            <lightning:layout multipleRows="true" verticalAlign="start" horizontalAlign="stretch">
+                <lightning:layoutitem padding="horizontal-small" size="12" smallDeviceSize="12" mediumDeviceSize="12" largeDeviceSize="12">
+                    <div>
+                        <hr class="hrstyle1" />
+                        <div class="slds-text-align_right">Variable monthly fee:    <b>${!v.totalPrice}/Month</b></div>
+                    </div>
+                </lightning:layoutitem>
+            </lightning:layout>
+        </lightning:card>
+    </div>
+</aura:component>

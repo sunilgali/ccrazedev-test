@@ -1,0 +1,189 @@
+<aura:component controller ="SSManageSubscriptionsController" extends="c:ssBaseComponent" 
+                implements="forceCommunity:availableForAllPageTypes" access="global" >
+    
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    
+    <aura:attribute name="subscriptions" type="List" />
+    <aura:attribute name="sortedSubscriptions" type="List" />
+    <aura:attribute name="isSpin" type = "Boolean" default="false"/>
+    
+
+        <aura:if isTrue="{!v.isSpin}" >
+            <lightning:spinner alternativeText  = "Loading subscriptions..."/>
+        </aura:if>
+    
+        <div class="slds-p-around_large slds-card" >
+            <div class="slds-clearfix">
+                <div class="slds-float_left"><h2 class="header-lg slds-p-top_large">Manage your Subscriptions</h2></div>
+                <div class="slds-float_right slds-m-top_medium" style="width:300px;">
+                    <a href="03-BuyNow-1.html" class="slds-button slds-button_brand" style="float:right"> ADD NEW PRODUCT </a></div>
+            </div>
+
+            <div class="slds-p-vertical_large ">
+                
+                <table class="slds-table slds-table_bordered slds-table_cell-buffer " >
+                    <thead>
+                        <tr class="slds-text-title_caps">
+                            <td scope="col" style="border:0;">
+                                <div class="slds-truncate" title="Products">PRODUCTS</div>
+                            </td>
+                            <td scope="col" style="border:0;">
+                                <div class="slds-truncate" title="Actions">ACTIONS</div>
+                            </td>
+                            <td scope="col" style="border:0;">
+                                <div class="slds-truncate" title="Term">TERM</div>
+                            </td>
+                            <td scope="col" style="border:0;">
+                                <div class="slds-truncate" title="Status">STATUS</div>
+                            </td>
+                            <td scope="col" style="border:0;">
+                                <div class="slds-truncate" title="Price">PRICE</div>
+                            </td>
+							<td scope="col" style="border:0;">
+                                <div class="slds-truncate" title="End Date">START DATE</div>
+                            </td>                            
+                            <td scope="col" style="border:0;">
+                                <div class="slds-truncate" title="End Date">END DATE</div>
+                            </td>                            
+                        </tr>
+                    </thead>
+                    <tbody>
+                        
+                        <aura:iteration items="{!v.sortedSubscriptions}" var="item">
+                            
+                            <tr>
+                                <th scope="row" data-label="Product Name">
+                                    <div class="slds-truncate" title="Cloudhub" style="float:left;">
+                                        <span class="header-lg">{!item.productName}</span>
+                                        
+                                        <p class='header-sm'>( Quantity:{!item.productQuantity}, Term: {!item.subscriptionTermType} )</p>
+                                    </div>
+                                </th>
+                                <td> 
+                                    <aura:if isTrue="{!and(item.isTrial ,item.subscriptionStatus == 'Active')}" >
+                                        <lightning:button  aura:id="buyButton" name="{!item.subscriptionItemId}" label="BUY NOW" 
+                                                          variant="brand" onclick="{!c.onClickConvert}"/>
+                                    </aura:if>
+                                    
+                                    <aura:if isTrue="{!and(not(item.isTrial) , item.subscriptionStatus == 'Active')}" >
+                                    	<lightning:button label="CANCEL" name="{!item.subscriptionItemId}" value="{!item.productName}"
+                                                          variant="brand" onclick="{!c.onClickCancel}"/>
+                                    </aura:if>
+                                    
+                                    <aura:if isTrue="{!and(and(not(item.isTrial) , item.subscriptionStatus == 'Active') , 
+                                                     item.isUpgradable)}" >
+                                    	<lightning:button class="ss-upgrade slds-m-left_large" label="UPGRADE" value="{!item.productId}" 
+                                                name="{!item.subscriptionItemId}" onclick="{!c.onClickUpgrade}"/>
+                                    </aura:if>
+                                    
+                                </td>
+                                <td data-label="Term">
+                                    <div class="slds-truncate" title="Term">{!item.subscriptionTermType}</div>
+                                </td>
+                                <td data-label="IsActive">
+                                    <div class="slds-truncate" title="Status">{!item.subscriptionStatus}</div>
+                                </td>
+                                <td data-label="Price">
+                                    <div class="slds-truncate" title="Price">${!item.productPrice}</div>
+                                </td>
+                                <td data-label="Start Date">
+                                    <div class="slds-truncate" title="StartDate">                                    
+                                        <lightning:formattedDateTime value="{!item.subscriptionStartDate}" />
+                                    </div>
+                                </td>
+                                <td data-label="Close Date">
+                                    <div class="slds-truncate" title="CloseDate">                                    
+                                        <lightning:formattedDateTime value="{!item.subscriptionEndDate}" />
+                                    </div>
+                                </td>
+                            </tr>
+                            
+                            <aura:iteration items="{!item.childComponents}" var="cItem">                            
+                                <tr>
+                                    <th scope="row" data-label="Product Name" style='padding-left:50px;'>
+                                        <div class="slds-truncate" title="Cloudhub"> 
+                                            <span class="header-md">{!cItem.productName}
+                                            </span>
+                                            <p class='header-sm' style="margin-left:65px;">( Term: {!cItem.subscriptionTermType} )</p>
+                                        </div>
+                                    </th>
+                                    <td>
+                                        <div></div>
+                                    </td>
+                                    <td>
+                                        <div class="slds-truncate" title="">{!cItem.subscriptionTermType}</div>
+                                    </td>
+                                    <td>
+                                        <div class="slds-truncate" title="">{!cItem.subscriptionStatus}</div>
+                                    </td>
+                                    <td>
+                                        <div class="slds-truncate" title="">${!cItem.productPrice}</div>
+                                    </td>
+                                    <td data-label="Start Date">
+                                    	<div class="slds-truncate" title="StartDate">                                    
+                                        <lightning:formattedDateTime value="{!item.subscriptionStartDate}" />
+                                    	</div>
+                                	</td>
+                                    <td data-label="Close Date">
+                                        <div class="slds-truncate" title="CloseDate">
+                                        	<lightning:formattedDateTime value="{!cItem.subscriptionEndDate}" />
+                                        </div>
+                                    </td>
+                                </tr>
+                            </aura:iteration>
+                            
+                            <aura:iteration items="{!item.addOns}" var="sItem">                            
+                                <tr>
+                                    <th scope="row" data-label="Product Name" style='padding-left:50px;'>
+                                        <div class="slds-truncate" title="Cloudhub"><span class='slds-badge'>Add-On</span> 
+                                            <span class="header-md">{!sItem.productName}
+                                            </span>
+                                            <p class='header-sm' style="margin-left:65px;">( Term: {!sItem.subscriptionTermType} )</p>
+                                        </div>
+                                    </th>
+                                    <td>
+                                         <aura:if isTrue="{!and(item.isTrial ,item.subscriptionStatus == 'Active')}" >
+                                            <lightning:button  aura:id="buyButton" name="{!sItem.subscriptionItemId}" label="BUY NOW" 
+                                                              variant="brand" />
+                                        </aura:if>
+                                        
+                                        <aura:if isTrue="{!and(not(sItem.isTrial) , sItem.subscriptionStatus == 'Active')}" >
+                                            <lightning:button label="CANCEL" name="{!sItem.subscriptionItemId}" value="{!sItem.productName}"
+                                                              variant="brand" onclick="{!c.onClickCancel}"/>
+                                        </aura:if>
+                                        
+                                        <aura:if isTrue="{!and(and(not(sItem.isTrial) , sItem.subscriptionStatus == 'Active') , 
+                                                     sItem.isUpgradable)}" >
+                                            <lightning:button class="ss-upgrade" label="UPGRADE" value="{!sItem.productId}" 
+                                                 name="{!sItem.subscriptionItemId}" variant="brand" onclick="{!c.onClickUpgrade}"/>
+                                        </aura:if>
+                                    </td>
+                                    <td>
+                                        <div class="slds-truncate" title="">{!sItem.subscriptionTermType}</div>
+                                    </td>
+                                    <td>
+                                        <div class="slds-truncate" title="">{!sItem.subscriptionStatus}</div>
+                                    </td>
+                                    <td>
+                                        <div class="slds-truncate" title="">${!sItem.productPrice}</div>
+                                    </td>
+                                    <td data-label="Start Date">
+                                        <div class="slds-truncate" title="StartDate">                                    
+                                            <lightning:formattedDateTime value="{!item.subscriptionStartDate}" />
+                                        </div>
+                                    </td>
+                                    <td data-label="Close Date">
+                                        <div class="slds-truncate" title="CloseDate">
+                                        	<lightning:formattedDateTime value="{!sItem.subscriptionEndDate}" />
+                                        </div>
+                                    </td>
+                                </tr>
+                            </aura:iteration>
+                        </aura:iteration>
+                    </tbody>
+                </table>
+            </div>
+            
+        </div>
+
+</aura:component>

@@ -1,0 +1,80 @@
+<aura:component controller="SSRelatedProductsController" extends="c:ssBaseComponent" implements="c:ssAppInterface">
+    
+    <aura:attribute name="relationType" type="String" />
+    <aura:attribute name="cartId" type="String" />
+    <aura:attribute name="cart" type="SSCartModel" />
+    <aura:attribute name="productSKU" type="String" />
+    <aura:attribute name="relatedProducts" type="List" default="[]"/>
+    <aura:attribute name="cTitle" type="String" />
+    <aura:attribute name="isSpin" type="Boolean"/>
+    <!--aura:attribute name="relatedProductsPrice" type="String"/-->
+        
+    <aura:registerEvent name="ssCartEvent" type="c:ssCartEvent"/>
+    <aura:handler event="c:ssCartEvent" action="{!c.updateCart}" />
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+    
+    <aura:if isTrue="{!v.relatedProducts.length > 0}" >
+        <aura:if isTrue="{!v.isSpin}">
+            <lightning:spinner variant="brand" size="small" alternativeText="Loading data..."/>
+        </aura:if>
+        <lightning:layout class="slds-p-left_medium" multipleRows="true" verticalAlign="start" horizontalAlign="stretch">
+            <lightning:layoutitem padding="horizontal-small" size="12" smallDeviceSize="12" mediumDeviceSize="12" largeDeviceSize="12">
+                <div class="header-sm slds-text-align_left header-sm" >
+                    {!v.cTitle}
+                </div>
+            </lightning:layoutitem>
+            
+			<lightning:layoutitem class="slds-p-bottom_medium" padding="horizontal-small" size="12" smallDeviceSize="12" mediumDeviceSize="12" largeDeviceSize="12">
+            </lightning:layoutitem>
+            
+            <aura:iteration items="{!v.relatedProducts}" var="item">
+                <lightning:layoutitem class="slds-p-bottom_medium" padding="horizontal-small" size="12" smallDeviceSize="12" mediumDeviceSize="12" largeDeviceSize="12">
+                    
+                    <dl class="slds-list_inline">
+                    <lightning:input class="header-sm" type="checkbox"  name="{!item.productSKU}"
+                                         aura:id="addOnCheckBox" value="{!item.productSKU}"
+                                         onchange="{!c.updatePrice}"/>
+                    <img src="{!item.productThumbImage}" style="width:30px;height:30px" />
+                        &nbsp; {!item.productName}
+                    </dl>
+                    
+            	</lightning:layoutitem>
+                
+                <lightning:layoutitem class="slds-p-bottom_medium" padding="horizontal-small" size="12" smallDeviceSize="12" mediumDeviceSize="12" largeDeviceSize="12">
+                    <div class="slds-list_horizontal">
+                        <aura:if isTrue="{!item.isTierPriced}" >
+                    	<lightning:select class="header-sm select-fixed-width slds-p-right_medium" name="{!item.productSKU}" label="Tier"  
+                                                                      aura:id="addOnTierSelect" >
+                            <aura:iteration items="{!item.price[0].tierPriceList}" var="item">
+                                <option text="{!item.tierDescription}" value="{!item.tierDescription}" 
+                                        selected="{!item.price[0].tierPriceList[0].tierDescription == item.tierDescription}"/>
+                            </aura:iteration>
+                        </lightning:select>
+                        </aura:if>
+                        
+						<aura:if isTrue="{! not(v.relationType == 'Maintenance')}">
+                            <div class="ssWidth">
+                                <lightning:input class="ssWidth slds-p-right_small" type="number"  label="Quantity" name="{!item.productSKU}" 
+                                                 aura:id="addonQuantity"  onblur="{!c.updatePrice}"/>
+                            </div>
+                        </aura:if>
+                        <div>
+                             <label class="ss-form-element__label">Term</label>
+                            <div>
+                        		<aura:iteration items="{!item.price}" var="pitem">
+                            	<aura:if isTrue="{!pitem.subscriptionInstallmentUOM.length > 0}" > 
+                            	<lightning:button class="ssWidth slds-m-right_small " name="{!item.productSKU}"
+                            	label="{! pitem.subscriptionInstallmentUOM +' $'+pitem.listPrice  }"
+                            	value="{!pitem.subscriptionInstallmentUOM}"  aura:id="addOnTermPlanSelect" onclick="{!c.updatePrice}"  /> 
+                            </aura:if>
+                        </aura:iteration>
+                                </div>
+                        </div>
+                   </div>
+             </lightning:layoutitem>
+            
+            </aura:iteration>
+            
+       </lightning:layout>
+    </aura:if>
+</aura:component>

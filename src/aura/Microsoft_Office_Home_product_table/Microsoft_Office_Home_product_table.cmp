@@ -1,0 +1,28 @@
+<aura:component >
+    
+    <table class="slds-table">  
+        <tbody>
+            
+            <tr> 
+                <td>Looking for more?</td>
+                <td>$99.99</td>
+                <td>$99.99</td>
+                <td>$99.99</td>
+            </tr>
+            <tr>
+                <td>See options for:<br/>
+                    Students|Mac</td>
+                <td>(per year)</td>
+                <td>(per year)</td>
+                <td>(one-time purchase)</td>
+            </tr>
+            <tr>
+                <td>What is Office 365 for home?</td>
+                <td>Office 365 Home</td>
+                <td>Office 365 Personal</td>
+                <td>Office Home and Student 2016 for PC</td>
+            </tr> 
+            
+        </tbody>
+    </table>
+</aura:component>

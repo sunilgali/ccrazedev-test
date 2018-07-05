@@ -1,0 +1,34 @@
+<aura:component controller="SSCrossSellProductsController" extends="c:ssBaseComponent" access="global">
+    
+    <aura:attribute name="crossSellProducts" type="List" />
+    <aura:attribute name="isSpin" type="Boolean"/>
+    <aura:attribute name="productSKU" type="String" />
+    <aura:attribute name="cartId" type="String" />
+    
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <aura:if isTrue="{!v.isSpin}">
+            <lightning:spinner variant="brand" size="small" alternativeText="Loading data..."/>
+        </aura:if>
+    <a href="02-personal-info.html" class="slds-button slds-button_brand slds-float--right slds-m-right_xx-large slds-m-top_large slds-m-bottom_large">Continue to Checkout</a>
+    <div style='clear:both'></div>
+    <!-- Data Ends -->
+    <div class='slds-p-horizontal_xx-large related-products-list ' >
+        <div class='header-lg slds-text-align_center slds-p-vertical_medium'>Additional products that you may like</div>
+        <div class="slds-grid slds-gutters">
+            <aura:iteration items="{!v.crossSellProducts}" var="item">
+            <div class="slds-col slds-size_1-of-4 slds-text-align_center">
+                <div class="related-product slds-p-around_medium">
+                    <img src="{!v.product.productThumbImage}" style="width:40px" /><br />  
+                    <div class='header-lg'><b>{!item.productName}</b></div>
+                    <p class="header-md">{!item.productShortDescription}</p>
+                    <p class="header-sm slds-p-vertical_medium">US $ 19.99/mo per user </p>
+                    <button class="slds-button slds-button_brand">
+                        Learn More
+                    </button>
+                </div>
+            </div>
+            </aura:iteration>
+        </div>
+    </div>                
+   
+</aura:component>

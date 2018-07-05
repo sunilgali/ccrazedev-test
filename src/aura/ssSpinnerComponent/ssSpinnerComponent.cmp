@@ -1,0 +1,12 @@
+<aura:component access="GLOBAL" implements="forceCommunity:availableForAllPageTypes" >
+    
+    <aura:attribute name="show" type="Boolean" default="false" />
+    <!--aura:handler name="change" value="{!v.show}" action="{!c.spinnerDisplayHandler}"/-->
+    
+    <aura:handler event="c:ssShowSpinnerEvent" action="{!c.showHideSpinner}"/>
+    <aura:handler event="c:ssHideSpinnerEvent" action="{!c.showHideSpinner}"/>
+    <aura:if isTrue="{!v.show}">
+    	<lightning:spinner aura:id="ssSpinner" variant="brand" size="small" 
+                           alternativeText="Please wait.." />
+	</aura:if>
+</aura:component>

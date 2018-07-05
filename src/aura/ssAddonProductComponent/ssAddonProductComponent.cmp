@@ -1,0 +1,105 @@
+<aura:component controller="SSAddonProductController" >
+    <ltng:require styles="{!$Resource.SSDefaultTheme + '/assets/styles/custom.css'}" 
+                  afterScriptsLoaded="{!c.onScriptsLoaded}" />
+    
+    <aura:attribute name="productSKU" type="String" />
+    <aura:attribute name="addonProducts" type="List" />
+    <aura:attribute name="maintainenceProducts" type="List"/>
+    <aura:attribute name="addonProductsPrice" type="String"/>
+    
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+    <aura:registerEvent name="ssTermPrice" type="c:ssTermPrice"/>
+    
+    <lightning:layout multipleRows="true" verticalAlign="start" horizontalAlign="stretch">
+        
+        <lightning:layoutitem padding="horizontal-small" size="12" smallDeviceSize="12" mediumDeviceSize="4" largeDeviceSize="4">
+               <div class="header-sm slds-text-align_left" >
+                    SELECT TERM
+                </div>
+        </lightning:layoutitem>
+        <lightning:layoutitem padding="horizontal-small" size="12" smallDeviceSize="12" mediumDeviceSize="8" largeDeviceSize="8">
+            <div class="header-sm slds-text-align_left" >
+                CHOOSE OPTIONAL ADDON PRODUCTS
+            </div>
+        </lightning:layoutitem>
+ 		<lightning:layoutitem padding="horizontal-small" size="12" smallDeviceSize="12" mediumDeviceSize="12" largeDeviceSize="12">
+                <hr class="hrstyle1" />
+        </lightning:layoutitem>
+        <aura:iteration items="{!v.addonProducts}" var="item">
+            <lightning:layoutitem padding="horizontal-small" size="12" smallDeviceSize="12" mediumDeviceSize="4" largeDeviceSize="4">
+                
+                    <div class="slds-form-element slds-float_left" style="padding-left:8px;">
+                        <lightning:select name="addonProdSelect" label="Term" variant="label-hidden" 
+                                 aura:id="addonProdSelect" onchange="{!c.updatePrice}">
+                            <option>Term           Plan</option>
+                            <aura:iteration items="{!item.price}" var="term">
+                                <option text="{!term.subscriptionInstallmentUOM}" value="{!term.listPrice}" selected="{!term.selected}"/>
+                            </aura:iteration>
+                        </lightning:select>
+                    </div>    
+                
+            </lightning:layoutitem>
+            <lightning:layoutitem padding="horizontal-small" size="12" smallDeviceSize="12" mediumDeviceSize="8" largeDeviceSize="8">
+                <div class=" slds-box_x-small slds-text-align_left " style="padding-left:8px;">
+                        <div class="slds-form-element slds-float_left">
+                            <div class="slds-form-element__control">
+                                <span class="slds-checkbox">
+                                    <input type="checkbox" name="options" id="checkbox-1" value="on" />
+                                    <label class="slds-checkbox__label" for="checkbox-1">
+                                        <span class="slds-checkbox_faux"></span>
+                                        <span class="header-md">{!item.productName}</span>
+                                    </label>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="slds-form-element slds-float_right" style="padding-right:8px;">
+                            <div class="slds-select_container" style="width:150px;">
+                                <select class="slds-select" id="select-01">
+                                    <option>Users</option>
+                                    <option>50</option>
+                                    <option>100</option>
+                                    <option>300</option>
+                                </select>
+                            </div>
+                        </div> 
+                        <div class="clr"></div>
+                </div>
+            </lightning:layoutitem>
+        </aura:iteration>
+        <lightning:layoutitem padding="horizontal-small" size="12" smallDeviceSize="12" mediumDeviceSize="12" largeDeviceSize="12">
+            <div class="header-sm slds-text-align_left" >
+                CHOOSE MAINTENANCE PERIOD
+                <hr class="hrstyle1" />
+            </div>
+        </lightning:layoutitem>
+        <aura:iteration items="{!v.maintainenceProducts}" var="item">
+        <lightning:layoutitem padding="horizontal-small" size="12" smallDeviceSize="12" mediumDeviceSize="12" largeDeviceSize="12">
+            <div class="header-sm slds-text-align_left" >
+                
+                    <div class="slds-form-element  slds-float_left">
+                        <div class="slds-form-element__control">
+                            <span class="slds-checkbox">
+                                <input type="checkbox" name="options" id="checkbox-2" value="on" />
+                                <label class="slds-checkbox__label" for="checkbox-2">
+                                    <span class="slds-checkbox_faux"></span>
+                                    <span class="header-md">{!item.productName}</span>
+                                </label>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="slds-form-element slds-float_right" style="padding-left:8px;">
+                        <div class="slds-select_container" style="width:235px;">
+                            <select class="slds-select" id="select-02">
+                                <option></option>
+                                <aura:iteration items="{!item.price}" var="term">
+                                    <option text="{!term.subscriptionInstallmentUOM}" value="{!term.listPrice}" selected="{!term.selected}"/>
+                                </aura:iteration>
+                            </select>
+                        </div>
+                    </div>   
+            </div>
+        </lightning:layoutitem>
+        </aura:iteration>
+    </lightning:layout>
+    
+</aura:component>

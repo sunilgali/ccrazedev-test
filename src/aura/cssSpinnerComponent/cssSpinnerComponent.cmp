@@ -1,0 +1,12 @@
+<aura:component access="GLOBAL"  implements="flexipage:availableForAllPageTypes,forceCommunity:availableForAllPageTypes">
+    
+    <aura:attribute name="show" type="Boolean" default="false" />
+    <aura:attribute name="spinnerSize" type="String" default="small" />
+    <aura:attribute name="alternateText" type="String" default="Please wait.." />
+    
+    <aura:handler event="c:cssSpinnerEvent" action="{!c.showHideSpinner}"/>
+    <aura:if isTrue="{!v.show}">
+    	<lightning:spinner aura:id="ssSpinner" variant="brand" size="{!v.spinnerSize}" 
+                           alternativeText="{!v.alternateText}" />
+	</aura:if>
+</aura:component>

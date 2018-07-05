@@ -1,0 +1,105 @@
+<aura:component controller="SSUpgradeConfirmationController" extends="c:ssBaseComponent" 
+                implements="c:ssAppInterface,forceCommunity:availableForAllPageTypes" access="global" >
+    
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+    
+    <aura:attribute name="previousSubscription" type="Object" />
+    <aura:attribute name="upgradeSubscription" type="Object" />
+    <aura:attribute name="isSpinner" type = "Boolean" default="false"/>
+    
+    <aura:if isTrue="{!v.isSpinner}" >
+        <lightning:spinner variant="brand" size="small" alternativeText="Please wait.." />
+     </aura:if>
+    <div class='light-grey-bg' >
+        <div class="slds-p-vertical">
+            <div class="slds-text-align_center" style='width:400px; margin:0px auto;' >
+                <h1 class="header-lg slds-p-vertical_small" >Upgrade to {!v.upgradeSubscription.sortedSubscription.productName}</h1>
+                <div class="slds-text-align_center">Thanks for buying</div>
+            </div>
+            <article class="slds-card" style="width:500px;  margin:0px auto 30px" >
+                
+                <div class="slds-card__header slds-grid">
+                    
+                    <div class='slds-p-around_large' style='width:100%'>
+                        <h1 class='header-lg'>Summary</h1>
+                        <hr class="hrstyle1"/>
+                        <p class='header-sm slds-p-bottom_large'><b>Your previous subscription(s):</b></p>
+                        
+                        <table>
+                            
+                            <tr><td>
+                                <h1 class='header-md slds-has-flexi-truncate'>
+                                    {!v.previousSubscription.sortedSubscription.productName}</h1>
+                                <span class="header-xs">( Quantity:{!v.previousSubscription.sortedSubscription.productQuantity}, Term: {!v.previousSubscription.sortedSubscription.subscriptionTermType} )</span>
+                                </td>
+                                <td style="vertical-align:top; width:100px;"><b>${!v.previousSubscription.sortedSubscription.productPrice}/{!v.previousSubscription.sortedSubscription.subscriptionTermType}</b></td>
+                            </tr>
+                            
+                            <aura:iteration items="{!v.previousSubscription.sortedSubscription.addOns}" var="sItem"> 
+                                <tr><td colspan="2"><hr class="hrstyle1" /></td></tr>
+                                <tr><td><span class='slds-badge'>Add-On</span> 
+                                    <span class="header-md">{!sItem.productName}</span>
+                                    <h3 class="header-xs" style='margin-left:65px'>(Term: {!sItem.subscriptionTermType})</h3> 
+                                    </td>
+                                    <td style="vertical-align:top"><b>${!sItem.productPrice}/ {!sItem.subscriptionTermType}</b></td>
+                                </tr>
+                            </aura:iteration>
+                        </table>
+                        
+                        <hr class="hrstyle1"/>
+                        <p class='header-sm slds-p-bottom_large'><b>Your upgraded subscription(s):</b></p>
+                        
+                        <table>
+                            <tr><td>
+                                <h1 class='header-md slds-has-flexi-truncate'>
+                                    {!v.upgradeSubscription.sortedSubscription.productName}</h1>
+                                <span class="header-xs">( Quantity:{!v.upgradeSubscription.sortedSubscription.productQuantity}, Term: {!v.previousSubscription.sortedSubscription.subscriptionTermType} )</span>
+                                </td>
+                                <td style="vertical-align:top; width:100px;"><b>${!v.upgradeSubscription.sortedSubscription.productPrice}/{!v.previousSubscription.sortedSubscription.subscriptionTermType}</b></td>
+                            </tr>
+                            <aura:iteration items="{!v.previousSubscription.sortedSubscription.addOns}" var="sItem"> 
+                                <tr><td colspan="2"><hr class="hrstyle1" /></td></tr>
+                                <tr><td><span class='slds-badge'>Add-On</span> 
+                                    <span class="header-md">{!sItem.productName}</span>
+                                    <h3 class="header-xs" style='margin-left:65px'>(Term: {!sItem.subscriptionTermType})</h3> 
+                                    <p class='promo-sm' style="margin-left:65px">Promo: 50% off for 3 months</p>
+                                    </td>
+                                    <td style="vertical-align:top;text-align:right"><b>${!sItem.productPrice}/ {!sItem.subscriptionTermType}</b></td>
+                                </tr>
+                            </aura:iteration>
+                            </table>
+                        
+                        <table style="width:380px; margin:0 auto">
+                            <tr><td colspan="2"><hr class="hrstyle1"/></td></tr>
+                            <tr><td class="slds-p-vertical_small" >New Subtotal</td>
+                                <td class=" slds-text-align_right" style="vertical-align:top; width:100px;"><b>$56.99</b></td>
+                            </tr>
+                            <tr><td class="slds-p-vertical_small">Sales Tax (0%)</td>
+                                <td class="slds-text-align_right"  style="vertical-align:top; width:100px;"><b>$0.00</b></td>
+                            </tr>
+                            <tr><td class="slds-p-vertical_small">Updated Monthly Price</td>
+                                <td class="slds-p-vertical_small slds-text-align_right" style="vertical-align:top; width:100px;"><b>$56.00 </b></td>
+                            </tr>
+                            <tr><td colspan="2"> </td></tr>
+                            <tr><td class="slds-p-vertical_small">Transaction Ref: </td><td style="text-align:right">DG34345</td></tr>
+                            
+                            <tr><td colspan="2" class="slds-text-align_center header-success slds-p-vertical_large">
+                                <span style='padding:0 10px'>
+                                    <img src="{!$Resource.SSUtil + '/images/done.svg'}" style="width:32px;"/></span>Purchase Complete</td></tr>
+                            <tr><td colspan="2" class="slds-text-align_center slds-p-vertical_small">Payment will be taken using your existing payment method.
+                                We have sent you a copy of this confirmation by email.</td></tr>
+                            <tr><td colspan="2" ><b>Upgrades can take a short time to take effect, 
+                                please refresh the page.</b></td></tr>
+                            
+                        </table>
+                    </div>
+                </div>
+            </article>
+           
+            <div class="slds-v-vertical_large" style='width:230px; margin:0 auto;'>
+                <lightning:button label = "GO TO YOUR PRODUCTS" variant="brand" />
+                
+            </div>
+        </div>
+    </div>
+</aura:component>

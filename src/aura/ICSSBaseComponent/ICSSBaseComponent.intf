@@ -1,0 +1,10 @@
+<aura:interface description="Base interface extended by all Storefront Components" access="global">
+	
+    <aura:attribute name="storefront" type="String" default="" description="Storefront Name" access="global"/>
+    <aura:attribute name="userLocale" type="String" default="" description="User Locale" access="global"/>
+    <aura:attribute name="userCurrency" type="String" default="" description="User Currency" access="global"/>
+
+    <aura:attribute name="userName" type="String" default="" description="User Name" access="global"/>
+    <aura:attribute name="userLogin" type="String" default="" description="User Login" access="global"/>
+    
+</aura:interface>

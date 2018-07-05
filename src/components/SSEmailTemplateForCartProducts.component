@@ -1,0 +1,209 @@
+<apex:component controller="SSEmailController" access="global">
+    
+    <apex:attribute name="encryptedCartId" description="Encrypted Cart Id" type="String" assignTo="{!cartId}"/>
+    <apex:attribute name="accountOrderId" description="Order Id" type="String" assignTo="{!orderId}"/>
+    <apex:attribute name="productType" description="Order Type" type="String" assignTo="{!orderType}"/>
+
+    <table align="center" cellpadding="0" cellspacing="0" border="0" bgcolor="#ffffff" style="text-align:center; margin-left:auto; margin-right:auto;max-width:600px;">
+        <tbody>
+            <tr>
+                <td width="60" align="left" valign="top" bgcolor="#f5f5f6" style="width:60px;min-width:60px; mso-cellspacing: 0px; mso-padding-alt: 0px 0px 0px 0px;">
+                        <font style="font-family:Arial,Helvetica,sans-serif;color:#3c424f;font-size:12px; font-weight:normal; line-height:12px;">&nbsp;</font>
+                </td>
+                <td width="480" align="center" bgcolor="#f5f5f6" class="remove-horizontal-padding" style="padding-top:28px;padding-right:0;padding-bottom:28px;padding-left:0;">
+                    <!-- ToDo-->                    
+                    <a href="http://na.sageone.com/" target="_blank">
+                        <apex:image id="sage-one-logo" value="https://sagegroup--c.eu14.content.force.com/servlet/servlet.ImageServer?id=0151o000004cz7a&oid=00D24000000IvOE" 
+                                height="42px" width="140px" alt="Sage" title="Sage" styleclass="logo" style="text-align:center; margin-left:auto; margin-right:auto;display:block;">
+                        </apex:image>
+                    </a>                    
+                </td>
+                <td width="60" align="left" valign="top" bgcolor="#f5f5f6" style="width:60px;min-width:60px; mso-cellspacing: 0px; mso-padding-alt: 0px 0px 0px 0px;">
+                    <font style="font-family:Arial,Helvetica,sans-serif;color:#3c424f;font-size:12px; font-weight:normal; line-height:12px;">&nbsp;</font>
+                </td>
+            </tr>
+            <tr>
+                <td width="60" align="left" valign="top" bgcolor="#f5f5f6" style="width:60px;min-width:60px; mso-cellspacing: 0px; mso-padding-alt: 0px 0px 0px 0px;">
+                        <font style="font-family:Arial,Helvetica,sans-serif;color:#3c424f;font-size:12px; font-weight:normal; line-height:12px;">&nbsp;</font>
+                </td>
+                <td width="480" align="center" bgcolor="#f5f5f6" class="remove-horizontal-padding" style="padding-top:28px;padding-right:0;padding-bottom:5px;padding-left:0;">
+                    <font style="font-family:Arial,Helvetica,sans-serif;color:#3c424f;font-size:24px; font-weight:normal; line-height:32px;">
+                        <!-- Trial Panel Output Start -->
+                        <apex:outputPanel rendered="{!productType=='trial'}">
+                           Congratulations on signing up for<br/> your free&nbsp; 
+                           <apex:outputText value="{!productNames}"></apex:outputText>
+                            <br/>trial, 
+                        </apex:outputPanel>
+                        <!-- Trial Panel Output End -->
+                        <!-- Buy Panel Output Start -->
+                        <apex:outputPanel rendered="{!productType=='buy'}">
+                            Thank you for signing up to<br/>
+                            <apex:outputText value="{!productNames}"></apex:outputText>,<br/>
+                        </apex:outputPanel>
+                        <apex:outputPanel rendered="{!productType=='convert'}">
+                            Thank you for converting your<br/>
+                            <apex:outputText value="{!productNames} Subscription"></apex:outputText>,<br/>
+                        </apex:outputPanel>
+                        <!-- Buy Panel Output End -->
+                        <!-- Cross Sell Panel Output Start -->
+                        <apex:outputPanel rendered="{!OR(productType=='crossSell' , productType=='upsell')}">
+                            Congratulations on adding&nbsp;<apex:outputText value="{!productNames}"></apex:outputText> to your subscription.
+                        </apex:outputPanel>
+                        <!-- Cross Sell Panel Output Start -->
+                        <!-- Upgrade Panel Output Start -->
+                        <apex:outputPanel rendered="{!OR(productType=='upgrade')}">
+                            Thank you for upgrading your<br/><apex:outputText value="{!productNames}"></apex:outputText>
+                        </apex:outputPanel>
+                        <!-- Upgrade Panel Output End -->
+                        {!orderContact.Name}
+                    </font>
+                </td>               
+                <td width="60" align="left" valign="top" bgcolor="#f5f5f6" style="width:60px;min-width:60px; mso-cellspacing: 0px; mso-padding-alt: 0px 0px 0px 0px;">
+                        <font style="font-family:Arial,Helvetica,sans-serif;color:#3c424f;font-size:12px; font-weight:normal; line-height:12px;">&nbsp;</font>
+                </td>
+            </tr>
+            <tr>
+                <td width="60" align="left" valign="top" bgcolor="#f5f5f6" style="width:60px;min-width:60px; mso-cellspacing: 0px; mso-padding-alt: 0px 0px 0px 0px;">
+                        <font style="font-family:Arial,Helvetica,sans-serif;color:#3c424f;font-size:12px; font-weight:normal; line-height:12px;">&nbsp;</font>
+                </td>
+                <td width="480" align="center" bgcolor="#f5f5f6" class="remove-horizontal-padding" style="padding-top:0px;padding-right:0;padding-bottom:0px;padding-left:0;">
+                    <apex:image id="rectangle-fuschia" value="https://sagegroup--c.eu14.content.force.com/servlet/servlet.ImageServer?id=0151o000004cxEx&oid=00D24000000IvOE" 
+                    style="display:block">
+                    </apex:image>
+                </td>
+                <td width="60" align="left" valign="top" bgcolor="#f5f5f6" style="width:60px;min-width:60px; mso-cellspacing: 0px; mso-padding-alt: 0px 0px 0px 0px;">
+                    <font style="font-family:Arial,Helvetica,sans-serif;color:#3c424f;font-size:12px; font-weight:normal; line-height:12px;">&nbsp;</font>
+                </td>
+            </tr>
+            <tr>
+                <td width="60" align="left" valign="top" bgcolor="#f5f5f6" style="width:60px;min-width:60px; mso-cellspacing: 0px; mso-padding-alt: 0px 0px 0px 0px;">
+                    <font style="font-family:Arial,Helvetica,sans-serif;color:#3c424f;font-size:12px; font-weight:normal; line-height:12px;">&nbsp;</font>
+                </td>
+                <!-- Trial Panel Output Start -->
+                <apex:outputPanel rendered="{!productType=='trial'}" layout="none">
+                    <td width="480" align="left" bgcolor="#f5f5f6" class="remove-horizontal-padding" style="padding-top:28px;padding-right:0;padding-bottom:28px;padding-left:0;">
+                        <font style="font-family:Arial,Helvetica,sans-serif;color:#3c424f;font-size:14px; font-weight:normal; line-height:20px;">
+                            You've taken the first step to freeing yourself from admin, and taking your business to the next level.
+                        </font>
+                        <br/><br/>
+                        <font style="font-family:Arial,Helvetica,sans-serif;color:#3c424f;font-size:14px; font-weight:normal; line-height:20px;">
+                            Over the next 30 days we'll be sending you useful tips to help you get the most out of&nbsp;<apex:outputText value="{!productNames}"/> subscription. However, 
+                            if you're ready to dive right in now, we recommend starting with the helpful information below.
+                        </font>
+                    </td>   
+                </apex:outputPanel>
+                <!-- Trial Panel Output End -->
+                <!-- Buy Panel Output Start -->
+                <apex:outputPanel rendered="{!OR(productType=='buy',productType=='convert')}" layout="none">
+                    <td width="480" align="left" bgcolor="#f5f5f6" class="remove-horizontal-padding" style="padding-top:28px;padding-right:0;padding-bottom:38px;padding-left:0;">
+                        <font style="font-family:Arial,Helvetica,sans-serif;color:#3c424f;font-size:14px; font-weight:normal; line-height:20px;">
+                                You've made a great decision. From here, Sage Business Cloud will take the hassle and administration out of managing your finances, so you can get back to growing your business.
+                        </font>                   
+                    </td>
+                </apex:outputPanel>
+                <!-- Buy Panel Output End -->
+                <!-- Buy Panel Output Start -->
+                <apex:outputPanel rendered="{!OR(productType=='upgrade')}" layout="none">
+                    <td width="480" align="left" bgcolor="#f5f5f6" class="remove-horizontal-padding" style="padding-top:28px;padding-right:0;padding-bottom:38px;padding-left:0;">
+                        <font style="font-family:Arial,Helvetica,sans-serif;color:#3c424f;font-size:14px; font-weight:normal; line-height:20px;">
+                            You've made a great decision. Your new package will make managing your business even easier than before!
+                        </font>                   
+                    </td>
+                </apex:outputPanel>
+                <!-- Buy Panel Output End -->
+                <!-- Cross Sell Panel Output Start -->
+                <apex:outputPanel rendered="{!OR(productType=='crossSell' , productType=='upsell')}" layout="none">
+                    <td width="480" align="left" bgcolor="#f5f5f6" class="remove-horizontal-padding" style="padding-top:28px;padding-right:0;padding-bottom:28px;padding-left:0;">
+                    </td>
+                </apex:outputPanel>
+                <!-- Cross Sell Panel Output End -->
+                <td width="60" align="left" valign="top" bgcolor="#f5f5f6" style="width:60px;min-width:60px; mso-cellspacing: 0px; mso-padding-alt: 0px 0px 0px 0px;">
+                        <font style="font-family:Arial,Helvetica,sans-serif;color:#3c424f;font-size:12px; font-weight:normal; line-height:12px;">&nbsp;</font>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <apex:outputPanel rendered="{!OR(productType!='upgrade')}">
+        <table align="center" cellpadding="0" cellspacing="0" border="0" bgcolor="#ffffff" style="text-align:center; margin-left:auto; margin-right:auto;max-width:600px;">
+            <tbody>
+                <tr>
+                    <td width="60" align="left" valign="top" bgcolor="#ffffff" style="width:60px;min-width:60px; mso-cellspacing: 0px; mso-padding-alt: 0px 0px 0px 0px;">
+                            <font style="font-family:Arial,Helvetica,sans-serif;color:#3c424f;font-size:12px; font-weight:normal; line-height:12px;">&nbsp;</font>
+                    </td>
+                    <td width="480" align="center" bgcolor="#ffffff" class="remove-horizontal-padding" style="padding-top:38px;padding-right:0;padding-bottom:5px;padding-left:0;">         
+                        <font style="font-family:Arial,Helvetica,sans-serif;color:#3c424f;font-size:20px; font-weight:bold; line-height:30px;">
+                            <!-- Trial Panel Output Start -->
+                            <apex:outputPanel rendered="{!productType=='trial'}">
+                                Ready to get started?
+                            </apex:outputPanel>
+                            <!-- Trial Panel Output End -->
+                               <!-- Buy Panel Output Start -->
+                            <apex:outputPanel rendered="{!OR(productType=='buy',productType=='convert')}">
+                                Get the most out of your&nbsp;<apex:outputText value="{!productNames}"/> Subscription
+                               </apex:outputPanel>
+                            <!-- Buy Panel Output End -->
+                               <!-- Cross Sell Panel Output Start -->
+                            <apex:outputPanel rendered="{!OR(productType=='crossSell' , productType=='upsell')}">
+                                Get the most out of your&nbsp;<apex:outputText value="{!productNames}"></apex:outputText> Subscription
+                                <apex:outputText rendered="{!existingProductInfo!=''}" value=" and {!existingProductInfo}"></apex:outputText>
+                            </apex:outputPanel>
+                        </font>
+                    </td>
+                    <td width="60" align="left" valign="top" bgcolor="#ffffff" style="width:60px;min-width:60px; mso-cellspacing: 0px; mso-padding-alt: 0px 0px 0px 0px;">
+                            <font style="font-family:Arial,Helvetica,sans-serif;color:#3c424f;font-size:12px; font-weight:normal; line-height:12px;">&nbsp;</font>
+                    </td>
+                </tr>
+                <tr>
+                    <td width="60" align="left" valign="top" bgcolor="#ffffff" style="width:60px;min-width:60px; mso-cellspacing: 0px; mso-padding-alt: 0px 0px 0px 0px;">
+                            <font style="font-family:Arial,Helvetica,sans-serif;color:#3c424f;font-size:12px; font-weight:normal; line-height:12px;">&nbsp;</font>
+                    </td>
+                    <td width="480" align="center" bgcolor="#ffffff" class="remove-horizontal-padding" style="padding-top:0px;padding-right:0;padding-bottom:0px;padding-left:0;">
+                        <apex:image id="rectangle-azul" value="https://sagegroup--c.eu14.content.force.com/servlet/servlet.ImageServer?id=0151o000004cxF2&oid=00D24000000IvOE" 
+                                style="display:block">
+                        </apex:image>
+                    </td>
+                    <td width="60" align="left" valign="top" bgcolor="#ffffff" style="width:60px;min-width:60px; mso-cellspacing: 0px; mso-padding-alt: 0px 0px 0px 0px;">
+                            <font style="font-family:Arial,Helvetica,sans-serif;color:#3c424f;font-size:12px; font-weight:normal; line-height:12px;">&nbsp;</font>
+                    </td>
+                </tr>
+                <tr>
+                    <td width="60" align="left" valign="top" bgcolor="#ffffff" style="width:60px;min-width:60px; mso-cellspacing: 0px; mso-padding-alt: 0px 0px 0px 0px;">
+                            <font style="font-family:Arial,Helvetica,sans-serif;color:#3c424f;font-size:12px; font-weight:normal; line-height:12px;">&nbsp;</font>
+                    </td>
+                    <td width="480" align="left" bgcolor="#ffffff" class="remove-horizontal-padding" style="padding-top:28px;padding-right:0;padding-bottom:28px;padding-left:0;">          
+                        <font style="font-family:Arial,Helvetica,sans-serif;color:#3c424f;font-size:14px; font-weight:normal; line-height:20px;">
+                                <apex:outputPanel rendered="{!OR(productType=='buy' , productType=='trial' ,productType=='convert')}">
+                                    If you didn't complete your set up during the sign-up process, click here to do that now:
+                                </apex:outputPanel>
+                                <apex:outputPanel rendered="{!OR(productType=='crossSell' , productType=='upsell')}">
+                                    We're always working to help you get the most out of your subscription. Our Support Hub has all the guides and info you need to go from beginner to power user.
+                                 </apex:outputPanel>
+                        <br/><br/>
+                        </font>
+                    </td>
+                    <td width="60" align="left" valign="top" bgcolor="#ffffff" style="width:60px;min-width:60px; mso-cellspacing: 0px; mso-padding-alt: 0px 0px 0px 0px;">
+                            <font style="font-family:Arial,Helvetica,sans-serif;color:#3c424f;font-size:12px; font-weight:normal; line-height:12px;">&nbsp;</font>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </apex:outputPanel>
+    <!-- 
+    <apex:dataTable value="{!TerisSubscriptionDetails}" var="subscriptionDetail">
+        <apex:column >
+            <apex:facet name="header">Subscription Start Date</apex:facet>
+            <apex:outputText value="{0,date,dd/MM/yyyy}">
+                <apex:param value="{!subscriptionDetail.ccrz__SubscriptionStartDate__c}" />
+            </apex:outputText>
+        </apex:column>
+        <apex:column >
+            <apex:facet name="header">Recurring Price</apex:facet>
+            <apex:outputText value="{!subscriptionDetail.ccrz__RecurringPriceSubAmt__c}"/> 
+        </apex:column>
+        <apex:column >
+            <apex:facet name="header">Subscription Status</apex:facet>
+            <apex:outputText value="{!subscriptionDetail.ccrz__SubscriptionStatus__c}"/> 
+        </apex:column>
+    </apex:dataTable>
+    -->
+</apex:component>

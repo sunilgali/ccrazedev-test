@@ -1,0 +1,4 @@
+<aura:event type="APPLICATION" description="Event template" >
+    <aura:attribute name="subscription" type="Object"/>
+    <aura:attribute name="userCart" type="Object"/>
+</aura:event>

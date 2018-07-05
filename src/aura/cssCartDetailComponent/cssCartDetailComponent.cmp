@@ -1,0 +1,378 @@
+<aura:component extends="c:cssBaseComponent"  implements="flexipage:availableForAllPageTypes,forceCommunity:availableForAllPageTypes" 
+                 access="global">
+    
+	<div class='light-grey-bg'>
+    	<div class='shell-temp' style='margin:0 auto; background:#fff'>
+        	<div class='actions_page_header'>
+            	<div class='rounded-w-label slds-m-around_medium slds-float_left '>1</div> 
+                <span class="actions_page_header_label slds-float_left slds-m-top_medium">Product Selection - Adobe Illustrator Plus</span>
+            </div>
+			<!-- Data Starts -->
+            <div class='slds-p-around_xx-large'>
+            	<!--Grid Strats-->
+                <div class="slds-grid slds-gutters">
+                	<div class="slds-col slds-size_3-of-5">                            
+                    	<article class="xslds-card">
+							<div class="slds-card__header slds-grid">
+								<header class="slds-media slds-media_center slds-has-flexi-truncate">
+									<div class="slds-media__figure">
+										<span class="slds-icon_container slds-icon-standard-account" title="account">
+											<img src="{!$Resource.AdobeTheme + '/assets/images/illustrator.svg'}" style="width:40px" />
+										</span>
+									</div>
+									<div class="slds-media__body">
+										<h2 class="slds-card__header-title">
+                                            <span class="slds-text-heading_small ">Adobe Illustrator Plus Font (Dynamic Kit)</span><br />
+    										<span>Embed data quality services to validate addresses and enrich with geocodes…</span>
+										</h2>	
+									</div>
+								</header>
+							</div>
+						</article>
+ 					</div>
+                    <div class="slds-col slds-size_2-of-5">
+                    	<span>
+                            <div class="slds-no-flex">Please select term of Payment<br />
+                            	<button class="slds-button slds-button_neutral slds-button_outline-brand" style="line-height:22px;border-color: #0a6fd3;">
+                                    <img src="{!$Resource.AdobeTheme + '/assets/images/checked.svg'}" style="width:12px" />&nbsp; <b>Paid Monthly<br />
+                                    US$ 31.49/mo per user</b> 
+                                </button>
+                                <button class="slds-button slds-button_neutral" style="line-height:22px">Paid Annually<br />	
+									US$ 19.98/mo per user 
+                                </button>
+                        	</div>
+                       	</span>
+                 	</div>
+             	</div>
+                <!--Grid Ends-->
+                    
+                <!--Grid Strats-->
+             	<div class="slds-grid slds-gutters">
+                	<div class="slds-col slds-size_3-of-5">  
+                    	<article>
+                        	<div class="slds-card__header slds-grid">
+								<header class="slds-media slds-media_center slds-has-flexi-truncate slds-p-left_large">
+    								<div class="slds-form-element">
+										<div class="slds-form-element__control">
+											<span class="slds-checkbox">
+												<input type="checkbox" name="options" id="checkbox-2" value="checkbox-2" />
+												<label class="slds-checkbox__label" for="checkbox-2">
+													<span class="slds-checkbox_faux"></span>
+												</label>
+											</span>
+										</div>
+									</div>
+                                    <div class="slds-media__figure">
+                                        <span class="slds-icon_container slds-icon-standard-account" title="account">
+                                        <img src="{!$Resource.AdobeTheme + '/assets/images/illustrator.svg'}" style="width:40px" />
+                                        </span>
+                                    </div>
+									<div class="slds-media__body">
+                                        <h2 class="slds-card__header-title">
+                                            <span class="slds-text-heading_small">Adobe Illustrator</span><br />
+                                            <span class='header-sm' style="font-weight:100">Create beautiful vector art and illustrations</span>
+                                        </h2>
+                                    </div>
+									<div class="slds-no-flex">
+    									<div class="slds-form-element">
+											<label class="slds-form-element__label" for="form-element-01">Users/Licenses</label>
+                                            <div class="slds-form-element__control">
+                                                <input type="text" id="form-element-01" class="slds-input slds-text-align_center" style="width:100px" value="50" placeholder="Placeholder Text" />
+                                            </div>
+										</div> 
+									</div>
+								</header>
+							</div>
+						</article>
+                  	</div>
+                    <div class="slds-col slds-size_2-of-5"></div>
+				</div>
+                    
+              	<div class="slds-grid slds-gutters">
+                	<div class="slds-col slds-size_3-of-5"> 
+                    	<article class="xslds-card">
+                        	<div class="slds-card__header slds-grid">
+								<header class="slds-media slds-media_center slds-has-flexi-truncate slds-p-left_large">
+    								<div class="slds-form-element">
+                                    	<div class="slds-form-element__control">
+                                        	<span class="slds-checkbox">
+                                            	<input type="checkbox" name="options" id="checkbox-2" value="checkbox-2" />
+                                                <label class="slds-checkbox__label" for="checkbox-2">
+                                                	<span class="slds-checkbox_faux"></span>
+                                               	</label>
+                                           	</span>
+                                       	</div>
+									</div>
+                                    <div class="slds-media__figure">
+                                    	<span class="slds-icon_container slds-icon-standard-account" title="account">
+                                        	<img src="{!$Resource.AdobeTheme + '/assets/images/photoshop.svg'}" style="width:40px" />
+                                        </span>
+                                 	</div>
+                                    <div class="slds-media__body">
+                                    	<h2 class="slds-card__header-title">
+                                        	<span class="slds-text-heading_small">Adobe Photoshop CC </span><br />
+                                            <span class='header-sm' style="font-weight:100">Editing and compositing grphic art  </span>
+                                       	</h2>
+                                 	</div>
+                                    <div class="slds-no-flex">
+                                    	<div class="slds-form-element">
+                                        	<label class="slds-form-element__label" for="form-element-01">Users/Licenses</label>
+                                            <div class="slds-form-element__control">
+                                            	<input type="text" id="form-element-01" class="slds-input slds-text-align_center" style="width:100px" value="50" placeholder="Placeholder Text" />
+                                          	</div>
+                                     	</div> 
+									</div>
+								</header>
+							</div>
+						</article>
+                  	</div>
+                    <div class="slds-col slds-size_2-of-5"></div>
+               	</div>
+                <!--Grid Ends-->
+                    
+                <!--Grid Strats-->
+              	<div class="slds-grid slds-gutters">
+                	<div class="slds-col slds-size_3-of-5">
+                    	<article class="xslds-card" >
+                        	<div class="slds-card__header slds-grid">
+								<header class="slds-media slds-media_center slds-has-flexi-truncate slds-p-left_large">
+    								<div class="slds-form-element">
+										<div class="slds-form-element__control">
+											<span class="slds-checkbox">
+												<input type="checkbox" name="options" id="checkbox-2" value="checkbox-2" />
+												<label class="slds-checkbox__label" for="checkbox-2">
+													<span class="slds-checkbox_faux"></span>
+												</label>
+											</span>
+										</div>
+									</div>
+									<div class="slds-media__figure">
+                                        <span class="slds-icon_container slds-icon-standard-account" title="account">
+	                                        <img src="{!$Resource.AdobeTheme + '/assets/images/lightroom.svg'}" style="width:40px" />
+                                        </span>
+									</div>
+									<div class="slds-media__body">
+                                        <h2 class="slds-card__header-title">
+                                            <span class="slds-text-heading_small">Adobe Lightroom CC</span><br />
+                                            <span class='header-sm' style="font-weight:100">Edit, organize, store, and share photos from anywhere)</span>
+                                        </h2>
+									</div>
+                                    <div class="slds-no-flex">
+                                        <div class="slds-form-element">
+                                            <label class="slds-form-element__label" for="form-element-01">Users/Licenses</label>
+                                            <div class="slds-form-element__control">
+                                                <input type="text" id="form-element-01" class="slds-input slds-text-align_center" style="width:100px" value="50" placeholder="Placeholder Text" />
+                                            </div>
+	                                    </div> 
+                                    </div>
+								</header>
+							</div>
+						</article>
+                  	</div>
+                    <div class="slds-col slds-size_2-of-5">
+                    	<div class="slds-form-element slds-m-top_small">
+             				Tier<br/>
+                            <div class="slds-form-element__control">
+                                <div class="slds-select_container" style='width:180px;line-height:18px'>
+                                    <select class="slds-select" id="select-01" style='line-height:18px'>
+                                        <option value="">1 - 10</option>
+                                        <option>10 -100</option>
+                                        <option>100- 200</option>
+                                    </select>
+                                </div>
+                             </div>
+				        </div> 
+					</div>
+              	</div>
+                <!--Grid Ends-->
+
+                
+                <!--Grid Strats for Add-On Products-->
+                <div class="slds-p-top_medium">CHOOSE OPTIONAL ADD-ON PRODUCTS</div>
+                <hr class="hrstyle1" />
+                    
+             	<div class="slds-grid slds-gutters">
+                	<div class="slds-col slds-size_3-of-5">                            
+                    	<article class="xslds-card">
+                            <div class="slds-card__header slds-grid slds-m-left_xx-large">
+                                <header class="slds-media slds-media_center slds-has-flexi-truncate">
+                                    <div class="slds-media__figure">
+                                        <span class="slds-icon_container slds-icon-standard-account" title="account">
+                                            <img src="{!$Resource.AdobeTheme + '/assets/images/stock.svg'}" style="width:40px" />
+                                        </span>
+                                    </div>
+                                    <div class="slds-media__body">
+                                        <h2 class="slds-card__header-title">
+                                            <span class="slds-text-heading_small">Adobe Stock</span><br />
+                                            <span class='header-sm' style="font-weight:100">Create beautiful vector art and illustrations</span>
+                                        </h2>
+                                    </div>
+                                    <div class="slds-no-flex">
+                                        <div class="slds-form-element">
+                                            <label class="slds-form-element__label" for="form-element-01">Users/Licenses</label>
+                                            <div class="slds-form-element__control">
+                                                <input type="text" id="form-element-01" class="slds-input slds-text-align_center" style="width:100px" value="50" placeholder="Placeholder Text" />
+                                            </div>
+                                        </div> 
+                                    </div>
+								</header>
+							</div>
+						</article>
+ 					</div>
+                    <div class="slds-col slds-size_2-of-5">
+						<span>
+                        	<div class="slds-no-flex slds-m-top_small">
+                                Please select term of Payment<br />
+                                <button class="slds-button slds-button_neutral slds-button_outline-brand" style="line-height:22px;border-color: #0a6fd3;">
+                                    <img src="assets/images/checked.svg" style="width:12px" />&nbsp; 
+                                    <b>Paid Monthly<br />
+                                    US$ 31.49/mo per user</b> 
+                                </button>
+                                <button class="slds-button slds-button_neutral" style="line-height:22px">Paid Annually<br />	
+									US$ 19.98/mo per user 
+                                </button>
+                        	</div>
+                    	</span>
+                	</div>
+            	</div>
+ 				<!--Grid Ends-->
+                    
+                <!--Grid Strats-->
+                <div class="slds-p-top_medium">CHOOSE SUPPORT / MAINTENANCE PACKAGE</div>
+                <hr class="hrstyle1" />
+                    
+                <div class="slds-grid slds-gutters">
+                	<div class="slds-col slds-size_2-of-5">  
+                    	<article>
+                        	<div class="slds-card__header slds-grid">
+								<header class="slds-media slds-media_center slds-has-flexi-truncate slds-p-left_large">
+									<div class="slds-media__body">
+										<h2 class="slds-card__header-title" style="margin-left:75px">
+                                            <span class="slds-text-heading_small" >Standard Support (included)</span><br />
+    										<span class='header-sm' style="font-weight:100">Online chat agent, access to community forum, standard turn around</span>
+										</h2>
+									</div> 
+								</header>
+							</div>
+						</article>
+                    </div>
+                    <div class="slds-col slds-size_2-of-4"> 
+                    </div>
+             	</div>
+                    
+                <div class="slds-grid slds-gutters">
+                	<div class="slds-col slds-size_3-of-5">  
+                    	<article>
+                            <div class="slds-card__header slds-grid">
+                                <header class="slds-media slds-media_center slds-has-flexi-truncate slds-p-left_large">
+                                    <div class="slds-form-element">
+                                        <div class="slds-form-element__control">
+                                            <span class="slds-checkbox">
+		                                        <input type="checkbox" name="options" id="checkbox-2" value="checkbox-2" />
+        		                                <label class="slds-checkbox__label" for="checkbox-2">
+                			                        <span class="slds-checkbox_faux"></span>
+                            		            </label>
+                                        	</span>
+                            			</div>
+                            		</div>
+									<div class="slds-media__body" style="margin-left:50px">
+										<h2 class="slds-card__header-title">
+                                            <span class="slds-text-heading_small">Advanced Support</span><br />
+    										<span class='header-sm' style="font-weight:100">Phone support, live chat, knowledge base</span>
+										</h2>
+									</div>
+								</header>
+							</div>
+						</article>
+ 					</div>
+                    <div class="slds-col slds-size_2-of-5">
+                    	<span>
+                            <div class="slds-no-flex">
+                                Please select term of Payment<br />
+                                <button class="slds-button slds-button_neutral slds-button_outline-brand" style="line-height:22px;">
+                                    Paid Monthly<br />
+                                    US$ 99/mo per user 
+                                </button>
+                            	<button class="slds-button slds-button_neutral" style="line-height:22px;border-color: #0a6fd3;">
+                                    <img src="{!$Resource.AdobeTheme + '/assets/images/checked.svg'}" style="width:12px" />&nbsp; <b>Paid Annually<br />	
+                                	US$ 1100/mo per user </b>
+                                </button>
+                        	</div>
+                      	</span>             
+                    </div>
+              	</div>
+                    
+                <div class="slds-p-top_medium header-lg">
+                    <b>Total Cost</b>
+              	</div>
+                <hr class="hrstyle2" />
+                <div class="slds-grid slds-gutters">
+                	<div class="slds-col slds-size_3-of-5"></div>
+                    <div class="slds-col slds-size_2-of-5 slds-text-align_right header-lg">
+                    	<b>Total Monthly Payment </b>
+                        <b class="slds-m-horizontal_xx-large"> US$   6253.79</b>
+                  	</div>
+              	</div>
+                <div class="slds-grid slds-gutters">
+                	<div class="slds-col slds-size_3-of-5"></div>
+                    <div class="slds-col slds-size_2-of-5 slds-text-align_right header-lg">
+                    	<span><b>Total Annual Payment</b><b class="slds-m-horizontal_xx-large"> US$   1100.00</b></span>
+                   	</div>
+               	</div>
+         	</div>
+                
+			<a href="02-personal-info.html" class="slds-button slds-button_brand slds-float--right slds-m-right_xx-large slds-m-top_large slds-m-bottom_large">Continue to Checkout</a>
+            	<div style='clear:both'></div>
+                <!-- Data Ends -->
+                <div class='slds-p-horizontal_xx-large related-products-list ' >
+                    <div class='header-lg slds-text-align_center slds-p-vertical_medium'>Additional products that you may like</div>
+                    <div class="slds-grid slds-gutters">
+                        <div class="slds-col slds-size_1-of-4 slds-text-align_center">
+                            <div class="related-product slds-p-around_medium">
+                                <img src="assets/images/acrobat.svg" class="slds-p-vertical_medium" style='width:40px' /><br />   
+                                <div class='header-lg'><b>Adobe Acrobat Pro</b></div>
+                                <p class="header-md">View, sign, and annotate your PDFs from anywhere.</p>
+                                <p class="header-sm slds-p-vertical_medium">US $ 19.99/mo per user </p>
+                                <button class="slds-button slds-button_brand">
+                                    Learn More
+                                </button>
+                            </div>
+                        </div>
+                        <div class="slds-col slds-size_1-of-4 slds-text-align_center">
+                            <div class="related-product slds-p-around_medium">
+                                <img src="assets/images/acrobat.svg" class="slds-p-vertical_medium" style='width:40px' /><br />   
+                                <div class='header-lg'><b>Adobe Acrobat Pro</b></div>
+                                <p class="header-md">View, sign, and annotate your PDFs from anywhere.</p>
+                                <p class="header-sm slds-p-vertical_medium">US $ 19.99/mo per user </p>
+                                <button class="slds-button slds-button_brand">
+                                    Learn More
+                                </button>
+                                </div>
+                        </div>
+                        <div class="slds-col slds-size_1-of-4 slds-text-align_center">
+                            <div class="related-product slds-p-around_medium">
+                                <img src="assets/images/acrobat.svg" class="slds-p-vertical_medium" style='width:40px' /><br />   
+                                <div class='header-lg'><b>Adobe Acrobat Pro</b></div>
+                                <p class="header-md">View, sign, and annotate your PDFs from anywhere.</p>
+                                <p class="header-sm slds-p-vertical_medium">US $ 19.99/mo per user </p>
+                                <button class="slds-button slds-button_brand">
+                                    Learn More
+                                </button>
+                                </div>
+                        </div>
+                        <div class="slds-col slds-size_1-of-4 slds-text-align_center">
+                            <div class="related-product slds-p-around_medium">
+                                <img src="assets/images/acrobat.svg" class="slds-p-vertical_medium" style='width:40px' /><br />   
+                                <div class='header-lg'><b>Adobe Acrobat Pro</b></div>
+                                <p class="header-md">View, sign, and annotate your PDFs from anywhere.</p>
+                                <p class="header-sm slds-p-vertical_medium">US $ 19.99/mo per user </p>
+                                <button class="slds-button slds-button_brand">
+                                    Learn More
+                                </button>
+                                </div>
+                        </div>
+                    </div>
+                </div>                 
+          </div>
+      </div>
+</aura:component>

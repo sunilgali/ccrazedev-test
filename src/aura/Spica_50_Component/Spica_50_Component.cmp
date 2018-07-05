@@ -1,0 +1,100 @@
+<aura:component access="global" implements="forcecommunity:availableforallpagetypes">
+    <lightning:layout multipleRows="true" verticalAlign="start" horizontalAlign="stretch" >
+        
+        <lightning:layoutItem padding="horizontal-small" flexibility="auto" size="12" smallDeviceSize="12" mediumDeviceSize="12" largeDeviceSize="12" >
+            <center>
+                <p style="line-height: 1.3;margin-bottom: 16px;color: #004b87;font-size: 28px;font-weight: 300;">Choose a product that fits your needs</p> 
+                <br/>
+            </center>
+        </lightning:layoutItem>
+        
+        
+        <lightning:layoutItem padding="horizontal-small" flexibility="auto" size="12" smallDeviceSize="12" mediumDeviceSize="12" largeDeviceSize="4" >
+            <div class="slds-box"> 
+                <div style="padding: 5px;color: #fff;border: 0;background-color: #073460;">
+                    <center>
+                        <p style="font-size: 1.2rem;font-weight: 300;">Spica 50cloud Pro Accounting</p>
+                        <hr/>
+                        <br/>
+                        <p style="font-size: 1rem;font-weight: 300;">$44.97/month</p>
+                        <br/>
+                    </center>
+                </div>
+                <div style="margin-left:15%;margin-right:15%">
+                    <br/>
+                    <p>Essentials Accounting</p> 
+                    <br/>
+                    <lightning:icon size="x-small" iconName="utility:check"  alternativeText="Indicates approval"/>&nbsp;&nbsp;Organize your finances<br/>
+                    <lightning:icon size="x-small" iconName="utility:check"  alternativeText="Indicates approval"/>&nbsp;&nbsp;Pay bills and get paid<br/>
+                    <lightning:icon size="x-small" iconName="utility:check"  alternativeText="Indicates approval"/>&nbsp;&nbsp;Manage cash flow and costs<br/>
+                    <lightning:icon size="x-small" iconName="utility:check"  alternativeText="Indicates approval"/>&nbsp;&nbsp;Anytime, anywhere cloud access<br/>
+                    <lightning:icon size="x-small" iconName="utility:check"  alternativeText="Indicates approval"/>&nbsp;&nbsp;Microsoft Office 365 integration<br/>
+                </div>
+                <br/>
+                <lightning:button class="BuyNow" variant="brand" label="Buy now" onclick="{! c.handleClick }" />    <br/>
+                
+            </div>
+        </lightning:layoutItem>
+        
+        
+        <lightning:layoutItem padding="horizontal-small" flexibility="auto" size="12" smallDeviceSize="12" mediumDeviceSize="12" largeDeviceSize="4" >
+            <div class="slds-box"> 
+                <div style="padding: 5px;color: #fff;border: 0;background-color: #073460;">
+                    <center>
+                        <p style="font-size: 1.2rem;font-weight: 300;">Spica 50cloud Premium Accounting</p>
+                        <hr/>
+                        <br/>
+                        <p style="font-size: 1rem;font-weight: 300;">$69.62/month</p>
+                        <br/>
+                    </center>
+                </div>
+                <div style="margin-left:15%;margin-right:15%">
+                    <br/>
+                    <p>Advanced Accounting</p> 
+                    <br/>
+                    <lightning:icon size="x-small" iconName="utility:check"  alternativeText="Indicates approval"/>&nbsp;&nbsp;Plan and track inventory<br/>
+                    <lightning:icon size="x-small" iconName="utility:check"  alternativeText="Indicates approval"/>&nbsp;&nbsp;Manage jobs and expenses<br/>
+                    <lightning:icon size="x-small" iconName="utility:check"  alternativeText="Indicates approval"/>&nbsp;&nbsp;Add more users and controls<br/>
+                    <lightning:icon size="x-small" iconName="utility:check"  alternativeText="Indicates approval"/>&nbsp;&nbsp;Anytime, anywhere cloud access<br/>
+                    <lightning:icon size="x-small" iconName="utility:check"  alternativeText="Indicates approval"/>&nbsp;&nbsp;Microsoft Office 365 integration<br/>
+                </div>
+                <br/>
+                <lightning:button class="BuyNow" variant="brand" label="Buy now" onclick="{! c.handleClick }" />    <br/>
+                
+            </div>
+        </lightning:layoutItem>
+        
+        
+        
+        
+        <lightning:layoutItem padding="horizontal-small" flexibility="auto" size="12" smallDeviceSize="12" mediumDeviceSize="12" largeDeviceSize="4" >
+            <div class="slds-box"> 
+                <div style="padding: 5px;color: #fff;border: 0;background-color: #073460;">
+                    <center>
+                        <p style="font-size: 1.2rem;font-weight: 300;">Spica 50cloud Quantum Accounting</p>
+                        <hr/>
+                        <br/>
+                        <p style="font-size: 1rem;font-weight: 300;">$175.87/month</p>
+                        <br/>
+                    </center>
+                </div>
+                <div style="margin-left:15%;margin-right:15%">
+                    <br/>
+                    <p>In-depth Accounting</p> 
+                    <br/>
+                    <lightning:icon size="x-small" iconName="utility:check"  alternativeText="Indicates approval"/>&nbsp;&nbsp;Enterprise-level accounting<br/>
+                    <lightning:icon size="x-small" iconName="utility:check"  alternativeText="Indicates approval"/>&nbsp;&nbsp;Fast processing, up to 40 users!<br/>
+                    <lightning:icon size="x-small" iconName="utility:check"  alternativeText="Indicates approval"/>&nbsp;&nbsp;Industry-specific features<br/>
+                    <lightning:icon size="x-small" iconName="utility:check"  alternativeText="Indicates approval"/>&nbsp;&nbsp;Anytime, anywhere cloud access<br/>
+                    <lightning:icon size="x-small" iconName="utility:check"  alternativeText="Indicates approval"/>&nbsp;&nbsp;Microsoft Office 365 integration<br/>
+                </div>
+                <br/>
+                <lightning:button class="BuyNow" variant="brand" label="Buy now" onclick="{! c.handleClick }" />    <br/>
+                
+            </div>
+        </lightning:layoutItem>
+        
+        
+        
+    </lightning:layout>
+</aura:component>

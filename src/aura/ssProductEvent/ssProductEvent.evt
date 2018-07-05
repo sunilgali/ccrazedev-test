@@ -1,0 +1,4 @@
+<aura:event type="APPLICATION" description="Event template" >
+    <aura:attribute name="showProduct" type="boolean" />
+    <aura:attribute name="cartId" type="String" />
+</aura:event>

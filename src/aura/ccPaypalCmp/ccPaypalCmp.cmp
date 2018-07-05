@@ -1,0 +1,7 @@
+<aura:component controller="ccPaypalController" implements="forcecommunity:availableforallpagetypes"> 
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+    <aura:attribute name="url" type="String" default="" />
+    <aura:attribute name="Amount" type="Integer" default="1" />
+    <aura:attribute name="cartId" type="String"/>
+    <aura:attribute name="subscriptionItemId" type="String"/>
+</aura:component>

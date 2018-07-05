@@ -1,0 +1,23 @@
+<aura:component controller="SSZuoraProductUtil" 
+                implements="force:lightningQuickActionWithoutHeader,flexipage:availableForAllPageTypes,force:hasRecordId"
+                access="global" >
+	<!-- ssFetchZuoraProducts -->
+    <!--BEGIN ATTRIBUTES-->
+    <aura:attribute name="recordId" type="String"/>
+    <aura:attribute name="strApexMethod" type="String" default="c.SyncZuoraWithCCProduct"/>
+    <aura:attribute name="displayMessage" type="String" />
+    <aura:attribute name="progress" type="Integer" default="0"/>
+    <!--END ATTRIBUTES-->
+    <!-- BEGIN EVENT -->
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <aura:handler name="render" value="{!this}" action="{!c.onRender}"/>
+    <aura:handler name="change" value="{!v.progress}" action="{!c.handleProgressChange}"/>
+    <!-- END EVENT -->
+    <!-- BEGIN BODY -->
+    <lightning:spinner aura:id="mySpinner" variant="brand" size="medium" class="slds-hide"/>
+    <lightning:progressBar value="{!v.progress}" aura:id="myProgressBar"/>
+    <div aura:id="outputContainer" class="slds-hide">
+        {! v.displayMessage}
+    </div>
+    <!-- END BODY -->
+</aura:component>

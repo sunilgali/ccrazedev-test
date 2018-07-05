@@ -1,0 +1,125 @@
+<aura:component controller="SSCompanyInfoController" extends="c:ssBaseComponent" 
+                implements="c:ssAppInterface,forceCommunity:availableForAllPageTypes" access="global" >
+    <ltng:require scripts="{!$Resource.SSUtil+ '/ssUtil.js'}" afterScriptsLoaded="{!c.onScriptsLoaded}" />
+     
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <aura:handler event="c:ssCartEvent" action="{!c.updateCartCompany}" />
+    
+    <aura:registerEvent name="ssProductEvent" type="c:ssProductEvent"/>
+    <aura:registerEvent name="ssPaymentInfoEvent" type="c:ssPaymentInfoEvent"/>
+    <aura:registerEvent name="ssCartEvent" type="c:ssCartEvent"/>
+    <aura:registerEvent name="ssSubscriptionItemEvent" type="c:ssSubscriptionItemEvent"/>
+    
+    
+    <aura:attribute name="showSpinner" type="Boolean" default="false" />
+    <aura:attribute name="cartId" type="String" />
+    <aura:attribute name="cart" type="Object"/> 
+    <aura:attribute name="countryOptions" type="List" />
+    <aura:attribute name="stateOptions" type="List" />
+    <aura:attribute name="isSpin" default="false" type="Boolean" />
+    <aura:attribute name="isPaymentVisible" type="Boolean" />
+    <aura:attribute name="account" type="SSAccountModel" />
+    <aura:attribute name="subscriptionItemId" type="String" /> 
+    
+    <div class=" slds-p-top_large"> 
+        <lightning:card >
+            <aura:set attribute="title">
+                <h1 class="slds-page-header__title ss-text-heading_medium">Customer Information </h1> 
+            </aura:set>
+            <aura:set attribute="actions">
+                <div class="slds-no-flex">
+                    <lightning:button name="Previous" label="Previous" onclick="{!c.goToProduct}"/>
+                </div>
+            </aura:set>
+            
+        <lightning:layout multipleRows="true" verticalAlign="start" horizontalAlign="stretch">
+            <lightning:layoutitem class="slds-p-left_large slds-p-bottom_x-small" size="12" smallDeviceSize="12" mediumDeviceSize="8" largeDeviceSize="8">
+                <lightning:input type="text" label="Company Name" aura:id="ssCompName" onblur="{!c.processAccount}" 
+                                 value="{!v.account.accountName}" required="true" />
+            </lightning:layoutitem>
+            <lightning:layoutitem size="12" smallDeviceSize="12" mediumDeviceSize="4" largeDeviceSize="4">
+            </lightning:layoutitem>
+            
+            <lightning:layoutitem class="slds-p-left_large slds-p-bottom_x-small" size="12" smallDeviceSize="12" mediumDeviceSize="4" largeDeviceSize="4">
+                <lightning:input type="text" label="Last Name" aura:id="ssLName"  onblur="{!c.processAccount}" 
+                                 value="{!v.account.billingContact.lastName}" required="true" />
+            </lightning:layoutitem>
+            <lightning:layoutitem class="slds-p-left_small slds-p-bottom_x-small" size="12" smallDeviceSize="12" mediumDeviceSize="4" largeDeviceSize="4">
+                <lightning:input type="text" label="First Name" aura:id="ssFName"  onblur="{!c.processAccount}"
+                                 value="{!v.account.billingContact.firstName}" required="true" />
+            </lightning:layoutitem>
+            <lightning:layoutitem size="12" smallDeviceSize="12" mediumDeviceSize="4" largeDeviceSize="4">
+            </lightning:layoutitem>
+            
+            
+            <lightning:layoutitem class="slds-p-left_large slds-p-bottom_x-small" size="12" smallDeviceSize="12" mediumDeviceSize="8" largeDeviceSize="8">
+                <lightning:input type="email" label="Email" aura:id="ssEmail"  onblur="{!c.processAccount}"
+                                 value="{!v.account.billingContact.email}" required="true" />
+            </lightning:layoutitem>
+            <lightning:layoutitem size="12" smallDeviceSize="12" mediumDeviceSize="4" largeDeviceSize="4">
+            </lightning:layoutitem>
+            
+            <lightning:layoutitem class="slds-p-left_large slds-p-bottom_x-small" size="12" smallDeviceSize="12" mediumDeviceSize="8" largeDeviceSize="8">
+                <lightning:input type="tel" label="Phone" name="tel" aura:id="ssPhone" required="true"  onblur="{!c.processAccount}"
+                                 value="{!v.account.billingContact.phone}" pattern="[0-9]*" messageWhenPatternMismatch="Enter a numeric value."/>
+            </lightning:layoutitem>
+            <lightning:layoutitem size="12" smallDeviceSize="12" mediumDeviceSize="4" largeDeviceSize="4">
+            </lightning:layoutitem>
+            <aura:if isTrue="{!v.cart.transactionType == 'Buy'}">
+            
+                <lightning:layoutitem class="slds-p-left_large slds-p-bottom_x-small" size="12" smallDeviceSize="12" mediumDeviceSize="8" largeDeviceSize="8">
+                    <lightning:input type="text" label="Address" aura:id="ssAddress"  onblur="{!c.processAccount}"
+                                    value="{!v.account.billingContact.address.streetAddress}" required="true" />
+                </lightning:layoutitem>
+                <lightning:layoutitem size="12" smallDeviceSize="12" mediumDeviceSize="4" largeDeviceSize="4">
+                </lightning:layoutitem>
+                
+                <lightning:layoutitem class="slds-p-left_large slds-p-bottom_x-small" size="12" smallDeviceSize="12" mediumDeviceSize="8" largeDeviceSize="8">
+                    <lightning:select name="ssCountry" label="Country" aura:id="ssCountry" 
+                                  value="{!v.account.billingContact.address.country}"    required="true" onchange="{!c.onCountryChange}"> 
+                        <option text="" value="" />
+                        <aura:iteration items="{!v.countryOptions}" var="item">
+                            <option text="{!item.label}" value="{!item.value}" selected="{!item.selected}"/>
+                        </aura:iteration>
+                    </lightning:select>
+                </lightning:layoutitem>
+                <lightning:layoutitem size="12" smallDeviceSize="12" mediumDeviceSize="4" largeDeviceSize="4">
+                </lightning:layoutitem>
+                
+                <lightning:layoutitem class="slds-p-left_large slds-p-bottom_x-small" size="12" smallDeviceSize="12" mediumDeviceSize="8" largeDeviceSize="8">
+                    <lightning:select name="ccState" label="State" aura:id="ssState"  onblur="{!c.processAccount}"
+                                      value="{!v.account.billingContact.address.state}" required="true" >
+                        <option text="" value="" />
+                        <aura:iteration items="{!v.stateOptions}" var="item">
+                            <option text="{!item.label}" value="{!item.value}" selected="{!item.selected}"/>
+                        </aura:iteration>
+                    </lightning:select>
+                </lightning:layoutitem>
+                <lightning:layoutitem size="12" smallDeviceSize="12" mediumDeviceSize="4" largeDeviceSize="4">
+                </lightning:layoutitem>
+                
+                <lightning:layoutitem class="slds-p-left_large slds-p-bottom_x-small" size="12" smallDeviceSize="12" mediumDeviceSize="8" largeDeviceSize="8">
+                    <lightning:input type="text" label="City" aura:id="ssCity"  onblur="{!c.processAccount}"
+                                     value="{!v.account.billingContact.address.city}" required="true" />
+                </lightning:layoutitem>
+                <lightning:layoutitem size="12" smallDeviceSize="12" mediumDeviceSize="4" largeDeviceSize="4">
+                </lightning:layoutitem>
+                 
+                <lightning:layoutitem class="slds-p-left_large slds-p-bottom_x-small" size="12" smallDeviceSize="12" mediumDeviceSize="8" largeDeviceSize="8">
+                    <lightning:input type="text" label="Postal Code" aura:id="ssPostalCode"  onblur="{!c.processAccount}"
+                                     value="{!v.account.billingContact.address.postalCode}" pattern="[0-9]{5}" messageWhenPatternMismatch="Enter a 5 digit numeric value." required="true"/>
+                </lightning:layoutitem>
+            </aura:if>
+            
+        </lightning:layout>
+        </lightning:card>
+    </div>
+    <!-- class="slds-hide" -->
+    <div aura:id="paymentComponent" class="slds-hide">
+    	<c:ssPaymentInfoComponent aura:id="pComponent" cartId="{!v.cartId}" cart="{!v.cart}"/>
+    </div>
+    <c:ssSpinnerComponent show="{!v.showSpinner}"/>
+    <!--aura:if isTrue="{!isPaymentVisible}" -->
+    <!--c:ssPaymentInfoComponent /-->
+    <!--/aura:if-->
+</aura:component>

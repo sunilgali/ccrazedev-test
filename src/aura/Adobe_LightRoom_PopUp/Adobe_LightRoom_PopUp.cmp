@@ -1,0 +1,76 @@
+<aura:component >
+    <p style="font-size: 2.4rem;
+              font-weight: 200;
+              margin-bottom: 20px;text-align:center"> Everything you need for photography. And then some.</p>
+    
+    
+    
+    <div style="padding-top:20px;background-color:#f5f5f5;">
+        <lightning:layout multipleRows="true" verticalAlign="start" horizontalAlign="stretch">
+            
+            <lightning:layoutItem padding="horizontal-small" flexibility="auto" size="12" smallDeviceSize="12" mediumDeviceSize="4" largeDeviceSize="4"> 
+                <div style="background-color:white;line-height: 2.5">
+                    <center>
+                        <br/>
+                        <img src="1.png"/>
+                        <p style="font-size: 1.1rem;margin-bottom: 1.1em;font-weight: 700;">Lightroom CC Plan</p> 
+                        <p style="font-size: 25px;line-height: .5;font-weight: 300;">US$9.99/mo</p>
+                    </center>
+                    <p><b>Includes:</b></p>
+                    <ul class="slds-list_dotted">
+                        <li>Lightroom CC</li>
+                        <li>Your own portfolio website and social media tools</li>
+                        <li>1TB of cloud storage (about 20,000 raw DSLR images or 200,000 JPEGs)</li><br/>
+                    </ul> 
+                    <hr/>
+                    <lightning:button class="slds-float_left button" label="Try now" onclick="{!c.handleAdobeTryLightroom}"/>
+                    <lightning:button class="slds-float_right button" label="Buy now" onclick="{!c.handleAdobeBuyLightroom}"/><br/><br/>
+                    
+                </div>
+            </lightning:layoutItem>
+            
+            <lightning:layoutItem padding="horizontal-small" flexibility="auto" size="12" smallDeviceSize="12" mediumDeviceSize="4" largeDeviceSize="4">
+                <div style="background-color:white;line-height: 2.5">
+                    <center>
+                        <br/>
+                        <img src="2.png"/>
+                        <p style="font-size: 1.1rem;margin-bottom: 1.1em;font-weight: 700;">Photography Plans</p>
+                        <p style="font-size: 25px;line-height: .5;font-weight: 300;"> US$9.99/mo</p>
+                    </center>
+                    <p><b>Includes:</b></p>
+                    <ul class="slds-list_dotted">
+                        <li>Lightroom CC</li> 
+                        <li>Lightroom Classic CC</li> 
+                        <li>Photoshop CC</li> 
+                        <li>Your own portfolio website and social media tools</li> 
+                        <li>20GB of cloud storage (about 4,000 JPEG)</li> 
+                    </ul>  
+                    <hr/>
+                    <lightning:button class="slds-float_right button" label="Buy now" onclick="{!c.handleAdobeBuyLightroom}"/><br/><br/>
+                </div>
+            </lightning:layoutItem>
+            
+            <lightning:layoutItem padding="horizontal-small" flexibility="auto" size="12" smallDeviceSize="12" mediumDeviceSize="4" largeDeviceSize="4">
+                <div style="background-color:white;line-height: 2.5">
+                    <center>
+                        <br/>
+                        <img src="3.png"/>
+                        <p style="font-size: 1.1rem;margin-bottom: 1.1em;font-weight: 700;"> Creative Cloud All Apps</p>
+                        <p style="font-size: 25px;line-height: .5;font-weight: 300;">$52.99/mo</p>
+                        <br/>
+                    </center>
+                    <ul class="slds-list_dotted">
+                        <li > The entire collection of 20+ creative desktop and mobile apps including Photoshop CC, Lightroom CC, Illustrator CC, and Adobe XD CC</li> 
+                        <li>Includes 100GB of cloud storage, your own portfolio website, premium fonts and social media tools</li> 
+                    </ul> 
+                    <hr/>
+                    <lightning:button class="slds-float_right button" label="Buy now" onclick="{!c.handleAdobeBuyLightroom}"/>
+                    <br/><br/>
+                </div>
+                
+            </lightning:layoutItem>
+        </lightning:layout> 
+        
+        <div><br/><center>Need more storage (up to 10TB) or have questions? Call 800-585-0774</center> <br/></div> 
+    </div> 
+</aura:component>

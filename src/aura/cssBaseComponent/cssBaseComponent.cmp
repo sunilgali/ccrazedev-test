@@ -1,0 +1,7 @@
+<aura:component access="GLOBAL" extensible="true" abstract="true"  >
+
+    <ltng:require styles="{!$Resource.AdobeTheme + '/assets/styles/custom2.css'}"  />
+        
+	{! v.body }
+    
+</aura:component>

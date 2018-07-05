@@ -1,0 +1,123 @@
+<apex:page showHeader="false" sidebar="false" cache="false"
+         wizard="false" setup="false"
+            controller="SSZuoraPaymentUtil"
+              applyBodyTag="false" applyHtmlTag="false" docType="html-5.0" readOnly="false"
+                       title="Zuora Payment">
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"/>
+        <script type="text/javascript" src="https://static.zuora.com/Resources/libs/hosted/1.3.0/zuora-min.js"/>   
+        <style>
+            #z-overlay {
+                background-color: white !important;
+            }
+            #z-container{
+    			left: 0% !important;
+        		top : 0% !important;
+    		}
+        </style>     
+        <script>
+            
+            var prevPayload;
+            //Added lexOrigin output at submit 
+            var lexOrigin = 'https://{!$CurrentPage.parameters.lcHost}';    
+            var pageType = '{!$CurrentPage.parameters.type}';  
+        	console.log('lexOrigin:' + lexOrigin);
+        	console.log('Origin: ' + window.location.origin);
+            function sendToLC(message) {
+                console.log(message);
+                if(typeof(lexOrigin) != 'undefined'){
+                    parent.postMessage(message, lexOrigin);
+                }
+            }
+            
+            function sendIframeDimensions() {
+                var zframes = document.getElementsByTagName('iframe');
+            	var zframe = zframes[0].width  = 1100;
+                /*
+                var zframes = document.getElementsByTagName('iframe');
+                if( zframes.length && zframes[0].getAttribute('height') !== '100%') {
+                    var zframe = zframes[0];
+                    var payload = { 
+                        action: 'SET_DIMENSIONS', 
+                        data: { 
+                            height: zframe.getAttribute('height'), 
+                            width: zframe.getAttribute('width'),
+                            type: '{! $CurrentPage.parameters.type }'
+                        }
+                    };
+                    if( !prevPayload || prevPayload.data.height !== payload.data.height || prevPayload.data.width !== payload.data.width ) {
+                        prevPayload = payload;
+                        //window.parent.postMessage(payload, window.location.origin);
+                        sendToLC({'state':'PAYLOAD_OUTPUT', 'type': pageType, 'payload':  payload, 'vfHost': "{!LEFT($CurrentPage.URL,FIND('/',$CurrentPage.URL,9))}"});
+                    }
+                }*/
+            }
+            
+            function onLoad() {
+                //Added LOADED state to let lightning know that vf page is loaded
+                sendToLC({'state':'LOADED', 'type': pageType, 'vfHost': "{!LEFT($CurrentPage.URL,FIND('/',$CurrentPage.URL,9))}"});
+                Visualforce.remoting.Manager.invokeAction( '{! $RemoteAction.SSZuoraPaymentUtil.fetchPaymentMethods }',
+                                                          '{! $CurrentPage.parameters.type }',
+                    function handlerResult(resp, evt) {
+                        if( evt.status ) {
+                            var zParams = {
+                                //containerId : "ach_payment",
+                                tenantId : resp.zTenantID,
+                                signature: resp.zSignature,
+                                token: resp.zToken,
+                                key: resp.zKey,
+                                url: resp.zURL,
+                                id: resp.paymentPageId,
+                                style:"overlay",
+                                submitEnabled : "false",
+                                locale:'en_US'
+                            };
+                            var isFirstLoad = false;
+                            Z.render(
+                                zParams,
+                                {},
+                                function cb(submitResp) {
+                                    console.log('sending zuora response: %o', submitResp);
+                                    var payload = {
+                                        action: 'PAYMENT_COMPLETED',
+                                        data: submitResp
+                                    };
+                                    console.log("payload submitted");
+                                    //Added Payload output at submit 
+                                    //window.parent.postMessage( payload, window.location.origin );
+                                    sendToLC({'state':'PAYLOAD_OUTPUT', 'type': pageType, 'payload':  payload, 'vfHost': "{!LEFT($CurrentPage.URL,FIND('/',$CurrentPage.URL,9))}"});
+                            });
+                            
+                            sendIframeDimensions();
+                        }
+                    },
+                    { buffer: false, escape: true, timeout: 120000 }
+                );
+
+                window.addEventListener('message', function(event) {
+                    if( event.data.submit) {
+						Z.submit();
+                    }
+                    /*if( event.origin === window.location.origin ) {
+                        switch( event.data.action ) {
+                            case 'SUBMIT':
+                                Z.submit();
+                        }
+                    }*/
+                });
+        }
+        (function loadScripts() {
+            if (window.addEventListener)
+                window.addEventListener("load", onLoad, false);
+            else if (window.attachEvent)
+                window.attachEvent("onload", onLoad);
+            else window.onload = onLoad;
+        })();
+        </script>
+    </head>
+    <body>
+
+            <div id="zuora_payment" ></div>
+
+    </body>
+</apex:page>

@@ -1,0 +1,127 @@
+<aura:component controller="SSPaymentController" access="global">
+    <ltng:require scripts="{!join(',', 
+                           $Resource.JQuery331,
+                           $Resource.SSUtil+ '/ssUtil.js')}" afterScriptsLoaded="{!c.onPayScriptsLoaded}" />
+    
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+    
+    <aura:attribute name="payment" type="SSPaymentDetailsModel" />
+    <!-- for silent post 
+	<aura:attribute name="vfHost" type="String"/>
+    <aura:attribute name="recipientPage" type="String"/>
+    <aura:attribute name="lgHost" type="String"/>
+    <aura:attribute name="formAction" type="String"/>
+    <aura:attribute name="secretKey" type="String"/>
+    <aura:attribute name="profileId" type="String"/>
+    <aura:attribute name="accessKey" type="String"/>
+    <aura:attribute name="transactionType" type="String"/>
+	<aura:attribute name="paymentMehtod" type="String"/>
+	-->
+    <aura:attribute name="isSpin" default="false" type="Boolean" />
+    <aura:attribute name="paymentId" type="String"/>
+    <aura:attribute name="errorMessage" type="String"/>
+    
+    <aura:attribute name="monthOptions" type="List" />
+    <aura:attribute name="yearOptions" type="List" />
+    <aura:attribute name="creditCardOptions" type="List" />
+    <aura:attribute name="countryOptions" type="List" />
+    <aura:attribute name="stateOptions" type="List" />
+    <aura:attribute name="cardType" type="String" default=""/>
+    <aura:attribute name="cardTypeNumber" type="String" default=""/>
+    <aura:attribute name="isPaymentVisible" type="Boolean"/>
+
+    <aura:registerEvent name="ssSCPaymentEvent" type="c:ssSCPaymentEvent" />
+    <aura:handler event="c:ssSCPaymentEvent" action="{!c.handlePayment}"/>
+    <aura:handler name="change" value="{!v.payment.country}" action="{!c.onPayCountryChange}"/>
+    <aura:handler name="change" value="{!v.payment.cardNumber}" action="{!c.onCardNumberChange}" />
+    
+	<div class="slds-p-left_large slds-p-right_large slds-p-bottom_large slds-p-top_small"> 
+        <aura:if isTrue="{!v.isSpin}">
+            <lightning:spinner variant="brand" size="small" alternativeText="Loading data..."/>
+        </aura:if>
+        <lightning:card >
+            <aura:set attribute="title">
+                <header class="slds-media slds-media_center slds-has-flexi-truncate">
+                    <div class="slds-media__body">
+                        <h2>
+                            <span class="ss_header-lg2">Payment Selection</span> 
+                            
+                        </h2>
+                    </div>
+                </header>
+            </aura:set>
+            <lightning:layout multipleRows="true" verticalAlign="start" horizontalAlign="stretch">
+                <lightning:layoutitem class="slds-p-left_large slds-p-bottom_x-small" size="12" smallDeviceSize="12" mediumDeviceSize="12" largeDeviceSize="12">
+                    <div class="slds-media__body">
+						<h2>
+                            <span class="ss_header-lg2"><lightning:input type="radio" label="Credit Card"/></span> 
+    						<p class="slds-text-body_small slds-m-horizontal_large">Safe money transfer using Visa, Mastercard, Discover, American Express</p>
+						</h2>
+					</div>
+                </lightning:layoutitem>
+                
+                <lightning:layoutitem class="slds-p-left_large slds-p-bottom_x-small" size="12" smallDeviceSize="12" mediumDeviceSize="6" largeDeviceSize="6">
+                	<lightning:input type="text" label="CARD NUMBER" aura:id="ccInfo" onchange="{!c.onCardNumberChange}"
+                                          value="{!v.payment.cardNumber}" pattern="[0-9]*" 
+                                          messageWhenPatternMismatch="Enter a numeric value." required="true"/>
+            </lightning:layoutitem>
+            <lightning:layoutitem class="slds-p-top_large" size="12" smallDeviceSize="12" mediumDeviceSize="6" largeDeviceSize="6">
+            	<aura:if isTrue="{!v.cardType}">
+                    <img src="{!$Resource.SSUtil + '/images/'+v.cardType+'.png'}" style="width:50px" />
+                </aura:if>
+            </lightning:layoutitem>
+                
+            <lightning:layoutitem class="slds-p-left_large slds-p-bottom_x-small" size="12" smallDeviceSize="12" mediumDeviceSize="6" largeDeviceSize="6">
+                <lightning:input type="text" label="NAME ON CARD" aura:id="ssLName"  onblur="{!c.processAccount}" 
+                                 required="true" />
+            </lightning:layoutitem>
+            <lightning:layoutitem class="slds-p-left_small slds-p-bottom_x-small" size="12" smallDeviceSize="12" mediumDeviceSize="2" largeDeviceSize="2">
+                <lightning:select name="expMonth" label="EXPIRY MONTH" aura:id="ccInfo" required="true" value="{!v.payment.expirationMonth}">
+                    <option text="" value="" />
+                    <aura:iteration items="{!v.monthOptions}" var="item">
+                        <option text="{!item.label}" value="{!item.value}" selected="{!item.selected}"/>
+                    </aura:iteration>
+                </lightning:select>
+            </lightning:layoutitem>
+            <lightning:layoutitem class="slds-p-left_small slds-p-bottom_x-small" size="12" smallDeviceSize="12" mediumDeviceSize="2" largeDeviceSize="2">
+                <lightning:select name="expYear" label="EXPIRY YEAR" aura:id="ccInfo" required="true" value="{!v.payment.expirationYear}">
+                    <option text="" value="" />
+                    <aura:iteration items="{!v.yearOptions}" var="item">
+                        <option text="{!item.label}" value="{!item.value}" selected="{!item.selected}"/>
+                    </aura:iteration>
+                </lightning:select>
+            </lightning:layoutitem>
+            <lightning:layoutitem size="12" smallDeviceSize="12" mediumDeviceSize="2" largeDeviceSize="2">
+            </lightning:layoutitem>
+                
+             <lightning:layoutitem class="slds-p-left_large slds-p-bottom_x-small" size="12" smallDeviceSize="12" mediumDeviceSize="4" largeDeviceSize="4">
+                <lightning:input type="text" label="CVV CODE" aura:id="ssCompName" onblur="{!c.processAccount}" 
+                                 required="true" />
+            </lightning:layoutitem>
+            <lightning:layoutitem class="slds-p-bottom_medium" size="12" smallDeviceSize="12" mediumDeviceSize="8" largeDeviceSize="8">
+            </lightning:layoutitem>
+                
+            <lightning:layoutitem class="slds-p-left_large slds-p-bottom_x-small" size="12" smallDeviceSize="12" mediumDeviceSize="6" largeDeviceSize="6">
+                <lightning:input type="checkbox" label="Billing address same as company address" name="blue"/>
+            </lightning:layoutitem>
+            <lightning:layoutitem size="12" smallDeviceSize="12" mediumDeviceSize="6" largeDeviceSize="6">
+            </lightning:layoutitem>
+                
+             <lightning:layoutitem class="slds-p-bottom_large" size="12" smallDeviceSize="12" mediumDeviceSize="12" largeDeviceSize="12">
+            </lightning:layoutitem>   
+                
+            <lightning:layoutitem class="slds-p-left_large slds-p-top_large slds-p-bottom_x-small" size="12" smallDeviceSize="12" mediumDeviceSize="12" largeDeviceSize="12">
+                <div class="slds-media__body">
+                    <h2>
+                        <span class="ss_header-lg2"><lightning:input type="radio" label="PayPal"/></span> 
+                        <p class="slds-text-body_small slds-m-horizontal_large">You will be redirected to PayPal website to compkete your puechase securely.</p>
+                    </h2>
+                </div>
+           </lightning:layoutitem>
+                
+                
+            </lightning:layout>
+        </lightning:card>
+    </div>
+    
+</aura:component>

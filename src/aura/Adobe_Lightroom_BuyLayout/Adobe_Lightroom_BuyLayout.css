@@ -1,0 +1,12 @@
+.THIS .button{
+    color:white;
+    padding:5px 9px 5px 9px;
+    background:#1473e6;
+    border-color:#1473e6;
+    border-radius: 12px;
+    text-align:center;
+    margin-left:40px;
+}
+.THIS .slds-icon-text-default{
+    Fill:white;
+}

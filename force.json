@@ -1,0 +1,18 @@
+{
+    "autoRefresh": false,
+    "browser": "Google Chrome Canary",
+    "pollTimeout": 1200,
+    "debugOnly": true,
+    "debugFilter": "USER_DEBUG|FATAL_ERROR",
+    "apiVersion": "43.0",
+    "deployOptions": {
+        "checkOnly": false,
+        "testLevel": "runLocalTests",
+        "verbose": false,
+        "ignoreWarnings": true
+    },
+    "username": "sgali@docmation.com.ccrazedev",
+    "password": "Gavaskar6Y2UUmyGeXYwm0S3tfObNfqxvh",
+    "url": "https://login.salesforce.com",
+    "autoCompile": true
+}

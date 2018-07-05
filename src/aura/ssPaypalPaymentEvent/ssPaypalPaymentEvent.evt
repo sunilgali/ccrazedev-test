@@ -1,0 +1,8 @@
+<aura:event type="APPLICATION" description="Event template" >
+    <aura:attribute name="userCart" type="Object"/>
+    <aura:attribute type="String" name="payerId"/>
+    <aura:attribute type="String" name="paymentId"/>
+    <aura:attribute type="String" name="token"/>
+    <aura:attribute name = "account" type="SSAccountModel"/>
+    <aura:attribute name="fromPaypal" type="Boolean" default="true"/>
+</aura:event>

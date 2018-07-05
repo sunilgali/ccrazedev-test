@@ -1,0 +1,22 @@
+<aura:component implements="forceCommunity:layout" description="Custom Content Layout" access="global">
+    <aura:attribute name="component1" type="Aura.Component[]"/>
+    <aura:attribute name="component2" type="Aura.Component[]"/>
+    <aura:attribute name="component3" type="Aura.Component[]"/>
+    <br/> <br/> <br/>
+    <lightning:layout multipleRows="true" verticalAlign="start" horizontalAlign="stretch" >
+        
+        <lightning:layoutItem padding="horizontal-small" flexibility="auto" size="12" smallDeviceSize="12" mediumDeviceSize="2" largeDeviceSize="2" >   
+            {!v.component1}
+        </lightning:layoutItem>
+        
+        <lightning:layoutItem padding="horizontal-small" flexibility="auto" size="12" smallDeviceSize="12" mediumDeviceSize="7" largeDeviceSize="7" >   
+            {!v.component2}  
+        </lightning:layoutItem>
+        
+        <lightning:layoutItem padding="horizontal-small" flexibility="auto" size="12" smallDeviceSize="12" mediumDeviceSize="3" largeDeviceSize="3" >
+            {!v.component3}
+        </lightning:layoutItem>
+        
+    </lightning:layout>
+    
+</aura:component>

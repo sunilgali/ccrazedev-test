@@ -1,0 +1,33 @@
+.THIS {
+}
+
+.THIS .header-lg{
+    font-size: t(SSLDTHeaderLGFontSize);
+    color : t(SSLDTHeaderLGColor);
+}
+
+.THIS .header-md{
+    font-size: t(SSLDTHeaderMDFontSize);
+    color : t(SSLDTHeaderMDColor);
+}
+
+.THIS .header-sm{
+    font-size: t(SSLDTHeaderSMFontSize);
+    color : t(SSLDTHeaderSMColor);
+}
+
+.THIS .ss-upgrade{
+    background-color: #E27C00 ;
+    border-color: #E27C00 ;
+    color: white;
+}
+
+.THIS .data-container-rt2{
+    background: #fff; 
+    position: absolute;
+    left: 200px;
+    top:0;
+    right:0;
+    bottom:0;
+    overflow: auto
+}

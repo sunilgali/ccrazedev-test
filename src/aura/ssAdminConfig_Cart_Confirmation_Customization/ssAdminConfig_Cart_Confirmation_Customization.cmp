@@ -1,0 +1,84 @@
+<aura:component implements="c:ISSAdminConfig">
+    
+    <ltng:require styles="{!$Resource.ssAdminConfig_Styles  + '/styles/custom2.css'}" 
+                  afterScriptsLoaded="{!c.onScriptsLoaded}" />
+    
+    
+    <aura:handler event="c:ssAdminConfig_StorefrontValEvent" action="{!c.onStorefrontSelected}"/>
+    <!-- Body content Starts.. -->      
+    <div class='light-grey-bg' style='height:500px'>
+        <!-- Block container starts..-->
+        <div class="admin-ctr" >
+            
+            <!-- Right block starts -->
+            <div class="admin-rt">
+                
+                <div class="slds-p-vertical_large">
+                    <h2 style="margin-top:-45px;" id="entity-header" class="header-xl slds-p-around_medium">
+                        Cart Summary Component Customization
+                    </h2>
+                    <div class="slds-form slds-form_horizontal slds-p-around_medium">
+                        <div class="slds-form-element">
+                            <label class="slds-form-element__label" for="select-01">
+                                Display Confirmation Page
+                            </label>
+                            <div class="slds-form-element__control slds-p-horizontal_large slds-m-bottom_medium">
+                                <fieldset class="slds-form-element">
+                                    <div class="slds-form-element__control">
+                                        <span class="slds-radio" style="width:100px;float:left">
+                                            <input type="radio" id="radio-13" name="options" value="on" />
+                                            <label class="slds-radio__label" for="radio-13">
+                                                <span class="slds-radio_faux"></span>
+                                                <span class="slds-form-element__label"><b>Yes</b></span>
+                                            </label>
+                                        </span>
+                                        <span class="slds-radio" style="width:100px; float:left">
+                                            <input type="radio" id="radio-14" name="options" value="on" />
+                                            <label class="slds-radio__label" for="radio-14">
+                                                <span class="slds-radio_faux"></span>
+                                                <span class="slds-form-element__label"><b>No</b></span>
+                                            </label>
+                                        </span>
+                                    </div>
+                                </fieldset>
+                                
+                            </div>
+                        </div>
+                        
+                        <div class="slds-form-element">
+                            <label class="slds-form-element__label" for="text-input-id-1">
+                                Dispay Login Page Button
+                            </label>
+                            <div class="slds-form-element__control slds-p-horizontal_large slds-m-bottom_medium">
+                                <fieldset class="slds-form-element">
+                                    <div class="slds-form-element__control">
+                                        <span class="slds-radio" style="width:100px;float:left">
+                                            <input type="radio" id="radio-13" name="options" value="on" />
+                                            <label class="slds-radio__label" for="radio-13">
+                                                <span class="slds-radio_faux"></span>
+                                                <span class="slds-form-element__label"><b>Yes</b></span>
+                                            </label>
+                                        </span>
+                                        <span class="slds-radio" style="width:100px; float:left">
+                                            <input type="radio" id="radio-14" name="options" value="on" />
+                                            <label class="slds-radio__label" for="radio-14">
+                                                <span class="slds-radio_faux"></span>
+                                                <span class="slds-form-element__label"><b>No</b></span>
+                                            </label>
+                                        </span>
+                                    </div>
+                                </fieldset>
+                            </div>
+                        </div>
+                        
+                    </div>
+                    
+                     <div class="slds-float_right" style="padding-top:10px">
+                        <lightning:button class="ssBillingConfigBtn"  label="Save" />
+                        </div>
+                </div>
+            </div>
+        </div>
+    </div>     
+    
+</aura:component>

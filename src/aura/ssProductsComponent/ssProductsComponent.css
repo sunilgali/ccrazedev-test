@@ -1,0 +1,46 @@
+.THIS {
+}
+
+.THIS .header-sm{
+    font-size: t(SSLDTHeaderSMFontSize);
+    color : t(SSLDTHeaderSMColor);
+}
+
+.THIS .header-xs{
+    font-size: t(SSLDTHeaderXSFontSize);
+    color : t(SSLDTHeaderXSColor);
+}
+
+.THIS .ss-form-element__label { 
+    color : t(SSLDTFormElementLabelColor);
+}
+
+.THIS .ssPaddingLeft{
+    padding-left:8px;
+}
+
+.THIS .ssWidth{
+    width: 150px;
+}
+
+.THIS .header-sm{
+    font-size: t(SSLDTHeaderSMFontSize);
+    color : t(SSLDTHeaderMDColor);
+    font-weight:t(SSLDTHeaderLG2FontWeight);
+}
+
+.THIS .ssWidth-1{
+    width: 100px;
+}
+
+.THIS .select-fixed-width > .slds-form-element__control > .slds-select_container{
+    width: 100px;
+}
+
+.THIS .select-hide-label > .slds-form-element__label{
+    display: none;
+}
+
+.THIS .btn-selected{
+    background-color: rgb(233, 234, 236);
+}

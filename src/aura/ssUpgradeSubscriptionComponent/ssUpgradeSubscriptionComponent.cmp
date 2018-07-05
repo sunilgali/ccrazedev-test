@@ -1,0 +1,334 @@
+<aura:component controller="SSUpgradeSubscriptionController" extends="c:ssBaseComponent" 
+                implements="c:ssAppInterface,forceCommunity:availableForAllPageTypes" access="global" >
+    
+    <aura:attribute name="subscription" type="Object" />
+    <aura:attribute name="cart" type="Object" />
+    <aura:attribute name="selectedTerm" type="String"/>
+    
+    
+    <aura:attribute name="selectedProduct" type="Object"/>
+    <aura:attribute name="tieredPricing" type = "Boolean" default="true"/>
+    <aura:attribute name="isSpin" type = "Boolean" default="false"/>
+    
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    
+    <aura:registerEvent name="ssSubscriptionEvent" type="c:ssSubscriptionEvent" />
+    
+    <aura:if isTrue="{!v.isSpin}" >
+        <lightning:spinner variant="brand" size="small" alternativeText="Please wait.." />
+     </aura:if>
+
+        
+        <div class=' slds-p-top_large '>
+            
+            <div class='slds-p-horizontal_large'>
+                <h1 class='header-lg'>You current subscription(s):</h1>
+            </div>
+            <div class="slds-p-left_large slds-p-top_large slds-p-bottom_large">
+                <div class="slds-card">
+                <table class="slds-table slds-table_bordered slds-table_cell-buffer custom_table1">
+                    <thead>
+                        <tr class="slds-text-title_caps">
+                            <td scope="col" style="border:0;">
+                                <div class="slds-truncate" title="Opportunity Name">PRODUCTS</div>
+                            </td>
+                            <td scope="col" style="border:0;">
+                                <div class="slds-truncate" title="Close Date">END DATE</div>
+                            </td>
+                            <td scope="col" style="border:0;">
+                                <div class="slds-truncate" title="Stage">PRICE/{!v.subscription.sortedSubscription.subscriptionTermType}</div>
+                            </td> 
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th scope="row" data-label="Opportunity Name">
+                                <div class="slds-truncate" title="Cloudhub">
+                                    <span class="header-lg">
+                                        {!v.subscription.sortedSubscription.productName}</span>
+                                    <p class='header-sm'>( Quantity:{!v.subscription.sortedSubscription.productQuantity}, Term: {!v.sortedSubscription.subscriptionTermType} )</p>
+                                    
+                                </div>
+                            </th>
+                            <td data-label="Close Date">
+                                <div class="slds-truncate" title="4/14/2015">
+                                    <lightning:formattedDateTime value="{!v.sortedSubscription.subscriptionEndDate}" />
+                                </div>
+                            </td>
+                            <td data-label="Prospecting">
+                                <div class="slds-truncate" title="Prospecting">
+                                    <aura:if isTrue="{!empty(v.subscription.sortedSubscription.childComponents)}">
+                                    ${!v.subscription.sortedSubscription.productPrice}
+                                    </aura:if>
+                                </div>
+                            </td>
+                        </tr>
+                        
+                        <aura:iteration items="{!v.subscription.sortedSubscription.childComponents}" var="cItem"> 
+                            <tr>
+                                <th scope="row" data-label="Opportunity Name" style='padding-left:60px;'>
+                                    <div class="slds-truncate" title="Cloudhub"><span class='slds-badge'></span> 
+                                        <span class="header-md">{!cItem.productName}</span>
+                                        <p class='header-sm' style='margin-left:65px'>( Term: {!cItem.subscriptionTermType} )</p>
+                                    </div>
+                                </th>
+                                <td>
+                                    <div class="slds-truncate" title="">
+                                        <lightning:formattedDateTime value="{!cItem.subscriptionEndDate}" />
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="slds-truncate" title="">${!cItem.productPrice}</div>
+                                </td>
+                            </tr>
+                        </aura:iteration>
+                        
+                        <aura:iteration items="{!v.subscription.sortedSubscription.addOns}" var="sItem"> 
+                            <tr>
+                                <th scope="row" data-label="Opportunity Name" style='padding-left:60px;'>
+                                    <div class="slds-truncate" title="Cloudhub"><span class='slds-badge'>Add-On</span> 
+                                        <span class="header-md">{!sItem.productName}</span>
+                                        <p class='header-sm' style='margin-left:65px'>( Term: {!sItem.subscriptionTermType} )</p>
+                                    </div>
+                                </th>
+                                <td>
+                                    <div class="slds-truncate" title="">
+                                        <lightning:formattedDateTime value="{!sItem.subscriptionEndDate}" />
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="slds-truncate" title="">${!sItem.productPrice}</div>
+                                </td>
+                            </tr>
+                        </aura:iteration>
+                    </tbody>
+                </table>
+                </div>
+                <aura:if isTrue = "{!v.subscription.sortedSubscription.upsellProducts.length > 0}">
+                <div class='slds-p-top_large slds-p-bottom_large'>
+                    <h1 class='header-lg'><b>Select the product that you want to upgrade to:</b></h1>
+                </div>
+
+                <div>
+                    <aura:iteration items="{!v.subscription.sortedSubscription.upsellProducts}" var="product">
+                    <!-- game starts -->
+                    <article class="slds-card">
+                        <div class="slds-card__header slds-grid">
+                            <header class="slds-media slds-media_center slds-has-flexi-truncate">
+                                <lightning:input type="radio" aura:id="upsellProductOption" value="{!product.productSKU}" 
+                                                 name="{!product.subscriptionItemId}" checked="true"/>
+                                <div class="slds-media__figure">
+                                    <img src="{!product.productThumbImage}"  style="width:40px"/>
+                                </div>
+                                <div class="slds-media__body">
+                                    <h2>
+                                        <span class="header-lg2">{!product.productName}</span> 
+                                        <p class='slds-text-body_small'><aura:unescapedHtml value="{!product.productShortDescription}"/></p>
+                                        
+                                    </h2>
+                                </div>
+                            </header>
+                        </div> 
+                        <div class="slds-card__body slds-card__body_inner">     
+                            <div class="demo-only demo-only--sizing slds-grid slds-wrap">
+                                <div class="slds-size_2-of-4">
+                                    <div class=" slds-box_x-small slds-text-align_left">
+                                        {!$Label.c.SS_PRODUCT_COMPONENTS}
+                                        <hr class='hrstyle1'/>
+                                        <div class="slds-col">
+                                            <aura:if isTrue="{!product.isTierPriced}" >
+                                            <div class="slds-form-element">
+                                                <div class="slds-form-element__control slds-float_left">
+                                                    <lightning:select name="{!product.productSKU}" label="Tier" class="select-fixed-width "
+                                                                  aura:id="tierSelect" >
+                                                    <option text="Select Tier" value = ""/>
+                                                    <aura:iteration items="{!product.price[0].tierPriceList}" var="item">
+                                                        <option text="{! item.tierDescription }" value="{!item.tierDescription}" />
+                                                    </aura:iteration>
+                                                </lightning:select>
+                                                </div>
+                                                <!--selected="{!product.price[0].tierPriceList[0].tierDescription == item.tierDescription}"-->
+                                            </div> 
+                                            <div class="slds-form-element slds-float_left" style='padding-left:8px;'>
+                                                <lightning:input class="ssWidth" type="number" placeholder="Quantity"  label="Quantity" name="{!product.productSKU}" 
+                                                 aura:id="tierQuantity" onblur="{!c.tierQuantityChanged}"/>
+                                              </div>
+                                            </aura:if>
+                                            <aura:if isTrue="{! not(product.isTierPriced)}" >        
+                                                <div >
+                                                    <lightning:input class="ssWidth" type="number" placeholder="Quantity"  name="{!product.productSKU}" value="1" 
+                                                                     aura:id="simpQuantity" label="Quantity" />
+                                                </div>
+                                            </aura:if>  
+                                           </div>
+                                    </div>
+                                </div>
+                                <div class="slds-size_2-of-4">
+                                    <div class="  slds-box_x-small slds-text-align_left xslds-m-around_x-small">
+                                        SELECT TERM
+                                        <hr class='hrstyle1'/>
+                                        <div >
+                                            <label class="ss-form-element__label">Term</label>
+                                            <div>
+                                            <aura:iteration items="{!product.price}" var="item">
+                                                <aura:if isTrue="{!item.subscriptionInstallmentUOM.length > 0}" > 
+                                                <lightning:button class="ssWidth slds-m-right_small " name="{!product.productSKU}"
+                                                label="{!item.subscriptionInstallmentUOM +' $'+item.listPrice }"
+                                                       
+                                                value="{!item.subscriptionInstallmentUOM}"  aura:id="productTermSelect" onclick="{!c.termChanged}"  /> 
+                                                </aura:if>
+                                            </aura:iteration>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                            </div>
+                            
+                        </div>
+                        <aura:if isTrue="{!product.addOnProducts.length > 0}">
+                        <!-- 2nd -->
+                        <div class="slds-card__body slds-card__body_inner">     
+                            <div class="demo-only demo-only--sizing slds-grid slds-wrap">
+                                <div class="slds-size_2-of-4">
+                                    <div class=" slds-box_x-small slds-text-align_left">
+                                        {!$Label.c.SS_CHOOSE_OPTIONAL_ADDON_PRODUCTS}
+                                        <hr class='hrstyle1'/>
+                                        <div class="slds-col">
+                                            <aura:iteration items = "{!product.addOnProducts}" var="addon">
+                                            <div class="slds-form-element">
+                                                <div class="slds-form-element__control slds-float_left">
+                                                    
+                                                    
+                                                    <dl class="slds-list_inline">								
+                                                
+                                                        
+                    								<lightning:input class="header-sm" type="checkbox"  name="{!addon.productSKU}"
+                                         				aura:id="addOnCheckBox" value="{!addon.productSKU}"
+                                         				/>
+                                                        <img src="{!addon.productThumbImage}" style="width:40px" />
+                                                        
+                                                &nbsp; {!addon.productName}
+                                                    
+                                                </dl>
+                                                    
+                                                </div>
+                                                
+                                                
+                                                
+                                            </div> 
+                                            <div class="slds-form-element slds-float_left" style='padding-left:8px;'>
+                                                <lightning:input class="ssWidth" type="number" placeholder="Quantity"  label="Quantity" name="{!addon.productSKU}"
+                                                 aura:id="addOnQuantity" />
+                                              </div>
+                                            </aura:iteration>
+                                              
+                                           </div>
+                                    </div>
+                                </div>
+                                <div class="slds-size_2-of-4">
+                                    <div class="  slds-box_x-small slds-text-align_left xslds-m-around_x-small">
+                                        SELECT TERM
+                                        <hr class='hrstyle1'/>
+                                        <div >
+                                            <aura:iteration items = "{!product.addOnProducts}" var="addon">
+                                            <label class="ss-form-element__label">Term</label>
+                                            <div>
+                                            <aura:iteration items="{!addon.price}" var="item">
+                                                <aura:if isTrue="{!item.subscriptionInstallmentUOM.length > 0}" > 
+                                                <lightning:button class="ssWidth slds-m-right_small " 
+                                                label="{!item.subscriptionInstallmentUOM +' $'+item.listPrice  }" name="{!addon.productSKU}" 
+                                                value="{!item.subscriptionInstallmentUOM}"  aura:id="productTermSelect" onclick="{!c.addonTermChanged}"  /> 
+                                                </aura:if>
+                                            </aura:iteration>
+                                            </div>
+                                           </aura:iteration>     
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                            </div>
+                            
+                            
+                        </div>
+                        </aura:if>
+                        <!-- thrid -->
+                        
+                        <aura:if isTrue="{!product.maintainanceProducts.length > 0}">
+                        <!-- 2nd -->
+                        <div class="slds-card__body slds-card__body_inner">     
+                            <div class="demo-only demo-only--sizing slds-grid slds-wrap">
+                                <div class="slds-size_2-of-4">
+                                    <div class=" slds-box_x-small slds-text-align_left">
+                                        {!$Label.c.SS_CHOOSE_MAINTENANCE_PERIOD}
+                                        <hr class='hrstyle1'/>
+                                        <div class="slds-col">
+                                            <aura:iteration items = "{!product.maintainanceProducts}" var="addon">
+                                            <div class="slds-form-element">
+                                                <div class="slds-form-element__control slds-float_left">
+                                                    
+                                                    
+                                                    
+                                                    <dl class="slds-list_inline">								
+                                                
+                                                        
+                    								<lightning:input class="header-sm" type="checkbox"  name="{!addon.productSKU}"
+                                         				aura:id="addOnCheckBox" value="{!addon.productSKU}"
+                                         				/>
+                                                        <img src="{!addon.productThumbImage}" style="width:40px;height:40px" />
+                                                        
+                                                &nbsp; {!addon.productName}
+                                                    
+                                                </dl>
+                                                    
+                                                </div>
+                                            </div> 
+                                            <div class="slds-form-element slds-float_left" style='padding-left:8px;'>
+                                                
+                                              </div>
+                                            </aura:iteration>
+                                              
+                                           </div>
+                                    </div>
+                                </div>
+                                <div class="slds-size_2-of-4">
+                                    <div class="  slds-box_x-small slds-text-align_left xslds-m-around_x-small">
+                                        SELECT TERM
+                                        <hr class='hrstyle1'/>
+                                        <div >
+                                            <aura:iteration items = "{!product.maintainanceProducts}" var="addon">
+                                            <label class="ss-form-element__label">Term</label>
+                                            <div>
+                                            <aura:iteration items="{!addon.price}" var="item">
+                                                <aura:if isTrue="{!item.subscriptionInstallmentUOM.length > 0}" > 
+                                                <lightning:button class="ssWidth slds-m-right_small " name="{!addon.productSKU}"
+                                                label="{!item.subscriptionInstallmentUOM +' $'+item.listPrice  }"
+                                                value="{!item.subscriptionInstallmentUOM}"  aura:id="productTermSelect" onclick="{!c.addonTermChanged}"  /> 
+                                                </aura:if>
+                                            </aura:iteration>
+                                            </div>
+                                           </aura:iteration>     
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                            </div>
+                        </div>
+                        </aura:if>
+                        
+                        <hr class='hrstyle1'/>
+                            <div class="slds-p-horizontal_medium slds-text-align_right">Variable monthly fee:    <b>${!v.cart.subTotalAmount}/{!v.selectedTerm}</b></div>
+                    </article>
+                   </aura:iteration> 
+                    
+                     
+                    <!-- end game -->
+                </div>
+            </aura:if>
+          </div>
+            
+
+        
+    </div>
+    
+</aura:component>

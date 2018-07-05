@@ -1,0 +1,7 @@
+<aura:component access="GLOBAL" extensible="true" abstract="true" controller="SSBaseController">
+    
+    <aura:registerEvent name="showSpinner" type="c:ssShowSpinnerEvent" />
+    <aura:registerEvent name="hideSpinner" type="c:ssHideSpinnerEvent" />
+    
+	{! v.body }
+</aura:component>

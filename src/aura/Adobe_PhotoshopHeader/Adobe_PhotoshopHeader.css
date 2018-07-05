@@ -1,0 +1,30 @@
+.THIS body {
+  margin: 0;
+  font-family: Arial;
+}
+
+.THIS .top-container {
+  background-color: #f1f1f1;
+  padding: 30px;
+  text-align: center;
+}
+
+.THIS .header {
+  padding: 10px 16px;
+  background: #555;
+  color: #f1f1f1;
+}
+
+.THIS .content {
+  padding: 16px;
+}
+
+.THIS .sticky {
+  position: fixed;
+  top: 0;
+  width: 100%;
+}
+
+.THIS .sticky + .content {
+  padding-top: 102px;
+}

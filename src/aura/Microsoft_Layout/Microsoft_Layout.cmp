@@ -1,0 +1,144 @@
+<aura:component implements="forceCommunity:layout" description="Custom Content Layout" access="global" >
+    
+    <aura:attribute name="component1" type="Aura.Component[]"/>
+    <aura:attribute name="component2" type="Aura.Component[]"/>
+    <aura:attribute name="component3" type="Aura.Component[]"/>
+    <aura:attribute name="component4" type="Aura.Component[]"/>
+    <aura:attribute name="component5" type="Aura.Component[]"/>
+    <aura:attribute name="component6" type="Aura.Component[]"/>
+    <aura:attribute name="component7" type="Aura.Component[]"/>
+    <aura:attribute name="component8" type="Aura.Component[]"/>
+    <aura:attribute name="component9" type="Aura.Component[]"/>
+    <aura:attribute name="component10" type="Aura.Component[]"/>
+    <aura:attribute name="component11" type="Aura.Component[]"/>
+    <aura:attribute name="component12" type="Aura.Component[]"/>
+    
+    <lightning:layout multipleRows="true" verticalAlign="start" horizontalAlign="stretch" >
+        <lightning:layoutItem padding="horizontal-small" flexibility="auto" size="12" smallDeviceSize="12" mediumDeviceSize="12" largeDeviceSize="12" >
+            {!v.component1}
+        </lightning:layoutItem>
+    </lightning:layout>
+    
+    
+     <lightning:layout multipleRows="true" verticalAlign="start" horizontalAlign="stretch" >
+        <lightning:layoutItem padding="horizontal-small" flexibility="auto" size="12" smallDeviceSize="12" mediumDeviceSize="12" largeDeviceSize="12" >
+           <div class="HomeComponent2">
+            {!v.component2}
+               </div>
+        </lightning:layoutItem>
+    </lightning:layout>
+    
+    <div style="padding-top:20px">
+      <lightning:layout multipleRows="true" verticalAlign="start" horizontalAlign="stretch" >
+          
+        <lightning:layoutItem padding="horizontal-small" flexibility="auto" size="12" smallDeviceSize="12" mediumDeviceSize="6" largeDeviceSize="3" >
+            {!v.component3}
+        </lightning:layoutItem>
+    
+        <lightning:layoutItem padding="horizontal-small" flexibility="auto" size="12" smallDeviceSize="12" mediumDeviceSize="6" largeDeviceSize="3" >
+            {!v.component4}
+        </lightning:layoutItem>
+
+        <lightning:layoutItem padding="horizontal-small" flexibility="auto" size="12" smallDeviceSize="12" mediumDeviceSize="6" largeDeviceSize="3" >
+            {!v.component5}
+        </lightning:layoutItem>
+
+        <lightning:layoutItem padding="horizontal-small" flexibility="auto" size="12" smallDeviceSize="12" mediumDeviceSize="6" largeDeviceSize="3" >
+            {!v.component6}
+        </lightning:layoutItem>
+          
+    </lightning:layout>
+    </div>
+    
+     <div style="padding-top:20px">
+      <lightning:layout multipleRows="true" verticalAlign="start" horizontalAlign="stretch" >
+        <lightning:layoutItem padding="horizontal-small" flexibility="auto" size="12" smallDeviceSize="12" mediumDeviceSize="12" largeDeviceSize="12" >
+              <div class="HomeComponent7">
+            {!v.component7}
+            </div>
+        </lightning:layoutItem>
+    </lightning:layout>
+    </div> 
+    
+      <div style="padding-top:20px">
+      <lightning:layout multipleRows="true" verticalAlign="start" horizontalAlign="stretch" >
+        <lightning:layoutItem padding="horizontal-small" flexibility="auto" size="12" smallDeviceSize="12" mediumDeviceSize="12" largeDeviceSize="12" >
+            {!v.component8}
+        </lightning:layoutItem>
+    </lightning:layout>
+    </div>
+    
+     <div style="padding-top:20px">
+      <lightning:layout multipleRows="true" verticalAlign="start" horizontalAlign="stretch" >
+        <lightning:layoutItem padding="horizontal-small" flexibility="auto" size="12" smallDeviceSize="12" mediumDeviceSize="12" largeDeviceSize="12" >
+           <div class="HomeComponent9">
+            {!v.component9}
+            </div>
+        </lightning:layoutItem>
+    </lightning:layout>
+    </div>
+    
+    <!--
+    <lightning:layout multipleRows="true" verticalAlign="start" horizontalAlign="stretch" >
+        <lightning:layoutItem padding="horizontal-small" flexibility="auto" size="12" smallDeviceSize="12" mediumDeviceSize="6" largeDeviceSize="6" >
+            {!v.component2}
+        </lightning:layoutItem>
+        <lightning:layoutItem padding="horizontal-small" flexibility="auto" size="12" smallDeviceSize="12" mediumDeviceSize="6" largeDeviceSize="6" >
+            {!v.component3}
+        </lightning:layoutItem>
+    </lightning:layout>
+    
+    
+    <lightning:layout multipleRows="true" verticalAlign="start" horizontalAlign="stretch" >
+        <lightning:layoutItem padding="horizontal-small" flexibility="auto" size="12" smallDeviceSize="12" mediumDeviceSize="12" largeDeviceSize="12" >
+            {!v.component4}
+        </lightning:layoutItem>
+    </lightning:layout> 
+    
+    
+    <lightning:layout multipleRows="true" verticalAlign="start" horizontalAlign="stretch" >
+        <lightning:layoutItem padding="horizontal-small" flexibility="auto" size="12" smallDeviceSize="12" mediumDeviceSize="6" largeDeviceSize="6" >
+            {!v.component5}
+        </lightning:layoutItem>
+        <lightning:layoutItem padding="horizontal-small" flexibility="auto" size="12" smallDeviceSize="12" mediumDeviceSize="6" largeDeviceSize="6" >
+            {!v.component6}
+        </lightning:layoutItem>
+    </lightning:layout>
+    
+    <lightning:layout multipleRows="true" verticalAlign="start" horizontalAlign="stretch" >
+        <lightning:layoutItem padding="horizontal-small" flexibility="auto" size="12" smallDeviceSize="12" mediumDeviceSize="12" largeDeviceSize="12" >
+            {!v.component7}
+        </lightning:layoutItem>
+    </lightning:layout> 
+    
+    <lightning:layout multipleRows="true" verticalAlign="start" horizontalAlign="stretch" >
+        <lightning:layoutItem padding="horizontal-small" flexibility="auto" size="12" smallDeviceSize="12" mediumDeviceSize="12" largeDeviceSize="12" >
+            {!v.component8}
+        </lightning:layoutItem>
+    </lightning:layout> 
+    
+    <lightning:layout multipleRows="true" verticalAlign="start" horizontalAlign="stretch" >
+        <lightning:layoutItem padding="horizontal-small" flexibility="auto" size="12" smallDeviceSize="12" mediumDeviceSize="12" largeDeviceSize="12" >
+            {!v.component9}
+        </lightning:layoutItem>
+    </lightning:layout> 
+    
+    <lightning:layout multipleRows="true" verticalAlign="start" horizontalAlign="stretch" >
+        <lightning:layoutItem padding="horizontal-small" flexibility="auto" size="12" smallDeviceSize="12" mediumDeviceSize="12" largeDeviceSize="12" >
+            {!v.component10}
+        </lightning:layoutItem>
+    </lightning:layout> 
+    
+    <lightning:layout multipleRows="true" verticalAlign="start" horizontalAlign="stretch" >
+        <lightning:layoutItem padding="horizontal-small" flexibility="auto" size="12" smallDeviceSize="12" mediumDeviceSize="12" largeDeviceSize="12" >
+            {!v.component11}
+        </lightning:layoutItem>
+    </lightning:layout> 
+    
+    <lightning:layout multipleRows="true" verticalAlign="start" horizontalAlign="stretch" >
+        <lightning:layoutItem padding="horizontal-small" flexibility="auto" size="12" smallDeviceSize="12" mediumDeviceSize="12" largeDeviceSize="12" >
+            {!v.component12}
+        </lightning:layoutItem>
+    </lightning:layout> 
+    -->
+</aura:component>

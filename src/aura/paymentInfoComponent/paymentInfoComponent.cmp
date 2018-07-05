@@ -1,0 +1,137 @@
+<aura:component controller="SSPaymentController">
+    <ltng:require scripts="{!join(',', 
+                           $Resource.JQuery331,
+                           $Resource.SSUtil+ '/ssUtil.js')}" afterScriptsLoaded="{!c.onScriptsLoaded}" />
+    
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+    
+    <aura:attribute name="payment" type="SSPaymentDetailsModel" default="{'object': 'SSPaymentDetailsModel'}"/>
+    <aura:attribute name="vfHost" type="String"/>
+    <aura:attribute name="recipientPage" type="String"/>
+    <aura:attribute name="lgHost" type="String"/>
+    <aura:attribute name="formAction" type="String"/>
+    <aura:attribute name="secretKey" type="String"/>
+    <aura:attribute name="profileId" type="String"/>
+    <aura:attribute name="accessKey" type="String"/>
+    <aura:attribute name="transactionType" type="String"/>
+	<aura:attribute name="isSpin" default="flase" type="Boolean" />
+    <aura:attribute name="paymentId" type="String"/>
+    
+    <aura:attribute name="monthOptions" type="String[]" />
+    <aura:attribute name="yearOptions" type="String[]" />
+    <aura:attribute name="countryOptions" type="String[]" />
+    <aura:attribute name="stateOptions" type="String[]" />
+
+    <aura:registerEvent name="ssSCPaymentEvent" type="c:ssSCPaymentEvent" />
+    <aura:handler event="c:ssSCPaymentEvent" action="{!c.handlePayment}"/>
+    
+    <div class="slds-p-around_large"> 
+        <aura:if isTrue="{!v.isSpin}">
+            <lightning:spinner variant="brand" size="small" />
+        </aura:if>
+        <article class="slds-card">
+            <div  class="slds-card__body slds-card__body_inner" style="width: 640px;">
+                <div class="slds-form slds-form_compound">
+                    <fieldset class="slds-form-element">
+                        <legend class="slds-form-element__label slds-text-title_caps slds-p-bottom_x-small">Credit Card Info</legend>
+                        
+                        <div class="slds-form-element__row">
+                                <div class="slds-form-element slds-size_2-of-4">
+                                    <lightning:input type="text" label="Name on the Card" aura:id="ccInfo" 
+                                          value="{!v.payment.cardHolderName }" required="true"/>
+                                </div>
+                                
+                         </div>
+                        <div class="slds-form-element__row">
+                                <div class="slds-form-element slds-size_2-of-4">
+                                    <lightning:input type="text" label="Card Number" aura:id="ccInfo" 
+                                          value="{!v.payment.cardNumber}" pattern="[0-9]{}" required="true"/>
+                                </div>
+                            	<div class="slds-form-element slds-size_1-of-4">
+                                    <lightning:input type="text" label="Card Type" aura:id="ccInfo" 
+                                          value="{!v.payment.cardType }" required="true"/>
+                                </div>
+                         </div>
+                        <div class="slds-form-element__row">
+                                <div class="slds-form-element slds-size_1-of-4">
+                                    <!--<lightning:input type="text" label="Expiration Month" aura:id="ccInfo" 
+                                         value="{!v.payment.expirationMonth}" pattern="[0-9]{2}" required="true"/>
+                                    -->
+									<lightning:select name="expMonth" label="Expiration Month" aura:id="expMonth" required="true" value="{!v.payment.expirationMonth}">
+                                        <option text="" value="" />
+                                        <aura:iteration items="{!v.monthOptions}" var="item">
+                                            <option text="{!item.label}" value="{!item.value}" selected="{!item.selected}"/>
+                                         </aura:iteration>
+                                    </lightning:select>
+                                </div>
+                                <div class="slds-form-element slds-size_1-of-4">
+                                    <!--lightning:input type="text" label="Expiration Year" aura:id="ccInfo" 
+                                         value="{!v.payment.expirationYear}" pattern="[0-9]{}" required="true"/-->
+                                    <lightning:select name="expYear" label="Expiration Year" aura:id="expYear" required="true" value="{!v.payment.expirationYear}">
+                                        <option text="" value="" />
+                                        <aura:iteration items="{!v.yearOptions}" var="item">
+                                            <option text="{!item.label}" value="{!item.value}" selected="{!item.selected}"/>
+                                         </aura:iteration>
+                                    </lightning:select>
+                                </div>
+                                <div class="slds-form-element slds-size_1-of-4">
+                                    <lightning:input type="text" label="Security Code" aura:id="ccInfo"
+                                     	 value="{!v.payment.securityCode}" pattern="[0-9]{}" required="true"/>
+                                </div>
+                            </div>
+                    </fieldset>
+                    <fieldset class="slds-form-element">
+                        <legend class="slds-form-element__label slds-text-title_caps">Address</legend>
+                        <div class="slds-form-element__group">
+                            <div class="slds-form-element__row">
+                                <div class="slds-form-element slds-size_1-of-1">
+                                    <lightning:input type="text" label="Street" aura:id="ccInfo" 
+                                          value="{!v.payment.street}" required="true"/>
+                                </div>
+                            </div>
+                            <div class="slds-form-element__row">
+                                <div class="slds-form-element slds-size_1-of-4">
+                                    <lightning:select name="ccCountry" label="Country" aura:id="ccCountry" onchange="{!c.onCountryChange}" 
+                                                      required="true" value="{!v.payment.country}">
+                                        <option text="" value="" />
+                                        <aura:iteration items="{!v.countryOptions}" var="item">
+                                            <option text="{!item.label}" value="{!item.value}" selected="{!item.selected}"/>
+                                         </aura:iteration>
+                                    </lightning:select>{!v.countryOptions}
+                                </div>
+                                <div class="slds-form-element slds-size_1-of-4">
+                                    <lightning:select name="ccState" label="State" aura:id="ccState" required="true" value="{!v.payment.state}">
+                                        <option text="" value="" />
+                                        <aura:iteration items="{!v.stateOptions}" var="item">
+                                            <option text="{!item.label}" value="{!item.value}" selected="{!item.selected}"/>
+                                         </aura:iteration>
+                                    </lightning:select>
+                                </div>
+                            </div>
+                            <div class="slds-form-element__row">
+                                <div class="slds-form-element slds-size_1-of-4">
+                                    <lightning:input type="text" label="City" aura:id="ccInfo" 
+                                          value="{!v.payment.city}" required="true"/>
+                                </div>
+                                <div class="slds-form-element slds-size_1-of-4">
+                                    <lightning:input type="text" label="Zip Code" aura:id="ccInfo" 
+                                          value="{!v.payment.postalCode}" required="true"/>
+                                </div>
+                                <div class="slds-form-element slds-size_2-of-4">
+                                    {!v.paymentId}
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                </div>
+                <lightning:button label="Validate Payment" class="slds-m-top--medium" variant="brand"
+                          onclick="{!c.checkPayment}"/>
+            </div>
+        </article>
+    </div>
+    <!--style="width:0; height:0; border:0; border:none"-->
+    <iframe aura:id="vfFrame" id="vfFrame" src="{!v.vfHost + v.recipientPage}" style="width:0; height:0; border:0; border:none">
+    	
+    </iframe>
+
+</aura:component>

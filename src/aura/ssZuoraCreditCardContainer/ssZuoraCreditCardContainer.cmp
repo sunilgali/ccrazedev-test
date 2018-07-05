@@ -1,0 +1,32 @@
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes,forceCommunity:availableForAllPageTypes" access="global">
+	<!-- ssZuoraCreditCardContainer -->
+    <!--<ltng:require scripts="{!join(',', 
+                           $Resource.fontAwesome + '/fontawesome-all.css')}"
+                  afterScriptsLoaded="{!c.initScripts}"/>-->
+    <!--BEGIN ATTRIBUTES-->
+    <aura:attribute name="spinnerStatus" type="String"/>
+    <!--END ATTRIBUTES-->
+    <!-- BEGIN EVENT -->
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <aura:handler name="change" value="{!v.spinnerStatus}" action="{!c.handleSpinnerToggle}"/>
+    <!-- END EVENT -->
+    <!-- BEGIN BODY -->
+    <lightning:spinner aura:id="mySpinner" variant="brand" size="medium"/>
+    <lightning:card class="slds-p-horizontal_small">
+        <lightning:tabset class="slds-p-horizontal_medium">
+            <lightning:tab>
+                <aura:set attribute="label">
+                    Credit Card
+                </aura:set>
+                <c:ssGenericVFContainer iframeWidth="100%" iframeHeight="700" iframePageType="Credit%20Card" spinnerStatus="{!v.spinnerStatus}"/>
+            </lightning:tab>
+            <lightning:tab>
+                <aura:set attribute="label">
+                    ACH
+                </aura:set>
+                <c:ssGenericVFContainer iframeWidth="100%" iframeHeight="600" iframePageType="ACH" spinnerStatus="{!v.spinnerStatus}"/>
+            </lightning:tab>
+        </lightning:tabset>
+    </lightning:card>
+    <!-- END BODY -->
+</aura:component>

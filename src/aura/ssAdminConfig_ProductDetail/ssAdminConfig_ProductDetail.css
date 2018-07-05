@@ -1,0 +1,43 @@
+.THIS  .slds-radio{
+    display: -webkit-inline-box;
+    padding-right:10px;
+    font-weight: 700;
+    
+}
+.THIS .ssTaxConfigBtn{
+    padding-left: t(SSAdminBtnspaddingleft);
+    padding-right: t(SSAdminBtnspaddingright);
+    text-align: t(SSAdminBtnstextalign);
+    vertical-align: t(SSAdminBtnsverticalalign);
+    border: t(SSAdminBtnsborder);
+    transition: t(SSAdminBtnstransition);
+    background-color: t(SSAdminBtnsbackgroundcolor);
+    border-color: t(SSAdminBtnsbordercolor);
+    color: t(SSAdminBtnscolor);
+}
+.THIS .slds-form-element__label {
+    display: inline-block;
+    color:#000;
+    font-size: 0.75rem;
+    line-height: 1.5;
+    margin-right: 0.75rem;
+    margin-bottom: 0.125rem;
+}
+.THIS .padding-radiobuttons{ 
+    margin-top: 15px;
+}
+.THIS .slds-form-element__control{
+    padding-left:20px;
+}
+.THIS .header-xl{
+    color : t(SSAdminHeaderLGColor);
+    font-size: t(SSAdminHeaderLGFontSize);
+}
+.THIS .slds-p-around_medium .slds-p-around--medium{
+    padding: 1rem;
+}
+
+.THIS .admin-ctr{
+    width: auto;
+    height: 500px;
+}

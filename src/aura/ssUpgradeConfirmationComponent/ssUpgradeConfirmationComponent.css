@@ -1,0 +1,38 @@
+.THIS {
+}
+
+.THIS .light-grey-bg{
+    background:#F5F5F6;
+}
+
+.THIS .header-lg{
+    font-size: t(SSLDTHeaderLGFontSize);
+    color : t(SSLDTHeaderLGColor);
+}
+
+.THIS .header-md{
+    font-size: t(SSLDTHeaderMDFontSize);
+    color : t(SSLDTHeaderMDColor);
+}
+
+.THIS .header-sm{
+    font-size: t(SSLDTHeaderSMFontSize);
+    color : t(SSLDTHeaderSMColor);
+}
+
+.THIS .header-xs{
+    font-size: t(SSLDTHeaderXSFontSize);
+    color : t(SSLDTHeaderXSColor);
+}
+
+.THIS .hrstyle1{
+    margin: t(SSLDTHR1Margin1);
+}
+
+.THIS .hrstyle2{
+    margin: t(SSLDTHR2Margin1);
+}
+
+.THIS .slds-badge{
+    vertical-align: middle;
+}

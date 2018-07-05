@@ -1,0 +1,38 @@
+.THIS {
+}
+
+.THIS .slds-badge{
+    vertical-align: middle;
+}
+
+.THIS .ss-text-heading_medium{
+    font-weight: t(SSLDTHeaderLGFontWeight);
+}
+
+.THIS .header-lg{
+    font-size: t(SSLDTHeaderLGFontSize);
+    color : t(SSLDTHeaderLGColor);
+}
+
+.THIS .header-md{
+    font-size: t(SSLDTHeaderMDFontSize);
+    color : t(SSLDTHeaderMDColor);
+}
+
+.THIS .header-sm{
+    font-size: t(SSLDTHeaderSMFontSize);
+    color : t(SSLDTHeaderSMColor);
+}
+
+.THIS .header-xs{
+    font-size: t(SSLDTHeaderXSFontSize);
+    color : t(SSLDTHeaderXSColor);
+}
+
+.THIS .hrstyle1{
+    margin: t(SSLDTHR1Margin);
+}
+
+.THIS .hrstyle2{
+    margin: t(SSLDTHR2Margin);
+}

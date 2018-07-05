@@ -1,0 +1,9 @@
+<aura:component implements="force:lightningQuickActionWithoutHeader,force:hasRecordId"
+                access="global" >
+	<!-- ssOrderQuickActionDummy -->
+    <!--BEGIN ATTRIBUTES-->
+    <aura:attribute name="recordId" type="String"/>
+    <!--END ATTRIBUTES-->
+    <!-- BEGIN BODY -->
+    <!-- END BODY -->
+</aura:component>

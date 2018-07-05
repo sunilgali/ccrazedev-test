@@ -1,0 +1,130 @@
+<aura:component implements="forcecommunity:availableforallpagetypes" access="global">
+    
+    <div class="Adobe_Footer" style="background-color:black;color:white;">
+        <lightning:accordion activeSectionName="none">
+            <lightning:accordionSection name="Products" label="Products">
+                <ul  data-type="column">
+                    <li class="Footernav-submenu-item" id="Globalnav.Products.Creative_Cloud">
+                        <a href="//www.adobe.com/creativecloud.html?promoid=ZP46FD38&amp;mv=other" target="_self" class="Footernav-submenu-link" data-type="columnitem">Creative Cloud</a>
+                    </li>
+                    
+                    <li class="Footernav-submenu-item" id="Globalnav.Products.Experience_Cloud">
+                        <a href="//www.adobe.com/experience-cloud.html?promoid=Z9X3FR9C&amp;mv=other" target="_self" class="Footernav-submenu-link" data-type="columnitem">Experience Cloud</a>
+                    </li>
+                    
+                    <li class="Footernav-submenu-item" id="Globalnav.Products.Document_Cloud">
+                        <a href="https://acrobat.adobe.com/us/en/?promoid=ZKD5FHT9&amp;mv=other" target="_self" class="Footernav-submenu-link" data-type="columnitem">Document Cloud</a>
+                    </li>
+                    
+                    <li class="Footernav-submenu-item" id="Globalnav.Products.Elements_15_Family">
+                        <a href="//www.adobe.com/products/elements-family.html?promoid=V2XYKZ3B&amp;mv=other" target="_self" class="Footernav-submenu-link" data-type="columnitem">Elements 2018 Family</a>
+                    </li>
+                    
+                    <li class="Footernav-submenu-item" id="Globalnav.Products.Special_offers">
+                        <a href="//www.adobe.com/products/special-offers.html?promoid=ZSV7F8C7&amp;mv=other" target="_self" class="Footernav-submenu-link" data-type="columnitem">Special offers</a>
+                    </li>
+                    
+                    <li class="Footernav-submenu-item" id="Globalnav.Products.View_all_products">
+                        <a href="https://www.adobe.com/products/catalog.html?types=pf_252Fdesktop&amp;types=pf_252Fmobile&amp;types=pf_252Fweb&amp;promoid=ZFN4FMKB&amp;mv=other" target="_self" class="Footernav-submenu-link" data-type="columnitem">View all products</a>
+                    </li>
+                </ul>
+                
+            </lightning:accordionSection>
+            <lightning:accordionSection name="Blogs and Community" label="Blogs and Community">
+                <ul class="Footernav-submenu" data-type="column">
+                    <li class="Footernav-submenu-item" id="Globalnav.Blogs_Community.The_Adobe_Blog">
+                        <a href="https://theblog.adobe.com/?promoid=KLZPVFQY&amp;mv=other" target="_blank" rel="noopener" class="Footernav-submenu-link" data-type="columnitem">Adobe Blog</a>
+                    </li>
+                    
+                    <li class="Footernav-submenu-item" id="Globalnav.Blogs_Community.Adobe_io">
+                        <a href="https://www.adobe.io/?promoid=1SQHD8GY&amp;mv=other" target="_blank" rel="noopener" class="Footernav-submenu-link" data-type="columnitem">Adobe I/O</a>
+                    </li>
+                    
+                    <li class="Footernav-submenu-item" id="Globalnav.Blogs_Community.Create_Magazine">
+                        <a href="http://create.adobe.com/?promoid=162BDW54&amp;mv=other" target="_blank" rel="noopener" class="Footernav-submenu-link" data-type="columnitem">Create Magazine</a>
+                    </li>
+                    
+                    <li class="Footernav-submenu-item" id="Globalnav.Blogs_Community.Behance">
+                        <a href="http://behance.net/?promoid=ZXL8F4M6&amp;mv=other" target="_blank" rel="noopener" class="Footernav-submenu-link" data-type="columnitem">Behance</a>
+                    </li>
+                    
+                    <li class="Footernav-submenu-item" id="Globalnav.Blogs_Community.99u">
+                        <a href="http://99u.com/?promoid=1FJDDMP2&amp;mv=other" target="_blank" rel="noopener" class="Footernav-submenu-link" data-type="columnitem">99U</a>
+                    </li>
+                    
+                    <li class="Footernav-submenu-item" id="Globalnav.Blogs_Community.CMO_com">
+                        <a href="http://www.cmo.com/?promoid=1K8FDHY1&amp;mv=other" target="_blank" rel="noopener" class="Footernav-submenu-link" data-type="columnitem">CMO.com</a>
+                    </li>
+                    
+                    <li class="Footernav-submenu-item" id="Globalnav.Blogs_Community.View_all">
+                        <a href="http://news.adobe.com/blogs-social/?promoid=226KCZZW&amp;mv=other" target="_blank" rel="noopener" class="Footernav-submenu-link" data-type="columnitem">View all</a>
+                    </li>
+                </ul>
+                
+            </lightning:accordionSection>
+            
+            <lightning:accordionSection name="Suport" label="Suport">
+                <ul class="Footernav-submenu" data-type="column">
+                    <li class="Footernav-submenu-item" id="Globalnav.Support.Help_Center">
+                        <a href="https://helpx.adobe.com/support.html?promoid=1XGJD4QX&amp;mv=other" target="_self" class="Footernav-submenu-link" data-type="columnitem">Help Center</a>
+                    </li>
+                    
+                    <li class="Footernav-submenu-item" id="Globalnav.Support.Community_Forums">
+                        <a href="https://forums.adobe.com/welcome?promoid=29NMCRJT&amp;mv=other" target="_self" class="Footernav-submenu-link" data-type="columnitem">Community forums</a>
+                    </li>
+                    
+                    <li class="Footernav-submenu-item" id="Globalnav.Support.Contact_Adobe">
+                        <a href="https://helpx.adobe.com/contact/support.html?promoid=2FDNCMSS&amp;mv=other" target="_self" class="Footernav-submenu-link" data-type="columnitem">Contact Adobe</a>
+                    </li>
+                    
+                    <li class="Footernav-submenu-item" id="Globalnav.Support.Enterprise_support">
+                        <a href="https://helpx.adobe.com/contact/enterprise-support.html?promoid=9MZL4DLJ&amp;mv=other" target="_self" class="Footernav-submenu-link" data-type="columnitem">Enterprise Support</a>
+                    </li>
+                    
+                    <li class="Footernav-submenu-item" id="Globalnav.Support.Download_and_Install">
+                        <a href="https://helpx.adobe.com/download-install.html?promoid=2K4PCJ2R&amp;mv=other" target="_self" class="Footernav-submenu-link" data-type="columnitem">Download &amp; install</a>
+                    </li>
+                </ul>
+            </lightning:accordionSection>
+            
+            
+            <lightning:accordionSection name="Adobe" label="Adobe">
+                <ul class="Footernav-submenu" data-type="column">
+                    <li class="Footernav-submenu-item" id="Globalnav.Adobe.About">
+                        <a href="//www.adobe.com/about-adobe.html?promoid=2NVQCDBQ&amp;mv=other" target="_self" class="Footernav-submenu-link" data-type="columnitem">About</a>
+                    </li>
+                    
+                    <li class="Footernav-submenu-item" id="Globalnav.Adobe.Newsroom">
+                        <a href="http://www.adobe.com/news-room.html?promoid=2SLRC8LP&amp;mv=other" target="_self" class="Footernav-submenu-link" data-type="columnitem">Newsroom</a>
+                    </li>
+                    
+                    <li class="Footernav-submenu-item" id="Globalnav.Adobe.Corporate_Responsibility">
+                        <a href="//www.adobe.com/about-adobe/corporate-responsibility.html?promoid=322TC14M&amp;mv=other" target="_self" class="Footernav-submenu-link" data-type="columnitem">Corporate Responsibility</a>
+                    </li>
+                    
+                    <li class="Footernav-submenu-item" id="Globalnav.Adobe.Investor_Relations">
+                        <a href="https://www.adobe.com/investor-relations.html?promoid=2XBSC4VN&amp;mv=other" target="_self" class="Footernav-submenu-link" data-type="columnitem">Investor Relations</a>
+                    </li>
+                    
+                    <li class="Footernav-submenu-item" id="Globalnav.Adobe.Supply_Chain">
+                        <a href="//www.adobe.com/about-adobe/corporate-responsibility/supply-chain.html?promoid=Z9X3FQLZ&amp;mv=other" target="_self" class="Footernav-submenu-link" data-type="columnitem">Supply Chain</a>
+                    </li>
+                    
+                    <li class="Footernav-submenu-item" id="Globalnav.Adobe.Trust_Center">
+                        <a href="//www.adobe.com/trust.html?promoid=6WTV74QP&amp;mv=other" target="_self" class="Footernav-submenu-link" data-type="columnitem">Trust Center</a>
+                    </li>
+                    
+                    <li class="Footernav-submenu-item" id="Globalnav.Adobe.Events">
+                        <a href="//www.adobe.com/about-adobe/events.html?promoid=39JWBRNK&amp;mv=other" target="_self" class="Footernav-submenu-link" data-type="columnitem">Events</a>
+                    </li>
+                    
+                    <li class="Footernav-submenu-item" id="Globalnav.Adobe.Careers">
+                        <a href="//www.adobe.com/careers.html?promoid=35SVBWDL&amp;mv=other" target="_self" class="Footernav-submenu-link" data-type="columnitem">Careers</a>
+                    </li>
+                </ul>
+            </lightning:accordionSection>
+            
+            
+        </lightning:accordion>
+    </div>
+</aura:component>

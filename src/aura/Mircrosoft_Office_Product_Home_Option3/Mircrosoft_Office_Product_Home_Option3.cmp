@@ -1,0 +1,39 @@
+<aura:component access="global">
+    
+    
+    <div  style="Background-color:white;padding-top:30px">
+        
+        <div class="ProductValue">$149.99</div> 
+        <div>(one-time purchase)</div> 
+        <div class="h3">Office Home and Student for PC</div>
+        <button type="button" class="BuyproductButton">Buy Now</button><br/>
+        
+        <br/>
+        <br/>
+        <div style="padding-left:10%;padding-right:10%;"> <br/>
+            <br/>
+            <br/>
+            <hr/>
+        </div>
+        <div class="p">
+            Best for individuals with basic needs. Includes Office applications.
+        </div>
+        
+        <div class="h2" style="color:#d83b01"> Office applications included</div>
+        <img src="word.png" alt="Word" /> 
+        <img src="Excel.png" alt="Excel"/><br/> 
+        <img src="PowerPoint.png" alt="PowerPoint"/> 
+        <img src="Note.png" alt="OneNote"/><br/>
+        <img src="Outlook.png" alt="Outlook"/>
+        <img src="Publisher.png" alt="Publisher"/><br/>
+        <br/>
+        <br/><br/><br/><br/>
+        <div class="p">
+            Services Excluded
+        </div><br/>
+        
+        (not included)
+        <br/><br/><br/>
+    </div>      
+    <br/>
+</aura:component>

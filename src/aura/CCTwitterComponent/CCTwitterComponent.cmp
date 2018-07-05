@@ -1,0 +1,102 @@
+<aura:component controller="CCTwitterAPI" implements="forceCommunity:availableForAllPageTypes" access="global">
+    <ltng:require scripts="{!$Resource.jquery311 + '/jquery-3.1.1.js'}"
+                  afterScriptsLoaded="{!c.onInit}"/>
+    <aura:handler name="init" value="{!this}" action="{!c.onInit}"/>
+    <aura:attribute name="tweets" type="Map[]"/>
+    <aura:attribute name="name" default="" type="String" access="global"/>   
+    <aura:attribute name="permissionName" default="" type="String" access="global"/>
+    <aura:attribute name="isComponentAdmin" default="false" type="Boolean" access="global"/>
+    <aura:attribute name="componentType" type="String" default="Twitter Component" access="GLOBAL" description="" />
+    <aura:attribute name="hashtags" type="String" default="" access="GLOBAL" />
+    <aura:attribute name="value" type="String" default="" access="GLOBAL" />
+    <aura:attribute name="isNameDisabled" default="true" type="Boolean"  access="global"/>
+    <aura:attribute name="componentConfigId" type="String" default="" access="GLOBAL" description="" />  
+    <aura:attribute name="message" default="" type="String" access="global"/> 
+    
+    <aura:attribute name="isDataSaved" default="false" type="Boolean"  access="global"/>
+    <section  class="slds-clearfix">
+        <div class="slds-float--right"  style="cursor:pointer">
+            <p>&nbsp;
+                <aura:if isTrue="{!(v.isComponentAdmin == true )}">
+                    <span onclick="{!c.onClickIcon}">
+                        <lightning:icon iconName="utility:setup" size="small" alternativeText="Setup" />
+                    </span>
+                </aura:if>
+            </p>
+        </div>
+    </section>
+    <div id='twit-master-cont'>
+        <header class='slds-p-around_medium' id='feedHeader'>
+            <span style='color:#1da1f2;padding:0;border:none;' href="http://twitter.com" target='_blank' class="fa fa-twitter"></span>
+            <span style='font-size:24px;font-weight:bold'>Twitter Feed</span>
+        </header>
+        <div id='personal-styling'>
+            <section id='twitterParContainer'>
+                <aura:iteration var="twt" items="{!v.tweets}">
+                    <blockquote class="slds-p-around_medium twitter-tweet slds-border_top slds-m-around_none" data-lang="en">
+                        <div class="slds-grid slds-wrap">
+                            <div class='profileImg slds-p-right_small'>
+                                <aura:unescapedHtml value='{!twt.profileImg}'/>
+                            </div>
+                            <div class="slds-clearfix">
+                                <div class="slds-float_left">
+                                    <div class='post'>
+                                        <aura:unescapedHtml value='{!twt.userName}'/> - <span style='font-size:13px;color:#777;'>{!twt.dateCreated}</span>
+                                        <p>
+                                            <aura:unescapedHtml value='{!twt.body}'/>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </blockquote>
+                    
+                </aura:iteration>
+                <div id='viewmore' class='slds-text-align_center slds-p-top_large slds-p-bottom_large slds-border_top'>
+                    <a href='https://twitter.com/hashtag/salesforce?vertical=default' target='_blank' title='Twitter (Opens New Tab)'>View More on Twitter</a>
+                </div>
+            </section>
+        </div>
+        
+        <!-- Admin Dialog Content Start -->
+        <aura:if isTrue="{!(v.isComponentAdmin == true )}">
+            <div aura:id="modalDialog" role="dialog" tabindex="-1" aria-labelledby="header43" class="slds-modal slds-modal slds-modal--large">
+                <div class="slds-modal__container">
+                    <div class="slds-modal__header">
+                        <button class="slds-button slds-modal__close slds-button--icon-inverse" title="Close" onclick="{!c.onClickClose}">
+                            <lightning:icon iconName="utility:close" size="small" alternativeText="Configure" />
+                        </button>
+                        <h2 id="header43" class="slds-text-heading--medium">Configure Twitter Component</h2>
+                    </div>
+                    <div class="slds-modal__content slds-p-around--large">  
+                        
+                        <div class="slds-form-element">
+                            <div class="slds-text-color--error">
+                                <aura:unescapedHtml value="{!v.message}"/>                
+                            </div>
+                        </div>
+                        <div class="slds-form-element">
+                            <label class="slds-form-element__label" for="{!'txtName' + globalId}">Name</label>
+                            <div class="slds-form-element__control">        
+                                <input  id="{!'txtName' + globalId}" aura:id="txtName" disabled="{!v.isNameDisabled}" class="slds-input" type="text" placeholder="Component Name" value="{!v.name}" />
+                            </div>
+                        </div> 
+                        <div class="slds-form-element">
+                            <label class="slds-form-element__label">Hash Tags to be displayed</label>
+                            <div class="slds-form-element__control" id="{!'dTitle_' + globalId}">
+                                <input class="slds-input" id="TWTtxtHashtag"  type="text" placeholder="Enter a valid Hashtag"  value="{!v.hashtags}"/>
+                            </div>
+                        </div> 
+                    </div>
+                    <div class="slds-modal__footer">
+                        <button class="slds-button slds-button--neutral" onclick="{!c.onClickClose}">Cancel</button>
+                        <button class="slds-button slds-button--brand" onclick="{!c.onClickSave}">Save</button>
+                    </div>  
+                </div>
+            </div>
+            <div aura:id="modalBackdrop" class="slds-backdrop"></div>   
+            <!-- Admin Dialog Content End -->
+        </aura:if>
+    </div>
+    
+</aura:component>

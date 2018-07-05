@@ -1,0 +1,32 @@
+<aura:component implements="c:ssAppInterface" >
+    <ltng:require styles="{!$Resource.SSDefaultTheme + '/assets/styles/custom.css'}" 
+                  afterScriptsLoaded="{!c.onScriptsLoaded}" />
+    
+    <aura:attribute name="product" type="SSProductModel"/>
+    <aura:attribute name="parentProduct" type="SSProductModel"/>
+    <aura:attribute name="tieredPrice" type="SSPriceModel"/>
+
+    <aura:attribute name="termId" type="String"/>
+    <aura:attribute name="termType" type="String"/>
+    
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <aura:handler event="c:ssTermEvent" action="{!c.updateTierSelect}"/>
+
+    <aura:registerEvent name="ssTermPrice" type="c:ssTermPrice"/>
+    
+    <aura:if isTrue="{!v.product.isTierPriced}" >
+        <div class="slds-form-element slds-float_left" >
+            <lightning:select name="tierSelect" label="Term" variant="label-hidden" 
+                              aura:id="tierSelect" onchange="{!c.updateTierPrice}">
+                <option>Select Tier</option>
+                <aura:iteration items="{!v.tieredPrice.tierPriceList}" var="item">
+                    <option text="{!item.tierDescription}" value="{!item.tierDescription}" selected="{!item.selected}"/>
+                </aura:iteration>
+            </lightning:select>
+        </div>
+        <div class="slds-form-element slds-float_left" style="padding-left:8px;width: 150px;">
+            <lightning:input type="number" placeholder="Quantity" variant="label-hidden" name="quantity" 
+                             aura:id="quantity" label="Qunatity" onchange="{!c.updateTierPrice}"/>
+        </div>
+    </aura:if>
+</aura:component>

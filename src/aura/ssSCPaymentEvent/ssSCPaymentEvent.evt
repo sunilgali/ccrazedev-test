@@ -1,0 +1,3 @@
+<aura:event type="APPLICATION" description="Event for Payments" >
+    <aura:attribute name="paymentId" type="String"/>
+</aura:event>

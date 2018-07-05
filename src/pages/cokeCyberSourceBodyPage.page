@@ -1,0 +1,8 @@
+<apex:page id="cybersourcebodyPage" docType="html-5.0" sidebar="false" showHeader="false" standardStylesheets="false" applyHtmlTag="false">
+<script type="text/javascript">
+
+        Modernizr =  {};
+        Modernizr.input = Modernizr.input || {};
+        Modernizr.input.placeholder = Modernizr.input.placeholder || {};
+</script>
+</apex:page>

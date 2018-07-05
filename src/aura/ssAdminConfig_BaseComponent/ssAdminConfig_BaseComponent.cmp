@@ -1,0 +1,20 @@
+<aura:component implements="c:ISSAdminConfig" access="global" controller="ssAdminConfig_BaseComponentcontoller" >
+    <!-- Change handler for Storefront selection where you go and fetch the Configuration based on the Config Type and Storefront name -->
+    <aura:handler name="change" value="{!v.storefrontName}" action="{!c.onStorefrontSelected}" />
+    <aura:registerEvent name="ssAdminConfig_StorefrontValEvent" type="c:ssAdminConfig_StorefrontValEvent"/>
+     <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    
+    <aura:attribute name="Strorefronts" default="" type="List" access="global"/> 
+    
+    <lightning:layout multipleRows="true" verticalAlign="start" horizontalAlign="stretch"> 
+        <lightning:layoutitem padding="horizontal-small" size="12" smallDeviceSize="12" mediumDeviceSize="12" largeDeviceSize="12"> 
+            <lightning:select aura:id="StoreFronts"  name="StoreFronts" label="StoreFront" value="{!v.storefrontName}">
+                <option value="" text=""></option>
+                <aura:iteration items="{!v.Strorefronts}" var="store">
+                    <option value="{!store.value}" text="{!store.value}" ></option>
+                </aura:iteration>
+            </lightning:select><br/>
+        </lightning:layoutitem>
+    </lightning:layout>
+   
+</aura:component>

@@ -1,0 +1,6 @@
+.THIS {
+}
+
+.THIS .select-fixed-width > .slds-form-element__control > .slds-select_container{
+    width: 215px;
+}

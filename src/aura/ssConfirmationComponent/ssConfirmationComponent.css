@@ -1,0 +1,50 @@
+.THIS {
+}
+
+.THIS .ss-text-heading_medium{
+    font-weight: t(SSLDTHeaderLGFontWeight);
+}
+
+.THIS .header-lg{
+    font-size: t(SSLDTHeaderLGFontSize);
+    color : t(SSLDTHeaderLGColor);
+}
+
+.THIS .header-md{
+    font-size: t(SSLDTHeaderMDFontSize);
+    color : t(SSLDTHeaderMDColor);
+}
+
+.THIS .header-sm{
+    font-size: t(SSLDTHeaderSMFontSize);
+    color : t(SSLDTHeaderSMColor);
+}
+
+.THIS .header-xs{
+    font-size: t(SSLDTHeaderXSFontSize);
+    color : t(SSLDTHeaderXSColor);
+}
+
+.THIS .hrstyle1{
+    margin: t(SSLDTHR1Margin);
+}
+
+.THIS .hrstyle2{
+    margin: t(SSLDTHR2Margin);
+}
+
+.THIS .ssConfirm{
+    width:600px;  
+    margin:0px auto 30px;
+}
+
+.THIS .light-grey-bg{
+    background:#F0F2F7;
+}
+
+
+.THIS .ssheader-success{
+    color: t(SSLDTHeaderSUCCESSColor); 
+    font-size: t(SSLDTHeaderSUCCESSFontSize); 
+    font-weight: t(SSLDTHeaderSUCCESSFontWeight);
+}

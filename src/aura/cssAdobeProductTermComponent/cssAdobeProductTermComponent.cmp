@@ -1,0 +1,74 @@
+<aura:component  controller="SSProductsController" extends="c:ssBaseComponent" implements="c:ssAppInterface" >
+    
+    <aura:attribute name="product" type="SSProductModel"/>
+    <aura:attribute name="cartId" type="String" />
+    <aura:attribute name="cart" type="SSCartModel" />
+    <aura:attribute name="productSKU" type="String" />
+    <aura:attribute name="selectedTerm" type="String" default="Monthly"/>
+    <aura:attribute name="isDynamicKit" type="Boolean"/>
+    <aura:attribute name="dynamicAmount" type="Decimal"/>
+    <aura:attribute name="isSpin" type="Boolean" default="false"/>   
+
+    <aura:attribute name="cartQuantity" type="Integer" default="1"/>   
+
+    
+    
+    <aura:registerEvent name="ssCartEvent" type="c:ssCartEvent"/>
+    <aura:handler event="c:ssCartEvent" action="{!c.updateCart}" />
+
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>   
+    
+    <aura:iteration items="{!v.product.price}" var="item" indexVar="index">
+    	<aura:if isTrue="{!item.subscriptionInstallmentUOM.length > 0}" > 
+        	<button aura:id="productTermSelect" onclick="{!c.termChanged}" class="slds-button slds-button_neutral slds-button_outline-brand" style="height:40px;width:160px;line-height:22px;border-color: #0a6fd3;">
+				<aura:if isTrue="{!index == 0}">
+                <img src="{!$Resource.AdobeTheme + '/assets/images/checked.svg'}" style="width:12px" />&nbsp; 
+                </aura:if>
+                <b>{! (v.isDynamicKit ? (item.subscriptionInstallmentUOM == v.selectedTerm ? item.subscriptionInstallmentUOM +' $'+v.dynamicAmount : item.subscriptionInstallmentUOM) : item.subscriptionInstallmentUOM +' $'+item.listPrice ) }
+                    <br />
+				</b> 
+            </button>
+        </aura:if>
+    </aura:iteration>
+    
+    	<aura:if isTrue="{! not(v.product.isTierPriced)}" >   
+        
+        <lightning:layoutitem padding="horizontal-small" size="12" smallDeviceSize="12" mediumDeviceSize="6" largeDeviceSize="6">
+            <br />
+            	<!--variant="label-hidden"-->
+                <div style="padding-left: 0rem;">
+                    <lightning:input class="ssWidth" style="padding-left: 0rem;width:80px;" type="number" placeholder="Quantity"  name="simpQuantity" value="{!v.cartQuantity}" 
+                                     aura:id="simpQuantity" label="Quantity" onblur="{!c.simpleQuantityChanged}"/>
+                </div>
+           
+        </lightning:layoutitem>            
+            
+        
+        
+    </aura:if>             
+    
+    <aura:if isTrue="{!v.product.isTierPriced}" >
+        <lightning:layoutitem padding="horizontal-small" size="12" smallDeviceSize="12" mediumDeviceSize="6" largeDeviceSize="6">
+            <br />
+                <!--c:ssProductOptionsComponent product="{!v.product}"/-->
+                 <div class="slds-form-element slds-float_left slds-p-right_medium" >
+                    <lightning:select name="tierSelect" label="Tier" class="select-fixed-width "
+                                      aura:id="tierSelect" onchange="{!c.tierQuantityChanged}">
+                        <option text="Select Tier" value = ""/>
+                        <aura:iteration items="{!v.product.price[0].tierPriceList}" var="item">
+                            <option text="{!item.tierDescription}" value="{!item.tierDescription}" 
+                                    selected="{!v.product.price[0].tierPriceList[0].tierDescription == item.tierDescription}"/>
+                        </aura:iteration>
+                    </lightning:select>
+                </div>
+            	<!--style="padding-left:8px;width: 150px;"-->
+                <div class="slds-form-element slds-float_left" >
+                    <lightning:input class="ssWidth" type="number" label="Quantity" name="quantity" 
+                                     aura:id="quantity" onblur="{!c.tierQuantityChanged}"/>
+                </div>
+            
+        </lightning:layoutitem>
+    </aura:if>
+
+
+</aura:component>

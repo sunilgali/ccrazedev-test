@@ -1,0 +1,63 @@
+<aura:component implements="forceCommunity:availableForAllPageTypes,c:ISSAdminConfig"   access="global" >
+    
+    <!-- Handlers -->
+    <!--<aura:handler name="init" value="{!this}" action="{!c.doInit}"/>-->
+    <aura:handler event="c:ssAdminConfig_StorefrontValEvent" action="{!c.onStorefrontSelected}"/>
+    
+    <!-- Attributes -->
+    <aura:attribute name="errorMessage" default="" type="String" access="global"/> 
+    
+    
+    <div class="slds-text-color--error">
+        {!v.errorMessage}                
+    </div>
+    
+    <lightning:layout multipleRows="true" verticalAlign="start" horizontalAlign="stretch"> 
+        
+        <lightning:layoutitem padding="horizontal-small" size="12" smallDeviceSize="12" mediumDeviceSize="12" largeDeviceSize="12"> 
+            <div style="padding-bottom:10px" class="slds-form-element">
+                <h2 class="header-xl slds-p-top_medium slds-p-left_medium"> Buy/Try/Convert Journey</h2>
+                
+            </div>                                                                         
+        </lightning:layoutitem>
+        
+        <lightning:layoutitem padding="horizontal-small" size="12" smallDeviceSize="12" mediumDeviceSize="12" largeDeviceSize="12"> 
+            <lightning:input aura:id="Avalara" type="radio" name="tax"  label="Standard" value="Standard"  />                                                                         
+        	<lightning:input aura:id="Avalara" type="radio" name="tax"  label="Custom" value="Custom"  />
+        </lightning:layoutitem>
+        
+        <lightning:layoutitem padding="horizontal-small" size="12" smallDeviceSize="6" mediumDeviceSize="6" largeDeviceSize="6">
+            <div class="TaxElements slds-form-element">
+                
+            </div>
+        </lightning:layoutitem>
+        
+        <lightning:layoutitem padding="horizontal-small" size="12" smallDeviceSize="6" mediumDeviceSize="6" largeDeviceSize="6">
+            <div class="TaxElements slds-form-element">
+                
+            </div>
+        </lightning:layoutitem>
+        
+        <lightning:layoutitem padding="horizontal-small" size="12" smallDeviceSize="12" mediumDeviceSize="12" largeDeviceSize="12">
+            <div class="TaxElements slds-form-element">
+                
+            </div>
+        </lightning:layoutitem>
+        
+        <lightning:layoutitem padding="horizontal-small" size="12" smallDeviceSize="6" mediumDeviceSize="6" largeDeviceSize="6">
+            <div class="TaxElements slds-form-element">
+                
+            </div>
+        </lightning:layoutitem>
+        <lightning:layoutitem padding="horizontal-small" size="12" smallDeviceSize="6" mediumDeviceSize="6" largeDeviceSize="6"></lightning:layoutitem>
+        
+        
+        
+        
+    </lightning:layout>
+    
+    <div class="slds-float_right" style="padding-top:10px">
+        <lightning:button class="ssTaxConfigBtn"  label="Save"  onclick="{!c.onclickSavebutton}"/>
+    </div>
+    
+</aura:component>

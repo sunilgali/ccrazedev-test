@@ -1,0 +1,23 @@
+.THIS .slds-icon-text-default{
+    fill:green;
+}
+.THIS hr{
+    margin: 0.5rem 0;
+}
+.THIS .TryNow{
+    color: #ce0058!important;
+    background-color: transparent;
+    border-color: #d6d6d6;
+    border: 1px solid;
+    border-radius: 40px;
+    Width:100%
+        
+}
+.THIS .BuyNow{
+    color: #fff!important;
+    background-color: #ce0058;
+    border: 0;
+    border-radius: 40px;
+    Width:100%
+        
+}

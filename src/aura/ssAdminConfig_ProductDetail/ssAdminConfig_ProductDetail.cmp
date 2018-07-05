@@ -1,0 +1,91 @@
+<aura:component implements="forceCommunity:availableForAllPageTypes,c:ISSAdminConfig" access="global" controller="ssAdminConfig_ComponentConfiguration">
+    
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    
+    <!-- Attributes -->
+    <aura:attribute name="optionsPD" type="List" default="[
+                                                          {'label': 'Yes', 'value': 'Yes'},
+                                                          {'label': 'No', 'value': 'No'}
+                                                          ]"/>
+    <aura:attribute name="PD1" type="String" default="option1"/>
+    
+    <aura:attribute name="PD2" type="String" default="option1"/>
+    
+    <aura:attribute name="PD3" type="String" default="option1"/>
+    
+    <aura:attribute name="PD4" type="String" default="option1"/>
+    <aura:attribute name="Strorefronts" default="" type="List" access="global"/> 
+    <aura:attribute name="ProductConfigJson" default="" type="object" access="global" />
+    <aura:attribute name="Banner" default="false" type="boolean" access="global"/>
+     <aura:attribute name="errorMessage" default="" type="String" access="global"/> 
+    
+     <div class="slds-text-color--error">
+        {!v.errorMessage}                
+    </div>
+    
+    <lightning:layout multipleRows="true" verticalAlign="start" horizontalAlign="stretch"> 
+        
+        <aura:if isTrue="{!v.Banner}">
+            <lightning:layoutitem padding="horizontal-small" size="12" smallDeviceSize="12" mediumDeviceSize="12" largeDeviceSize="12"> 
+                <div style="background-color:green;text-align:center;color:white;padding-top:7px;padding-bottom:7px;margin-bottom:10px">Record Updated Successfully!!</div>
+            </lightning:layoutitem>
+        </aura:if>
+        
+        <lightning:layoutitem padding="horizontal-small" size="12" smallDeviceSize="12" mediumDeviceSize="12" largeDeviceSize="12"> 
+            <lightning:select aura:id="StoreFronts"  name="StoreFronts" label="StoreFront" value="{!v.storefrontName}" onchange="{!c.onChangeStorefront}">
+                <option value="" text=""></option>
+                <aura:iteration items="{!v.Strorefronts}" var="store">
+                    <option value="{!store.value}" text="{!store.value}" ></option>
+                </aura:iteration>
+            </lightning:select><br/>
+        </lightning:layoutitem>
+        
+        
+        <lightning:layoutitem padding="horizontal-small" size="12" smallDeviceSize="12" mediumDeviceSize="12" largeDeviceSize="12">
+            <h2 class="header-xl slds-p-around_medium">Product Detail Component Customization</h2>
+        </lightning:layoutitem>
+        
+        <lightning:layoutitem padding="horizontal-small" size="12" smallDeviceSize="12" mediumDeviceSize="12" largeDeviceSize="12"> 
+            <lightning:radioGroup class="padding-radiobuttons" name="PD1radioGroup"
+                                  label="Display thumbnails next to product name"
+                                  options="{! v.optionsPD }"
+                                  value="{! v.PD1 }"
+                                  onchange="{! c.handleChangePD1 }"
+                                  type="radio"/>
+        </lightning:layoutitem>
+        
+        <lightning:layoutitem padding="horizontal-small" size="12" smallDeviceSize="12" mediumDeviceSize="12" largeDeviceSize="12"> 
+            <lightning:radioGroup class="padding-radiobuttons" name="PD2radioGroup"
+                                  label="Display short product description"
+                                  options="{! v.optionsPD }"
+                                  value="{! v.PD2 }"
+                                  onchange="{! c.handleChangePD2 }"
+                                  type="radio"/>
+        </lightning:layoutitem>
+        
+        
+        <lightning:layoutitem padding="horizontal-small" size="12" smallDeviceSize="12" mediumDeviceSize="12" largeDeviceSize="12"> 
+            <lightning:radioGroup class="padding-radiobuttons" name="PD3radioGroup"
+                                  label="Display add-on products"
+                                  options="{! v.optionsPD }"
+                                  value="{! v.PD3 }"
+                                  onchange="{! c.handleChangePD3 }"
+                                  type="radio"/>
+        </lightning:layoutitem>
+        
+        
+        <lightning:layoutitem padding="horizontal-small" size="12" smallDeviceSize="12" mediumDeviceSize="12" largeDeviceSize="12"> 
+            <lightning:radioGroup class="padding-radiobuttons" name="PD4radioGroup"
+                                  label="Display maintenance options"
+                                  options="{! v.optionsPD }"
+                                  value="{! v.PD4 }"
+                                  onchange="{! c.handleChangePD4 }"
+                                  type="radio"/>
+        </lightning:layoutitem>
+        
+    </lightning:layout>
+    <div class="slds-float_right" style="padding-top:10px">
+        <lightning:button class="ssTaxConfigBtn"  label="Save"  onclick="{!c.onclickSavebutton}"/>
+    </div>
+    
+</aura:component>

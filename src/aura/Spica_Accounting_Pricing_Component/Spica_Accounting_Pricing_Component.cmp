@@ -1,0 +1,70 @@
+<aura:component access="global" implements="forcecommunity:availableforallpagetypes">
+    <lightning:layout multipleRows="true" verticalAlign="start" horizontalAlign="stretch" >
+        
+        <lightning:layoutItem padding="horizontal-small" flexibility="auto" size="12" smallDeviceSize="12" mediumDeviceSize="12" largeDeviceSize="12" >
+            <center>
+                <p style="line-height: 1.3;margin-bottom: 16px;color: #004b87;font-size: 28px;font-weight: 300;">Spica Business Cloud pricing</p> 
+                <br/>
+            </center>
+        </lightning:layoutItem>
+        
+        <lightning:layoutItem padding="horizontal-small" flexibility="auto" size="12" smallDeviceSize="12" mediumDeviceSize="12" largeDeviceSize="6" >
+            <div class="slds-box"> 
+                <div style="padding: 5px;color: #fff;border: 0;background-color: #073460;">
+                    <center>
+                        <p style="font-size: 1.2rem;font-weight: 300;"> Accounting start</p>
+                        <hr/>
+                        <br/>
+                        <p style="font-size: 1rem;font-weight: 300;">$10/month</p>
+                        <br/>
+                    </center>
+                </div>
+                <div style="margin-left:15%;margin-right:15%">
+                    <br/>
+                    <p>An intuitive cloud accounting product that shows where your business finances stand quickly.</p> 
+                    <br/>
+                    <lightning:icon size="x-small" iconName="utility:check"  alternativeText="Indicates approval"/>&nbsp;&nbsp;Record income<br/>
+                    <lightning:icon size="x-small" iconName="utility:check"  alternativeText="Indicates approval"/>&nbsp;&nbsp;Record expenses<br/>
+                    <lightning:icon size="x-small" iconName="utility:check"  alternativeText="Indicates approval"/>&nbsp;&nbsp;Bank reconciliation<br/>
+                    <lightning:icon size="x-small" iconName="utility:check"  alternativeText="Indicates approval"/>&nbsp;&nbsp;Accountant access<br/>
+                    <lightning:icon size="x-small" iconName="utility:check"  alternativeText="Indicates approval"/>&nbsp;&nbsp;Instant automatic backup<br/>
+                    <lightning:icon size="x-small" iconName="utility:check"  alternativeText="Indicates approval"/>&nbsp;&nbsp;Supports one user<br/>
+                </div>
+                <br/>
+                <lightning:button class="TryNow" variant="brand" label="Start your free trail" onclick="{! c.handleClickTry }" /><br/>    <br/>
+                <lightning:button class="BuyNow" variant="brand" label="Buy now" onclick="{! c.handleClickBuy }" />    <br/>
+                
+            </div>
+        </lightning:layoutItem>
+        
+        <lightning:layoutItem padding="horizontal-small" flexibility="auto" size="12" smallDeviceSize="12" mediumDeviceSize="12" largeDeviceSize="6" >
+            <div class="slds-box">            
+                <div style="padding: 5px;color: #fff;border: 0;background-color: #073460;">     
+                    <center>
+                        <p style="font-size: 1.2rem;font-weight: 300;"> Accounting</p>
+                        <hr/>
+                        <br/>
+                        <p style="font-size: 1rem;font-weight: 300;">$25/month</p>
+                        <br/>
+                    </center>
+                </div>
+                <div style="margin-left:15%;margin-right:15%">
+                    <br/>
+                    <p>An intuitive yet powerful cloud accounting product that offers control over your finances and your business.</p> 
+                    <br/>
+                    <lightning:icon size="x-small" iconName="utility:check"  alternativeText="Indicates approval"/>&nbsp;&nbsp;All functionality from Accounting Start plus:<br/>
+                    <lightning:icon size="x-small" iconName="utility:check"  alternativeText="Indicates approval"/>&nbsp;&nbsp;Choose cash or accrual accounting<br/>
+                    <lightning:icon size="x-small" iconName="utility:check"  alternativeText="Indicates approval"/>&nbsp;&nbsp;Unlimited user collaboration (5)<br/>
+                    <lightning:icon size="x-small" iconName="utility:check"  alternativeText="Indicates approval"/>&nbsp;&nbsp;Cash flow forecasts<br/>
+                    <lightning:icon size="x-small" iconName="utility:check"  alternativeText="Indicates approval"/>&nbsp;&nbsp;Quotes and estimates<br/>
+                    <lightning:icon size="x-small" iconName="utility:check"  alternativeText="Indicates approval"/>&nbsp;&nbsp;Vendor bills<br/>
+                </div>
+                <br/>
+                <lightning:button class="TryNow" variant="brand" label="Start your free trail" onclick="{! c.handleClickTry }" /><br/>    <br/>
+                <lightning:button class="BuyNow" variant="brand" label="Buy now" onclick="{! c.handleClickBuy }" />    <br/>
+                
+            </div>
+        </lightning:layoutItem>
+    </lightning:layout>
+   
+</aura:component>

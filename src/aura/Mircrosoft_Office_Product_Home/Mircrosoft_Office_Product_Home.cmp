@@ -1,0 +1,38 @@
+<aura:component access="global" implements="forcecommunity:availableforallpagetypes">
+
+    
+    <div style="padding-top:20px;background-color:#f5f5f5;">
+        <lightning:layout multipleRows="true" verticalAlign="start" horizontalAlign="stretch">
+            
+            <lightning:layoutItem padding="horizontal-small" flexibility="auto" size="12" smallDeviceSize="12" mediumDeviceSize="12" largeDeviceSize="3">
+                
+                <div class="MircrosoftOpt" style="padding-top:100px">
+                    <p>Looking for more?
+                        See options for:</p><br/> 
+                    <a>Students | Mac</a><br/>
+                    <a> What is Office 365 for home? </a>
+                </div>
+                <br/>
+            </lightning:layoutItem>
+            
+            <lightning:layoutItem padding="horizontal-small" flexibility="auto" size="12" smallDeviceSize="12" mediumDeviceSize="4" largeDeviceSize="3">
+                <c:Mircrosoft_Office_Product_Home_Option1 />
+            </lightning:layoutItem>
+            
+            <lightning:layoutItem padding="horizontal-small" flexibility="auto" size="12" smallDeviceSize="12" mediumDeviceSize="4" largeDeviceSize="3">
+                <c:Mircrosoft_Office_Product_Home_Option2 />
+            </lightning:layoutItem>
+            
+            <lightning:layoutItem padding="horizontal-small" flexibility="auto" size="12" smallDeviceSize="12" mediumDeviceSize="4" largeDeviceSize="3">
+                <c:Mircrosoft_Office_Product_Home_Option3 />
+            </lightning:layoutItem>
+            
+        </lightning:layout>
+        
+        <lightning:layout >
+            <lightning:layoutItem padding="horizontal-small" flexibility="auto" size="12" smallDeviceSize="12" mediumDeviceSize="12" largeDeviceSize="12">
+                 <img src="plan.png"/>
+            </lightning:layoutItem> 
+        </lightning:layout>
+    </div>  
+</aura:component>

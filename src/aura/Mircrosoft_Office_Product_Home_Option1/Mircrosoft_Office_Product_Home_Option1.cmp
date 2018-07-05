@@ -1,0 +1,35 @@
+<aura:component access="global">
+  
+    <div  style="Background-color:white;padding-top:30px"> 
+        
+        <div class="ProductValue">$99.99</div> 
+        <div>(per year)</div> 
+        <div class="h3">Office 365 Home</div><br/>
+        
+        <button type="button" class="BuyproductButton">Buy Now</button><br/>
+        <button type="button" class="TryproductButton">Try for free</button><br/> 
+        
+        <div class="h2"><a>Or buy for 9.99 per month</a><br/></div>
+        <div style="padding-left:10%;padding-right:10%;">
+            <hr/>
+        </div>
+        <div class="p">
+            Best for households. Includes Office applications for up to 5 users.
+        </div>
+        <div class="h2" style="color:#d83b01"> Office applications included</div>
+        <img src="word.png" alt="Word" /> 
+        <img src="Excel.png" alt="Excel"/><br/> 
+        <img src="PowerPoint.png" alt="PowerPoint"/> 
+        <img src="Note.png" alt="OneNote"/><br/>
+        <img src="Outlook.png" alt="Outlook"/>
+        <img src="Publisher.png" alt="Publisher"/><br/>
+        <img src="Access.png" alt="Access"/>
+        <div class="p">
+            Services Excluded
+        </div><br/>
+        <img src="OneDrive.png" alt="OneDrive"/>
+        <img src="Skype.png" alt="Skype"/>
+        
+    </div>      
+    
+</aura:component>

@@ -1,0 +1,4 @@
+<aura:event type="APPLICATION" description="Event template" >
+    <aura:attribute name="termId" type="String"/>
+    <aura:attribute name="termType" type="String"/>
+</aura:event>
